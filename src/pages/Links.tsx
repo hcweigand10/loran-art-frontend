@@ -1,12 +1,12 @@
 import React, {useState} from 'react'
 
-const About = () => {
+const Links = () => {
 
     return (
         <div>
-             <h3>About</h3>
+             <h3>Links</h3>
         </div>
     )
 }
 
-export default About
+export default Links

@@ -4,19 +4,18 @@ import Navbar from "./components/Navbar";
 import "./App.css";
 import Gallery from "./pages/Gallery";
 import Contact from "./pages/Contact";
-import About from "./pages/About";
+import Links from "./pages/Links";
 import NotFound from "./pages/NotFound";
 
 function App() {
   return (
     <BrowserRouter>
+      <Navbar/>
       <Routes>
-        <Route path="*" element={<Navbar />}>
           <Route index={true} element={<Gallery />} />
           <Route path="contact" element={<Contact />} />
-          <Route path="about" element={<About />} />
+          <Route path="links" element={<Links />} />
           <Route path="*" element={<NotFound/>} />
-        </Route>
       </Routes>
     </BrowserRouter>
   );
