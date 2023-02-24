@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
 const colors = require('tailwindcss/colors')
-
+console.log(colors)
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
@@ -12,15 +12,13 @@ module.exports = {
       secondary: "#FF5733",
       white: "#ffffff",
       black: "#000000",
-      rose: "#FF5733",
-      black: colors.black,
-      white: colors.white,
-      gray: colors.slate,
-      green: colors.emerald,
-      purple: colors.violet,
-      yellow: colors.amber,
-      pink: colors.fuchsia,
-      red: colors.red
+      blue: "#4363d8",
+      gray: "#a9a9a9",
+      darkgray: "#6F7378",
+      green: "#3cb44b",
+      purple: "#911eb4",
+      yellow: "#ffe119",
+      red: "bd0909",
     },
     extend: {
     },
