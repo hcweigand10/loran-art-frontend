@@ -22,6 +22,7 @@ const Gallery = () => {
       setArt(
         data.data.Arts.map((art: artPiece) => (
           <ArtPiece
+            key={art.id}
             title={art.title}
             description={art.description}
             size={art.size}
@@ -37,10 +38,10 @@ const Gallery = () => {
 
   return (
     <div className="p-4">
-      <h3>Gallery</h3>
+      <h1 className="py-4 text-center text-3xl">{toSentenceCase(galleryCategory)}</h1>
       {isLoading ? (
-        <div>
-          <Loading />
+        <div className="w-full">
+          <Loading/>
         </div>
       ) : null}
       {data ? <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">{art}</div> : null}

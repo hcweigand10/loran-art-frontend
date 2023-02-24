@@ -4,7 +4,7 @@ const Contact = () => {
 
     return (
         <div>
-             <h3 className='text-primary font-bold underline '>Contact</h3>
+             <h3 className='text-primary font-bold underline'>Contact</h3>
         </div>
     )
 }

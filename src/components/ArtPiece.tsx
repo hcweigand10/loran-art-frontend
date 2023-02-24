@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { artPiece } from "../interfaces/interfaces";
+import { artPieceNode } from "../interfaces/interfaces";
 
-const ArtPiece = (props: artPiece) => {
+const ArtPiece = (props: artPieceNode) => {
   return (
     <div className="p-5">
       <img src={props.image} alt={props.title} />

@@ -1,12 +1,9 @@
 import React, {useState} from 'react'
 
-const Loading = () => {
-
-    return (
-        <div>
-             <h3>Loading...</h3>
-        </div>
-    )
-}
+import ReactLoading from 'react-loading';
+ 
+const Loading = () => (
+    <ReactLoading type={"spin"} color={"blue"} height={267} width={175} className="mx-auto pt-5"/>
+);
 
 export default Loading
