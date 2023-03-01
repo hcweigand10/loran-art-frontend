@@ -7,8 +7,6 @@ const Navbar = () => {
   const [open, setOpen] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<string>(window.location.pathname.slice(1));
 
-  console.log(currentPage);
-
   return (
     <div className="py-4 border-b-2 border-primary">
       <div className="max-w-2xl mx-auto">

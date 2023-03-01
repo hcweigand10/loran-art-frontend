@@ -37,7 +37,7 @@ const Gallery = () => {
   });
 
   return (
-    <div className="p-4">
+    <div className="max-w-2xl mx-auto">
       <h1 className="py-4 text-center text-3xl">{toSentenceCase(galleryCategory)}</h1>
       {isLoading ? (
         <div className="w-full">

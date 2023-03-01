@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.page {
+  min-height: calc(100vh - 98px - 80px);
+}
+
+.footer {
+  height: 80px;
+}
