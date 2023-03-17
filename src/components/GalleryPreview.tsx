@@ -9,10 +9,10 @@ interface props {
 
 const GalleryPreview = (props: props) => {
   return (
-    <div className="card hover:opacity-100 hover:font-semibold opacity-90 p-1">
+    <div className="card hover:opacity-80 p-1">
       <Link to="/gallery/?category=lg-wall">
         <img src={whistle} alt="Art for small walls" />
-        <h3 className="text-center">{props.category}</h3>
+        <h3 className="text-center hover:opacity-80">{props.category}</h3>
       </Link>
     </div>
   );

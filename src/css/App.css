@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.page {
+  min-height: calc(100vh - 98px - 120px);
+}
+
+.footer {
+  height: 120px;
+  color: rgba(255, 255, 255, 0.73);
+}
