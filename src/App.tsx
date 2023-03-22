@@ -35,7 +35,6 @@ function App() {
           setLoggedIn(true);
         }
       } catch (err) {
-        console.log("bad token");
         console.log(err);
         localStorage.removeItem("jwt");
       }
@@ -47,7 +46,7 @@ function App() {
     <BrowserRouter>
     <UserContext.Provider value={{loggedIn, setLoggedIn, loading, setLoading}}>
       <Navbar />
-      <div className="page">
+      <div className="container mx-auto lg:max-w-4xl page">
         <Routes>
           <Route index={true} element={<Home />} />
           <Route path="gallery/*" element={<Gallery />} />

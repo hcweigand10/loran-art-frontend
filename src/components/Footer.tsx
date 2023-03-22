@@ -11,13 +11,13 @@ import { faEnvelope, faHome } from "@fortawesome/free-solid-svg-icons";
 const Footer = () => {
   return (
     <footer className="bg-neutral-100 text-center text-neutral-600 dark:bg-neutral-600 dark:text-neutral-200 lg:text-left">
-      <div className="flex items-center justify-center border-b-2 border-neutral-200 p-6 dark:border-neutral-500 lg:justify-between">
-        <div className="mx-auto text-lg">
+      <div className="flex items-center justify-center border-b-2 border-neutral-200 pt-4 pb-3 dark:border-neutral-500 lg:justify-between">
+        <div className="mx-auto text-2xl text-neutral-600">
           <a
             href="https://twitter.com/recycledtoys"
             target="_blank"
             rel="noreferrer"
-            className="mx-3 text-neutral-600 dark:text-neutral-200 hover:opacity-80 hover:-translate-y-1 transition-all"
+            className="mx-3 dark:text-neutral-200 hover:opacity-80 hover:-translate-y-1 transition-all inline-block"
             title="Twitter"
           >
             <FontAwesomeIcon icon={faTwitter} />
@@ -26,7 +26,7 @@ const Footer = () => {
             href="http://www.flickr.com/people/loranscruggs/"
             target="_blank"
             rel="noreferrer"
-            className="mx-3 text-neutral-600 dark:text-neutral-200 hover:opacity-80 hover:-translate-y-1 transition-all"
+            className="mx-3 dark:text-neutral-200 hover:opacity-80 hover:-translate-y-1 transition-all inline-block"
             title="Flickr"
           >
             <FontAwesomeIcon icon={faFlickr} />
@@ -35,7 +35,7 @@ const Footer = () => {
             href="http://pinterest.com/loranscruggs"
             target="_blank"
             rel="noreferrer"
-            className="mx-3 text-neutral-600 dark:text-neutral-200 hover:opacity-80 hover:-translate-y-1 transition-all"
+            className="mx-3 dark:text-neutral-200 hover:opacity-80 hover:-translate-y-1 transition-all inline-block"
             title="Pinterest"
           >
             <FontAwesomeIcon icon={faPinterest} />
@@ -44,7 +44,7 @@ const Footer = () => {
             href="http://www.facebook.com/671809086"
             target="_blank"
             rel="noreferrer"
-            className="mx-3 text-neutral-600 dark:text-neutral-200 hover:opacity-80 hover:-translate-y-1 transition-all"
+            className="mx-3 dark:text-neutral-200 hover:opacity-80 hover:-translate-y-1 transition-all inline-block"
             title="Facebook"
           >
             <FontAwesomeIcon icon={faFacebook} />

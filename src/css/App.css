@@ -2,9 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  font-family: "Haas Grot Text R Web", "Helvetica"
 }
 
 #root {
@@ -12,7 +11,7 @@ code {
 }
 
 .page {
-  min-height: calc(100vh - 98px - 120px);
+  min-height: calc(100vh - 82px - 286px);
 }
 
 .footer {

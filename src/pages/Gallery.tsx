@@ -5,6 +5,7 @@ import ArtPiece from "../components/ArtPiece";
 import toSentenceCase from "../utils/toSentenceCase";
 import { artPiece } from "../interfaces/interfaces";
 import { useQuery } from "react-query";
+import Hero from "../components/Hero";
 
 const Gallery = () => {
   const [art, setArt] = useState<ReactNode>();
@@ -37,8 +38,10 @@ const Gallery = () => {
   });
 
   return (
-    <div className="max-w-2xl mx-auto">
-      <h1 className="py-4 text-center text-3xl">{toSentenceCase(galleryCategory)}</h1>
+    <div className="">
+      <Hero/>
+      <h1 className='text-3xl font-light tracking-wider mb-4'>{toSentenceCase(galleryCategory)}</h1>
+      <hr/>
       {isLoading ? (
         <div className="w-full">
           <Loading/>

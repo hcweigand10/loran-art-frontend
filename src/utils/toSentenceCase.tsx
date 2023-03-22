@@ -1,3 +1,4 @@
 export default (s: string) => {
-  return s.charAt(0).toUpperCase() + s.slice(1)
+  const words = s.split("-")
+  return words.map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ")
 }

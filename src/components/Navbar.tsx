@@ -24,7 +24,7 @@ const Navbar = () => {
             <button
               data-collapse-toggle="mobile-menu"
               type="button"
-              className="ml-3 text-gray-400 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-lg inline-flex items-center justify-center"
+              className="ml-3 text-gray-400 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-300 rounded-lg inline-flex items-center justify-center" 
               aria-controls="mobile-menu"
               aria-expanded="false"
               onClick={() => setOpen(!open)}
