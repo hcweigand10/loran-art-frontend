@@ -5,7 +5,7 @@ const Hero = () => {
 
     return (
         <div>
-            <div className='flex justify-center pt-20 pb-16'>
+            <div className='flex justify-center pt-8 pb-16'>
               <img src={whistle} alt="whistle art" width="120px" height="120px"/>
               <div className='ml-5'>
                 <h2 className='text-4xl font-medium'>Loran Scruggs</h2>

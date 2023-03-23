@@ -10,8 +10,9 @@ body {
   min-height: 100vh;
 }
 
+/* navbar, footer, navbar margin */
 .page {
-  min-height: calc(100vh - 82px - 286px);
+  min-height: calc(100vh - 82px - 286px - 40px);
 }
 
 .footer {

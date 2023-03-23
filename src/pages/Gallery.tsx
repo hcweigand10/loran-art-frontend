@@ -6,6 +6,7 @@ import toSentenceCase from "../utils/toSentenceCase";
 import { artPiece } from "../interfaces/interfaces";
 import { useQuery } from "react-query";
 import Hero from "../components/Hero";
+import categoryIdToName from "../utils/categoryIdToName";
 
 const Gallery = () => {
   const [art, setArt] = useState<ReactNode>();
@@ -30,6 +31,7 @@ const Gallery = () => {
             price={art.price}
             forSale={art.forSale}
             image={art.image}
+            category={categoryIdToName(art.CategoryId)}
           />
         ))
       );

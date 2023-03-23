@@ -11,7 +11,7 @@ const Navbar = () => {
   );
 
   return (
-    <div className="py-2 border-b-2 border-primary bg-white">
+    <div className="py-2 border-b-2 bg-primary text-white mb-10">
       <nav className="w-full">
         <div className="max-w-4xl mx-auto z-20">
           <div className="container mx-auto flex flex-wrap items-center justify-between">
@@ -60,7 +60,7 @@ const Navbar = () => {
         <div
           className={
             open
-              ? "w-full absolute transition-all top-20 z-10 bg-white pb-5 border-b-2 border-primary" : "w-full absolute transition-all -top-16 -z-10 bg-white border-b-2 border-primary"
+              ? "w-full absolute transition-all top-20 z-10 text-white pb-5 border-b-2 bg-primary" : "w-full absolute transition-all -top-16 -z-10 bg-white border-b-2 border-primary"
                
           }
           id="mobile-menu"
@@ -72,8 +72,8 @@ const Navbar = () => {
                   to="/"
                   className={
                     currentPage === "" || currentPage === "gallery/"
-                      ? "text-primary hover:text-primary border-b border-gray block pl-3 pr-4 py-2"
-                      : "hover:text-primary border-b border-gray block pl-3 pr-4 py-2"
+                      ? "text-neutral-300 hover:text-neutral-300 border-b border-gray block pl-3 pr-4 py-2"
+                      : "hover:text-neutral-300 border-b border-gray block pl-3 pr-4 py-2"
                   }
                   onClick={() => setCurrentPage("")}
                 >
@@ -85,8 +85,8 @@ const Navbar = () => {
                   to="/contact"
                   className={
                     currentPage === "contact"
-                      ? "text-primary hover:text-primary border-b border-gray block pl-3 pr-4 py-2"
-                      : "hover:text-primary border-b border-gray block pl-3 pr-4 py-2"
+                      ? "text-neutral-300 hover:text-neutral-300 border-b border-gray block pl-3 pr-4 py-2"
+                      : "hover:text-neutral-300 border-b border-gray block pl-3 pr-4 py-2"
                   }
                   onClick={() => setCurrentPage("contact")}
                 >
@@ -98,8 +98,8 @@ const Navbar = () => {
                   to="/links"
                   className={
                     currentPage === "links"
-                      ? "text-primary hover:text-primary border-b border-gray block pl-3 pr-4 py-2"
-                      : "hover:text-primary border-b border-gray block pl-3 pr-4 py-2"
+                      ? "text-neutral-300 hover:text-neutral-300 border-b border-gray block pl-3 pr-4 py-2"
+                      : "hover:text-neutral-300 border-b border-gray block pl-3 pr-4 py-2"
                   }
                   onClick={() => setCurrentPage("links")}
                 >

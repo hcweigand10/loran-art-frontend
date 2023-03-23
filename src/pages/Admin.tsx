@@ -1,4 +1,5 @@
 import React, { SetStateAction, useState, Dispatch, useContext } from "react";
+import Dashboard from "../components/Dashboard";
 import Login from "../components/Login";
 import userContext from "../contexts/userContext";
 import galleryAPI from "../utils/axios";
@@ -16,10 +17,7 @@ const Admin = () => {
       {!loggedIn ? (
         <Login />
       ) : (
-        <div>
-          <p>dashboard</p>
-          <button onClick={logout}>Log out</button>
-        </div>
+        <Dashboard/>
       )}
     </div>
   );

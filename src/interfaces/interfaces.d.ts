@@ -7,7 +7,8 @@ export interface artPiece {
   size: string,
   price: number,
   forSale: boolean,
-  image: string
+  image: string,
+  CategoryId: number
 }
 
 export interface artPieceNode {
@@ -17,7 +18,8 @@ export interface artPieceNode {
   size: string,
   price: number,
   forSale: boolean,
-  image: string
+  image: string,
+  category: string
 }
 
 export interface userInterface {
