@@ -8,18 +8,39 @@ export interface artPiece {
   price: number,
   forSale: boolean,
   image: string,
-  CategoryId: number
+  CategoryId: number,
+  category?: string
+}
+
+export interface formProps {
+  artId: number
 }
 
 export interface artPieceNode {
   key: number,
+  id: number,
   title: string,
   description: string,
   size: string,
   price: number,
   forSale: boolean,
   image: string,
-  category: string
+  category: string,
+  setLoading: Dispatch<SetStateAction<boolean>>
+}
+
+export interface tableRow {
+  key: number,
+  id: number,
+  title: string,
+  description: string,
+  size: string,
+  price: number,
+  forSale: boolean,
+  image: string,
+  category: string,
+  setLoading: Dispatch<SetStateAction<boolean>>,
+  delete: (id: number, title: string) => Promise<void>
 }
 
 export interface userInterface {
@@ -28,3 +49,4 @@ export interface userInterface {
   loading: boolean,
   setLoading: Dispatch<SetStateAction<boolean>>,
 }
+

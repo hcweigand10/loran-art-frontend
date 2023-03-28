@@ -15,5 +15,7 @@ module.exports = {
       // margin: "2rem"
     }
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/forms')
+  ],
 }

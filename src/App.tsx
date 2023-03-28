@@ -11,6 +11,8 @@ import NotFound from "./pages/NotFound";
 import Footer from "./components/Footer";
 import UserContext from "./contexts/userContext";
 import galleryAPI from "./utils/axios";
+import Edit from "./pages/Edit";
+import Create from "./pages/Create";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
@@ -53,6 +55,8 @@ function App() {
           <Route path="contact" element={<Contact />} />
           <Route path="links" element={<Links />} />
           <Route path="admin" element={<Admin />} />
+          <Route path="admin/edit/*" element={<Edit />} />
+          <Route path="admin/create-new" element={<Create />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

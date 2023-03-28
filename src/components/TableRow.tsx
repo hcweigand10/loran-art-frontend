@@ -1,19 +1,25 @@
 import React, { useState } from "react";
-import { artPieceNode } from "../interfaces/interfaces";
-import { Select, Option } from "@material-tailwind/react";
+import { Link } from "react-router-dom";
+import { tableRow } from "../interfaces/interfaces";
+import galleryAPI from "../utils/axios";
 
-const component = (props: artPieceNode) => {
+const TableRow = (props: tableRow) => {
+
+  const deleteArt = () => {
+    props.delete(props.id, props.title)
+  }
+
   return (
     <tr className="h-20">
       <td className="px-4 py-4 text-sm font-medium whitespace-nowrap">
         <div>
-          <h2 className="font-medium text-gray-800 dark:text-white ">
+          <h2 className="text-gray-800 dark:text-white font-semibold">
             {props.title}
           </h2>
         </div>
       </td>
       <td className="pr-6 py-4 text-sm font-medium whitespace-nowrap">
-        <div className="inline px-3 py-1 text-sm font-normal rounded-full text-emerald-500 gap-x-2 bg-emerald-100/60 dark:bg-gray-800">
+        <div className="inline py-1 text-sm font-normal dark:text-white">
           {props.category}
         </div>
       </td>
@@ -25,35 +31,38 @@ const component = (props: artPieceNode) => {
         </div>
       </td>
       <td className="pr-6 py-4 text-sm whitespace-nowrap">
-        <div className="flex items-center">{props.size}</div>
+        <div className="flex items-center">
+          <p className="pl-1">{props.size}</p>
+        </div>
       </td>
       <td className="pr-10 py-4 text-sm whitespace-nowrap">
         <div className="flex items-center">
-          {props.forSale ? "True" : "False"}
+          <p className={props.forSale ? "text-emerald-600 bg-emerald-100/60 rounded p-1" : "text-red-600 bg-red-100/60 rounded p-1"}>{props.forSale ? "True" : "False"}</p>
         </div>
       </td>
       <td className="pr-6 py-4 text-sm whitespace-nowrap">
-        <div className="flex items-center">${props.price}</div>
-      </td>
-      <td className="pr-6 py-4 text-sm whitespace-nowrap">
         <div className="flex items-center">
-          <img src={props.image} alt={props.title} width="200px"/>
+          <p className={props.price ? "pl-1" : "pl-1 text-neutral-400"}>{props.price ? `$${props.price}` : "N/A"}</p>
+        </div>
+      </td>
+      <td className="pr-6 py-2 text-sm whitespace-nowrap">
+        <div className="flex items-center">
+          <img src={props.image} alt={props.title} className="h-12 pl-1" />
         </div>
       </td>
 
       <td className="pr-6 py-4 text-sm whitespace-nowrap">
-        <div className="w-48">
-          <Select label="Select Version">
-            <Option>Material Tailwind HTML</Option>
-            <Option>Material Tailwind React</Option>
-            <Option>Material Tailwind Vue</Option>
-            <Option>Material Tailwind Angular</Option>
-            <Option>Material Tailwind Svelte</Option>
-          </Select>
+        <div className="flex items-center">
+          <Link to={`/admin/edit/id?=${props.id}`} className="rounded px-3 py-2 bg-neutral-200 mr-2">
+            Edit
+          </Link>
+          <button className="rounded p-2 bg-red-600 ml-2 text-white" onClick={deleteArt}>
+            Delete
+          </button>
         </div>
       </td>
     </tr>
   );
 };
 
-export default component;
+export default TableRow;

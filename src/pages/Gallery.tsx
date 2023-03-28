@@ -10,6 +10,7 @@ import categoryIdToName from "../utils/categoryIdToName";
 
 const Gallery = () => {
   const [art, setArt] = useState<ReactNode>();
+  const [loading, setLoading] = useState<boolean>(true)
   const queryParameters = new URLSearchParams(window.location.search);
   const galleryCategory = queryParameters.get("category") || "wall";
 
@@ -24,6 +25,7 @@ const Gallery = () => {
       setArt(
         data.data.Arts.map((art: artPiece) => (
           <ArtPiece
+            id={art.id}
             key={art.id}
             title={art.title}
             description={art.description}
@@ -32,6 +34,7 @@ const Gallery = () => {
             forSale={art.forSale}
             image={art.image}
             category={categoryIdToName(art.CategoryId)}
+            setLoading={setLoading}
           />
         ))
       );
