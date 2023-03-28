@@ -6,7 +6,9 @@ import galleryAPI from "../utils/axios";
 const TableRow = (props: tableRow) => {
 
   const deleteArt = () => {
-    props.delete(props.id, props.title)
+    if (props.id) {
+      props.delete(props.id, props.title)
+    }
   }
 
   return (
@@ -42,7 +44,7 @@ const TableRow = (props: tableRow) => {
       </td>
       <td className="pr-6 py-4 text-sm whitespace-nowrap">
         <div className="flex items-center">
-          <p className={props.price ? "pl-1" : "pl-1 text-neutral-400"}>{props.price ? `$${props.price}` : "N/A"}</p>
+          <p className={props.forSale ? "pl-1" : "pl-1 text-neutral-400"}>{props.forSale ? `$${props.price}` : "N/A"}</p>
         </div>
       </td>
       <td className="pr-6 py-2 text-sm whitespace-nowrap">
@@ -53,7 +55,7 @@ const TableRow = (props: tableRow) => {
 
       <td className="pr-6 py-4 text-sm whitespace-nowrap">
         <div className="flex items-center">
-          <Link to={`/admin/edit/id?=${props.id}`} className="rounded px-3 py-2 bg-neutral-200 mr-2">
+          <Link to={`/admin/edit/?id=${props.id}`} className="rounded px-3 py-2 bg-neutral-200 mr-2">
             Edit
           </Link>
           <button className="rounded p-2 bg-red-600 ml-2 text-white" onClick={deleteArt}>

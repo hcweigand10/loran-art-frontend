@@ -1,10 +1,12 @@
-import React, { ChangeEvent, useState, useEffect } from "react";
+import React, { ChangeEvent, useState, useEffect, useContext } from "react";
 import { useQuery } from "react-query";
 import galleryAPI from "../utils/axios";
 import { artPiece, formProps } from "../interfaces/interfaces";
+import CloudinaryBtn from "./CloudinaryBtn";
 import categoryIdToName from "../utils/categoryIdToName";
 import Loading from "./Loading";
 import categoryNameToId from "../utils/categoryNameToId";
+import { useNavigate } from "react-router-dom";
 // import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
 
 const Form = (props: formProps) => {
@@ -19,7 +21,9 @@ const Form = (props: formProps) => {
     CategoryId: 0,
     category: "",
   });
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate()
+  
 
   const { data, isLoading, isSuccess, isError } = useQuery({
     queryKey: [props.artId.toString()],
@@ -30,9 +34,8 @@ const Form = (props: formProps) => {
         ...data.data,
         category: categoryIdToName(data.data.CategoryId),
       });
-      setLoading(false);
     },
-    staleTime: 1000000,
+    // staleTime: 10000,
     enabled: props.artId !== 0,
   });
 
@@ -41,7 +44,6 @@ const Form = (props: formProps) => {
   };
 
   const handleCheckBoxChange = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.checked);
     setArtInfo({ ...artInfo, forSale: !artInfo.forSale });
   };
 
@@ -53,10 +55,31 @@ const Form = (props: formProps) => {
     setArtInfo({ ...artInfo, [e.target.name]: e.target.value, CategoryId: categoryNameToId(e.target.value) });
   };
 
+  const handleSubmit = async () => {
+    if (props.artId !== 0) {
+      setLoading(true)
+      const body = {...artInfo}
+      delete body.category
+      delete body.id
+      const response = await galleryAPI.put(`/api/art/${props.artId}`, body)
+      console.log(response)
+      setLoading(false)
+      navigate("/admin")
+    } else {
+      setLoading(true)
+      const body = {...artInfo}
+      delete body.category
+      delete body.id
+      const response = await galleryAPI.post(`/api/art`, body)
+      console.log(response)
+      setLoading(false)
+      navigate("/admin")
+    }
+  }
+
   return (
     <div>
-      <h1 className="text-2xl">Edit</h1>
-      {loading ? (
+      {isLoading || loading ? (
         <Loading />
       ) : (
         <form>
@@ -66,7 +89,7 @@ const Form = (props: formProps) => {
                 <div className="sm:col-span-4">
                   <label
                     htmlFor="title"
-                    className="block text-sm font-medium leading-6 text-gray-900"
+                    className="block text-md font-medium leading-6 text-gray-900"
                   >
                     Title
                   </label>
@@ -88,7 +111,7 @@ const Form = (props: formProps) => {
                 <div className="col-span-full">
                   <label
                     htmlFor="description"
-                    className="block text-sm font-medium leading-6 text-gray-900"
+                    className="block text-md font-medium leading-6 text-gray-900"
                   >
                     Description
                   </label>
@@ -98,7 +121,6 @@ const Form = (props: formProps) => {
                       name="description"
                       rows={3}
                       className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
-                      defaultValue={""}
                       value={artInfo.description}
                       onChange={handleTextAreaChange}
                     />
@@ -109,7 +131,7 @@ const Form = (props: formProps) => {
                   <div className="md:col-span-3">
                     <label
                       htmlFor="size"
-                      className="block text-sm font-medium leading-6 text-gray-900"
+                      className="block text-md font-medium leading-6 text-gray-900"
                     >
                       Size
                     </label>
@@ -127,7 +149,7 @@ const Form = (props: formProps) => {
                   <div className="md:col-span-3">
                     <label
                       htmlFor="image"
-                      className="block text-sm font-medium leading-6 text-gray-900"
+                      className="block text-md font-medium leading-6 text-gray-900"
                     >
                       Image
                     </label>
@@ -141,22 +163,17 @@ const Form = (props: formProps) => {
                       ) : (
                         <p>No image yet</p>
                       )}
-                      <button
-                        type="button"
-                        className="rounded-md bg-white py-1.5 px-2.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                      >
-                        Change
-                      </button>
+                      <CloudinaryBtn/>
                     </div>
                   </div>
                 </div>
                 <div className="col-span-full grid grid-cols-1 md:grid-cols-6 gap-6">
-                  <div className="md:col-span-3">
-                    <div className="relative flex gap-x-3">
-                      <div className="text-sm leading-6">
+                  <div className="md:col-span-3 grid grid-cols-1 md:grid-cols-6 gap-4">
+                    <div className="relative flex gap-x-3 md:col-span-2">
+                      <div className="leading-6">
                         <label
-                          htmlFor="comments"
-                          className="font-medium text-gray-900"
+                          htmlFor="forSale"
+                          className="font-medium text-md text-gray-900"
                         >
                           For Sale
                         </label>
@@ -173,13 +190,13 @@ const Form = (props: formProps) => {
                         />
                       </div>
                     </div>
-                    <div className={artInfo.forSale ? "pt-4" : "hidden"}>
+                    <div className={artInfo.forSale ? "pt-4 md:p-0 md:col-span-3" : "hidden  md:col-span-1"}>
                       <label
                         htmlFor="price"
                         className={
                           artInfo.forSale
-                            ? "block text-sm font-medium leading-6 text-gray-900"
-                            : "block text-sm font-medium leading-6 text-gray-500"
+                            ? "block text-md font-medium leading-6 text-gray-900"
+                            : "block text-md font-medium leading-6 text-gray-500"
                         }
                       >
                         Price
@@ -205,7 +222,7 @@ const Form = (props: formProps) => {
                   <div className="md:col-span-3">
                     <label
                       htmlFor="price"
-                      className="block text-sm font-medium leading-6 text-gray-900"
+                      className="block text-md font-medium leading-6 text-gray-900"
                     >
                       Category
                     </label>
@@ -247,6 +264,7 @@ const Form = (props: formProps) => {
             <button
               type="submit"
               className="rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white hover:drop-shadow-lg"
+              onClick={handleSubmit}
             >
               Save
             </button>

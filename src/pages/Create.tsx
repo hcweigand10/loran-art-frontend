@@ -1,7 +1,19 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
+import userContext from "../contexts/userContext";
+import { useNavigate } from "react-router-dom";
 import Form from '../components/Form'
 
 const Create = () => {
+
+  const {loggedIn} = useContext(userContext)
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if(!loggedIn) {
+      navigate("/admin")
+    }
+  }, [])
 
     return (
         <div>

@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react"
 
 export interface artPiece {
-  id: number,
+  id?: number,
   title: string,
   description: string,
   size: string,
@@ -17,8 +17,8 @@ export interface formProps {
 }
 
 export interface artPieceNode {
-  key: number,
-  id: number,
+  key?: number,
+  id?: number,
   title: string,
   description: string,
   size: string,
@@ -30,8 +30,8 @@ export interface artPieceNode {
 }
 
 export interface tableRow {
-  key: number,
-  id: number,
+  key?: number,
+  id?: number,
   title: string,
   description: string,
   size: string,
