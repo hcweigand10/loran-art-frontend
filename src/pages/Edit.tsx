@@ -10,19 +10,18 @@ import categoryIdToName from "../utils/categoryIdToName";
 
 const Edit = () => {
   const [art, setArt] = useState<artPiece>();
-  const [loading, setLoading] = useState<boolean>(false);
   const queryParameters = new URLSearchParams(window.location.search);
   const artId = queryParameters.get("id") || "1";
 
-  const {loggedIn} = useContext(userContext)
+  const {loggedIn, loading} = useContext(userContext)
 
   const navigate = useNavigate()
 
   useEffect(() => {
-    if(!loggedIn) {
+    if(!loading && !loggedIn) {
       navigate("/admin")
     }
-  }, [])
+  }, [loading, loggedIn])
 
   return (
     <div>

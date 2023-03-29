@@ -22,22 +22,31 @@ const Form = (props: formProps) => {
     category: "",
   });
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate()
-  
+  const navigate = useNavigate();
 
-  const { data, isLoading, isSuccess, isError } = useQuery({
+  useEffect(() => {
+    if (props.artId !== 0) {
+      refetch();
+    }
+  }, []);
+
+  const { data, isLoading, isSuccess, isError, refetch } = useQuery({
     queryKey: [props.artId.toString()],
     queryFn: () => galleryAPI.get(`/api/art/${props.artId}`),
     onSuccess: (data): void => {
-      console.log(data);
       setArtInfo({
         ...data.data,
         category: categoryIdToName(data.data.CategoryId),
       });
     },
     // staleTime: 10000,
-    enabled: props.artId !== 0,
+    enabled: false,
   });
+
+  const handleImageUpload = (url: string) => {
+    console.log(artInfo)
+    setArtInfo({ ...artInfo, image: url });
+  };
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setArtInfo({ ...artInfo, [e.target.name]: e.target.value });
@@ -52,30 +61,34 @@ const Form = (props: formProps) => {
   };
 
   const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setArtInfo({ ...artInfo, [e.target.name]: e.target.value, CategoryId: categoryNameToId(e.target.value) });
+    setArtInfo({
+      ...artInfo,
+      [e.target.name]: e.target.value,
+      CategoryId: categoryNameToId(e.target.value),
+    });
   };
 
   const handleSubmit = async () => {
     if (props.artId !== 0) {
-      setLoading(true)
-      const body = {...artInfo}
-      delete body.category
-      delete body.id
-      const response = await galleryAPI.put(`/api/art/${props.artId}`, body)
-      console.log(response)
-      setLoading(false)
-      navigate("/admin")
+      setLoading(true);
+      const body = { ...artInfo };
+      delete body.category;
+      delete body.id;
+      const response = await galleryAPI.put(`/api/art/${props.artId}`, body);
+      console.log(response);
+      setLoading(false);
+      navigate("/admin");
     } else {
-      setLoading(true)
-      const body = {...artInfo}
-      delete body.category
-      delete body.id
-      const response = await galleryAPI.post(`/api/art`, body)
-      console.log(response)
-      setLoading(false)
-      navigate("/admin")
+      setLoading(true);
+      const body = { ...artInfo };
+      delete body.category;
+      delete body.id;
+      const response = await galleryAPI.post(`/api/art`, body);
+      console.log(response);
+      setLoading(false);
+      navigate("/admin");
     }
-  }
+  };
 
   return (
     <div>
@@ -163,7 +176,12 @@ const Form = (props: formProps) => {
                       ) : (
                         <p>No image yet</p>
                       )}
-                      <CloudinaryBtn/>
+                      <CloudinaryBtn
+                        image={artInfo.image ? true : false}
+                        handleImageUpload={handleImageUpload}
+                        artInfo={artInfo}
+                        setArtInfo={setArtInfo}
+                      />
                     </div>
                   </div>
                 </div>
@@ -190,7 +208,13 @@ const Form = (props: formProps) => {
                         />
                       </div>
                     </div>
-                    <div className={artInfo.forSale ? "pt-4 md:p-0 md:col-span-3" : "hidden  md:col-span-1"}>
+                    <div
+                      className={
+                        artInfo.forSale
+                          ? "pt-4 md:p-0 md:col-span-3"
+                          : "hidden  md:col-span-1"
+                      }
+                    >
                       <label
                         htmlFor="price"
                         className={

@@ -16,7 +16,7 @@ import Create from "./pages/Create";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     checkToken()
@@ -26,7 +26,6 @@ function App() {
     const token = localStorage.getItem("jwt");
     if (token) {
       try {
-        setLoading(true)
         const response = await galleryAPI.post("/api/users/check-token", {},{
           headers: {
             authorization: `Bearer ${token}`,
@@ -40,6 +39,8 @@ function App() {
         console.log(err);
         localStorage.removeItem("jwt");
       }
+    } else {
+      setLoading(false)
     }
   }
 

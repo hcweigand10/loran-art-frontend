@@ -1,13 +1,21 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, SetStateAction, Dispatch } from "react";
+import { artPiece } from "../interfaces/interfaces";
 import { Cloudinary } from "@cloudinary/url-gen";
+import { image } from "@cloudinary/url-gen/qualifiers/source";
 
-const CloudinaryBtn = () => {
+interface props {
+  image: boolean
+  handleImageUpload: (url: string) => void
+  artInfo: artPiece
+  setArtInfo: Dispatch<SetStateAction<artPiece>>
+}
+
+const CloudinaryBtn = (props: props) => {
   const cloudinaryRef = useRef<any>();
   const widgetRef = useRef<any>();
 
   useEffect(() => {
     cloudinaryRef.current = window.cloudinary;
-    console.log(window.cloudinary)
     if (cloudinaryRef.current) {
       widgetRef.current = cloudinaryRef.current.createUploadWidget(
         {
@@ -17,11 +25,12 @@ const CloudinaryBtn = () => {
         (error: any, result: any) => {
           if (!error && result && result.event === "success") {
             console.log("Done! Here is the image info: ", result.info);
+            console.log(props.artInfo)
+            props.setArtInfo({ ...props.artInfo, image: result.info.url });
           }
         }
       );
     }
-    console.log(widgetRef)
   }, []);
 
   return (
@@ -29,11 +38,11 @@ const CloudinaryBtn = () => {
       type="button"
       className="button p-2 bg-primary text-white rounded hover:drop-shadow-md"
       onClick={() => {
-        console.log(widgetRef);
         widgetRef.current.open();
+        console.log(props.artInfo)
       }}
     >
-      Upload
+      {props.image ? "Change" : "Upload"}
     </button>
   );
 };
