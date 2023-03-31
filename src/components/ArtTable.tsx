@@ -41,11 +41,11 @@ const ArtTable = () => {
   };
 
   return (
-    <section className="container px-4 mx-auto pb-5">
+    <section className="mx-auto pb-5">
       <div className="sm:flex sm:items-center sm:justify-between">
         <div>
           <div className="flex items-center gap-x-3">
-            <h2 className="text-2xl font-medium text-gray-800 dark:text-white">
+            <h2 className="text-3xl font-medium text-gray-800 dark:text-white">
               All Art Pieces
             </h2>
 
@@ -57,8 +57,8 @@ const ArtTable = () => {
       </div>
 
       <div className="mt-6 md:flex md:items-end md:justify-between">
-        <div>
-          <Link to={"/admin/create-new"} className="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
+        <div className="mb-2">
+          <Link to={"/admin/create-new"} className="flex items-center justify-center px-2 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -74,7 +74,7 @@ const ArtTable = () => {
               />
             </svg>
 
-            <span>Add Piece</span>
+            <span>Add</span>
           </Link>
         </div>
 
@@ -100,10 +100,10 @@ const ArtTable = () => {
         </div>
       </div>
 
-      <div className="flex flex-col mt-6">
-        <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div className="inline-block min-w-full pt-2 pb-8 align-middle md:px-6 lg:px-8">
-            <div className="overflow-hidden border border-gray-200 dark:border-gray-700 md:rounded-lg">
+      <div className="mt-3">
+        <div className="overflow-x-auto">
+          <div className="inline-block min-w-full pt-2 pb-8 align-middle">
+            <div className="overflow-hidden border border-gray-200 dark:border-gray-700 rounded-lg drop-shadow-md">
               {loading ? (
                 <Loading />
               ) : (

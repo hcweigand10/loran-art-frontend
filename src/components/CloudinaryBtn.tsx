@@ -6,8 +6,6 @@ import { image } from "@cloudinary/url-gen/qualifiers/source";
 interface props {
   image: boolean
   handleImageUpload: (url: string) => void
-  artInfo: artPiece
-  setArtInfo: Dispatch<SetStateAction<artPiece>>
 }
 
 const CloudinaryBtn = (props: props) => {
@@ -25,8 +23,7 @@ const CloudinaryBtn = (props: props) => {
         (error: any, result: any) => {
           if (!error && result && result.event === "success") {
             console.log("Done! Here is the image info: ", result.info);
-            console.log(props.artInfo)
-            props.setArtInfo({ ...props.artInfo, image: result.info.url });
+            props.handleImageUpload(result.info.url);
           }
         }
       );
@@ -39,7 +36,6 @@ const CloudinaryBtn = (props: props) => {
       className="button p-2 bg-primary text-white rounded hover:drop-shadow-md"
       onClick={() => {
         widgetRef.current.open();
-        console.log(props.artInfo)
       }}
     >
       {props.image ? "Change" : "Upload"}

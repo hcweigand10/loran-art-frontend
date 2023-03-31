@@ -2,6 +2,7 @@
 
 const colors = require('tailwindcss/colors')
 colors.primary = "#056608"
+colors.soft = "#ACD1AF"
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",

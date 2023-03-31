@@ -1,4 +1,7 @@
 import React, { ReactNode, useState } from "react";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import galleryAPI from "../utils/axios";
 import Loading from "../components/Loading";
 import ArtPiece from "../components/ArtPiece";
@@ -38,17 +41,17 @@ const Gallery = () => {
           />
         ))
       );
-    },
-    staleTime: 100000000000,
+    }
   });
 
   return (
-    <div className="">
+    <div className="relative">
+      <Link to="/" className="absolute top-3 left-0 border-b border-primary"><FontAwesomeIcon icon={faArrowLeft} /> Go back</Link>
       <Hero/>
       <h1 className='text-3xl font-light tracking-wider mb-4'>{toSentenceCase(galleryCategory)}</h1>
       <hr/>
       {isLoading ? (
-        <div className="w-full">
+        <div className="">
           <Loading/>
         </div>
       ) : null}

@@ -10,17 +10,14 @@ import { useNavigate } from "react-router-dom";
 // import { PhotoIcon, UserCircleIcon } from '@heroicons/react/24/solid'
 
 const Form = (props: formProps) => {
-  const [artInfo, setArtInfo] = useState<artPiece>({
-    id: 0,
-    title: "",
-    description: "",
-    size: "",
-    price: 0,
-    forSale: false,
-    image: "",
-    CategoryId: 0,
-    category: "",
-  });
+  const [title, setTitle] = useState<string>("")
+  const [description, setDescription] = useState<string>("")
+  const [size, setSize] = useState<string>("")
+  const [price, setPrice] = useState<number>(0)
+  const [forSale, setForSale] = useState<boolean>(true)
+  const [image, setImage] = useState<string>("")
+  const [categoryId, setCategoryId] = useState<number>(0)
+  const [category, setCategory] = useState<string>("")
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -34,59 +31,60 @@ const Form = (props: formProps) => {
     queryKey: [props.artId.toString()],
     queryFn: () => galleryAPI.get(`/api/art/${props.artId}`),
     onSuccess: (data): void => {
-      setArtInfo({
-        ...data.data,
-        category: categoryIdToName(data.data.CategoryId),
-      });
+      setTitle(data.data.title)
+      setDescription(data.data.description)
+      setSize(data.data.size)
+      setPrice(data.data.price)
+      setForSale(data.data.forSale)
+      setImage(data.data.image)
+      setCategoryId(data.data.CategoryId)
     },
     // staleTime: 10000,
     enabled: false,
   });
 
   const handleImageUpload = (url: string) => {
-    console.log(artInfo)
-    setArtInfo({ ...artInfo, image: url });
+    setImage(url)
   };
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setArtInfo({ ...artInfo, [e.target.name]: e.target.value });
-  };
+  // const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  //   setArtInfo({ ...artInfo, [e.target.name]: e.target.value });
+  // };
 
   const handleCheckBoxChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setArtInfo({ ...artInfo, forSale: !artInfo.forSale });
+    setForSale(!forSale);
   };
 
-  const handleTextAreaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setArtInfo({ ...artInfo, [e.target.name]: e.target.value });
-  };
+  // const handleTextAreaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+  //   setArtInfo({ ...artInfo, [e.target.name]: e.target.value });
+  // };
 
   const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setArtInfo({
-      ...artInfo,
-      [e.target.name]: e.target.value,
-      CategoryId: categoryNameToId(e.target.value),
-    });
+    setCategory(e.target.value)
+    setCategoryId(categoryNameToId(e.target.value))
   };
 
   const handleSubmit = async () => {
+    const body = {
+      title,
+      description,
+      size,
+      price,
+      forSale,
+      image,
+      CategoryId: categoryId
+    }
     if (props.artId !== 0) {
       setLoading(true);
-      const body = { ...artInfo };
-      delete body.category;
-      delete body.id;
       const response = await galleryAPI.put(`/api/art/${props.artId}`, body);
       console.log(response);
-      setLoading(false);
-      navigate("/admin");
+      window.location.assign("/admin");
     } else {
       setLoading(true);
-      const body = { ...artInfo };
-      delete body.category;
-      delete body.id;
       const response = await galleryAPI.post(`/api/art`, body);
       console.log(response);
       setLoading(false);
-      navigate("/admin");
+      window.location.assign("/admin");
     }
   };
 
@@ -109,13 +107,13 @@ const Form = (props: formProps) => {
                   <div className="mt-2">
                     <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
                       <input
-                        value={artInfo.title}
+                        value={title}
                         type="text"
                         name="title"
                         id="title"
                         className="block flex-1 border-0 bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
                         placeholder=""
-                        onChange={handleInputChange}
+                        onChange={(e)=>setTitle(e.target.value)}
                       />
                     </div>
                   </div>
@@ -134,8 +132,8 @@ const Form = (props: formProps) => {
                       name="description"
                       rows={3}
                       className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
-                      value={artInfo.description}
-                      onChange={handleTextAreaChange}
+                      value={description}
+                      onChange={(e)=>setDescription(e.target.value)}
                     />
                   </div>
                 </div>
@@ -154,8 +152,8 @@ const Form = (props: formProps) => {
                         name="size"
                         id="size"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        value={artInfo.size}
-                        onChange={handleInputChange}
+                        value={size}
+                        onChange={(e)=>setSize(e.target.value)}
                       />
                     </div>
                   </div>
@@ -167,9 +165,9 @@ const Form = (props: formProps) => {
                       Image
                     </label>
                     <div className="mt-2 flex items-center gap-x-3">
-                      {artInfo.image ? (
+                      {image ? (
                         <img
-                          src={artInfo.image}
+                          src={image}
                           alt={"preview"}
                           className="h-24"
                         />
@@ -177,10 +175,8 @@ const Form = (props: formProps) => {
                         <p>No image yet</p>
                       )}
                       <CloudinaryBtn
-                        image={artInfo.image ? true : false}
+                        image={image ? true : false}
                         handleImageUpload={handleImageUpload}
-                        artInfo={artInfo}
-                        setArtInfo={setArtInfo}
                       />
                     </div>
                   </div>
@@ -204,13 +200,13 @@ const Form = (props: formProps) => {
                           type="checkbox"
                           className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                           onChange={handleCheckBoxChange}
-                          checked={artInfo.forSale}
+                          checked={forSale}
                         />
                       </div>
                     </div>
                     <div
                       className={
-                        artInfo.forSale
+                        forSale
                           ? "pt-4 md:p-0 md:col-span-3"
                           : "hidden  md:col-span-1"
                       }
@@ -218,7 +214,7 @@ const Form = (props: formProps) => {
                       <label
                         htmlFor="price"
                         className={
-                          artInfo.forSale
+                          forSale
                             ? "block text-md font-medium leading-6 text-gray-900"
                             : "block text-md font-medium leading-6 text-gray-500"
                         }
@@ -231,13 +227,13 @@ const Form = (props: formProps) => {
                             $
                           </span>
                           <input
-                            disabled={!artInfo.forSale}
+                            disabled={!forSale}
                             type="number"
                             name="price"
                             id="price"
                             className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                            value={artInfo.forSale ? artInfo.price : ""}
-                            onChange={handleInputChange}
+                            value={forSale ? price : ""}
+                            onChange={(e)=>setPrice(parseInt(e.target.value))}
                           />
                         </div>
                       </div>
@@ -256,7 +252,7 @@ const Form = (props: formProps) => {
                         id="category"
                         name="category"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6"
-                        value={artInfo.category}
+                        value={category}
                         onChange={handleSelectChange}
                       >
                         <option>Small Walls</option>

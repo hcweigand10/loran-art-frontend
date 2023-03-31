@@ -10,7 +10,7 @@ import { faEnvelope, faHome } from "@fortawesome/free-solid-svg-icons";
 
 const Footer = () => {
   return (
-    <footer className="bg-neutral-100 text-center text-neutral-600 dark:bg-neutral-600 dark:text-neutral-200 lg:text-left">
+    <footer className="bg-neutral-200 text-center text-neutral-600 dark:bg-neutral-600 dark:text-neutral-200 lg:text-left">
       <div className="flex items-center justify-center border-b-2 border-neutral-200 pt-4 pb-3 dark:border-neutral-500 lg:justify-between">
         <div className="mx-auto text-2xl text-neutral-600">
           <a
@@ -51,6 +51,7 @@ const Footer = () => {
           </a>
         </div>
       </div>
+      <hr className="border-neutral-400"/>
       <div className="mx-6 py-6 text-center md:text-left">
         <div className="flex justify-center">
           <div>
@@ -77,7 +78,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="bg-neutral-200 p-4 text-center dark:bg-neutral-700">
+      <div className="bg-neutral-300 p-4 text-center dark:bg-neutral-700">
         <span>Website by: </span>
         <a
           className="font-semibold text-neutral-600 dark:text-neutral-400"

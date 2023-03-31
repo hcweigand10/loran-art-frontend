@@ -11,7 +11,7 @@ const GalleryPreview = (props: props) => {
   return (
     <div className="card hover:opacity-80 p-1">
       <Link to={`/gallery/?category=${props.category}`}>
-        <img src={props.image} alt={toSentenceCase(props.category)} className="p-1"/>
+        <img src={props.image} alt={toSentenceCase(props.category)} className="p-1 w-full object-cover h-60"/>
         <h3 className="text-center hover:opacity-80">{toSentenceCase(props.category)}</h3>
       </Link>
     </div>

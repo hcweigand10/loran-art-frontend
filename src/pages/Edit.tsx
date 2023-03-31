@@ -28,7 +28,10 @@ const Edit = () => {
       {loading ? (
         <Loading />
       ) : (
+        <>
+        <h1 className="text-3xl">Edit</h1>
         <Form artId={parseInt(artId)}/>
+        </>
       )}
     </div>
   );

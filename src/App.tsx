@@ -49,7 +49,7 @@ function App() {
     <BrowserRouter>
     <UserContext.Provider value={{loggedIn, setLoggedIn, loading, setLoading}}>
       <Navbar />
-      <div className="container mx-auto lg:max-w-4xl page">
+      <div className="container mx-auto lg:max-w-4xl" id="home">
         <Routes>
           <Route index={true} element={<Home />} />
           <Route path="gallery/*" element={<Gallery />} />
