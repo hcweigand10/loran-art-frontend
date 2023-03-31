@@ -81,7 +81,7 @@ const Footer = () => {
       <div className="bg-neutral-300 p-4 text-center dark:bg-neutral-700">
         <span>Website by: </span>
         <a
-          className="font-semibold text-neutral-600 dark:text-neutral-400"
+          className="font-semibold text-neutral-600 dark:text-neutral-400 underline"
           href="https://henryweigand.com"
         >
           henryweigand.com
