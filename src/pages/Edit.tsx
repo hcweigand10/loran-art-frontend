@@ -24,7 +24,7 @@ const Edit = () => {
   }, [loading, loggedIn])
 
   return (
-    <div>
+    <div className="pt-5">
       {loading ? (
         <Loading />
       ) : (
