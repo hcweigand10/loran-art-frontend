@@ -55,7 +55,7 @@ const Gallery = () => {
           <Loading/>
         </div>
       ) : null}
-      {data ? <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">{art}</div> : null}
+      {data ? <div className="grid grid-cols-1 md:grid-cols-2">{art}</div> : null}
     </div>
   );
 };
