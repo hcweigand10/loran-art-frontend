@@ -39,7 +39,7 @@ const Form = (props: formProps) => {
       setForSale(data.data.forSale)
       setImage(data.data.image)
       setNotes(data.data.notes)
-      setCategory(categoryIdToName(data.data.categoryId))
+      setCategory(categoryIdToName(data.data.CategoryId))
       setCategoryId(data.data.CategoryId)
     },
     // staleTime: 10000,
