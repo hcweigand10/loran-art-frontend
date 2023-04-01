@@ -38,6 +38,8 @@ const Form = (props: formProps) => {
       setPrice(data.data.price)
       setForSale(data.data.forSale)
       setImage(data.data.image)
+      setNotes(data.data.notes)
+      setCategory(categoryIdToName(data.data.categoryId))
       setCategoryId(data.data.CategoryId)
     },
     // staleTime: 10000,
@@ -73,7 +75,7 @@ const Form = (props: formProps) => {
       forSale,
       image,
       notes,
-      category_id: categoryId
+      CategoryId: categoryId
     }
     console.log(body)
     if (props.artId !== 0) {
