@@ -23,7 +23,7 @@ const CloudinaryBtn = (props: props) => {
         (error: any, result: any) => {
           if (!error && result && result.event === "success") {
             console.log("Done! Here is the image info: ", result.info);
-            props.handleImageUpload(result.info.url);
+            props.handleImageUpload(result.info.secure_url);
           }
         }
       );
