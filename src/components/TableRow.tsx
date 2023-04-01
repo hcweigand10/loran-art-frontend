@@ -20,40 +20,49 @@ const TableRow = (props: tableRow) => {
           </h2>
         </div>
       </td>
-      <td className="pr-6 py-4 text-sm font-medium whitespace-nowrap">
+      <td className="pr-4 py-4 text-sm font-medium whitespace-nowrap">
         <div className="inline py-1 text-sm font-normal dark:text-white">
           {props.category}
         </div>
       </td>
-      <td className="pr-6 py-4 text-sm whitespace-nowrap">
+      <td className="pr-4 py-4 text-sm whitespace-nowrap">
         <div>
-          <h4 className="text-gray-700 dark:text-gray-200">
+          <h4 className="text-gray-700 dark:text-gray-200 truncate w-24">
+            {/* {props.description.length < 50 ? props.description : props.description.substring(0,49) + "..."} */}
             {props.description}
           </h4>
         </div>
       </td>
-      <td className="pr-6 py-4 text-sm whitespace-nowrap">
+      <td className="pr-4 py-4 text-sm whitespace-nowrap">
+        <div className="w-20">
+          <h4 className="text-gray-700 dark:text-gray-200 truncate mr-0">
+            {/* {props.description.length < 50 ? props.description : props.description.substring(0,49) + "..."} */}
+            {props.notes}
+          </h4>
+        </div>
+      </td>
+      <td className="pr-4 py-4 text-sm whitespace-nowrap">
         <div className="flex items-center">
           <p className="pl-1">{props.size}</p>
         </div>
       </td>
-      <td className="pr-10 py-4 text-sm whitespace-nowrap">
+      <td className="pr-4 py-4 text-sm whitespace-nowrap">
         <div className="flex items-center">
           <p className={props.forSale ? "text-emerald-600 bg-emerald-100/60 rounded p-1" : "text-red-600 bg-red-100/60 rounded p-1"}>{props.forSale ? "True" : "False"}</p>
         </div>
       </td>
-      <td className="pr-6 py-4 text-sm whitespace-nowrap">
+      <td className="pr-4 py-4 text-sm whitespace-nowrap">
         <div className="flex items-center">
           <p className={props.forSale ? "pl-1" : "pl-1 text-neutral-400"}>{props.forSale ? `$${props.price}` : "N/A"}</p>
         </div>
       </td>
-      <td className="pr-6 py-2 text-sm whitespace-nowrap">
+      <td className="pr-4 py-1 text-sm whitespace-nowrap">
         <div className="flex items-center">
-          <img src={props.image} alt={props.title} className="h-12 pl-1" />
+          <img src={props.image} alt={props.title} className="h-12 object-contain shadow" />
         </div>
       </td>
 
-      <td className="pr-6 py-4 text-sm whitespace-nowrap">
+      <td className="pr-4 py-4 text-sm whitespace-nowrap">
         <div className="flex items-center">
           <Link to={`/admin/edit/?id=${props.id}`} className="rounded px-3 py-2 bg-neutral-200 mr-2">
             Edit

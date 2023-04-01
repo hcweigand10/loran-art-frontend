@@ -15,7 +15,7 @@ import Hero from '../components/Hero'
 const Home = () => {
 
     return (
-        <div className=''>
+        <div className='lg:max-w-4xl mx-auto container pb-5'>
           <Hero/>
              <h1 className='text-3xl font-light tracking-wider mb-4'>Categories</h1>
              <hr/>

@@ -8,6 +8,7 @@ const Login = () => {
     email: string;
     password: string;
   }>({ email: "", password: "" });
+  const [alert, setAlert] = useState<string>("")
 
   const { loggedIn, setLoggedIn, loading, setLoading } =
     useContext(userContext);
@@ -30,9 +31,9 @@ const Login = () => {
         localStorage.setItem("jwt", response.data.token);
       }
     } catch (error) {
-      console.log(error);
       setLoading(false)
-      alert(error)
+      setLoginInfo({email: "", password: ""})
+      setAlert("Invalid credentials!")
     }
   };
 
@@ -105,6 +106,7 @@ const Login = () => {
               </button>
             </div>
           </form>
+          <h2 className="text-center text-red-600 py-3">{alert}</h2>
         </div>
       )}
     </div>

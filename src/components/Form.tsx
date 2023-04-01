@@ -16,8 +16,9 @@ const Form = (props: formProps) => {
   const [price, setPrice] = useState<number>(0)
   const [forSale, setForSale] = useState<boolean>(true)
   const [image, setImage] = useState<string>("")
-  const [categoryId, setCategoryId] = useState<number>(0)
-  const [category, setCategory] = useState<string>("")
+  const [categoryId, setCategoryId] = useState<number>(2)
+  const [category, setCategory] = useState<string>("Small Walls")
+  const [notes, setNotes] = useState<string>("")
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -71,7 +72,8 @@ const Form = (props: formProps) => {
       price,
       forSale,
       image,
-      CategoryId: categoryId
+      notes,
+      category_id: categoryId
     }
     console.log(body)
     if (props.artId !== 0) {
@@ -134,6 +136,25 @@ const Form = (props: formProps) => {
                       className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
                       value={description}
                       onChange={(e)=>setDescription(e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                <div className="col-span-full">
+                  <label
+                    htmlFor="notes"
+                    className="block text-md font-medium leading-6 text-gray-900"
+                  >
+                    Notes (private)
+                  </label>
+                  <div className="mt-2">
+                    <textarea
+                      id="notes"
+                      name="notes"
+                      rows={3}
+                      className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
+                      value={notes}
+                      onChange={(e)=>setNotes(e.target.value)}
                     />
                   </div>
                 </div>

@@ -8,6 +8,7 @@ export interface artPiece {
   price: number,
   forSale: boolean,
   image: string,
+  notes: string,
   CategoryId: number,
   category?: string
 }
@@ -39,6 +40,7 @@ export interface tableRow {
   forSale: boolean,
   image: string,
   category: string,
+  notes: string,
   setLoading: Dispatch<SetStateAction<boolean>>,
   delete: (id: number, title: string) => Promise<void>
 }

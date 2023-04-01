@@ -16,7 +16,7 @@ const Create = () => {
   }, [])
 
     return (
-        <div className='pt-5'>
+        <div className='pt-5 lg:max-w-4xl mx-auto container'>
             <h2 className="text-2xl font-medium text-gray-800 dark:text-white">
               Create New
             </h2>

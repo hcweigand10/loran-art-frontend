@@ -45,7 +45,7 @@ const Gallery = () => {
   });
 
   return (
-    <div className="relative">
+    <div className="relative lg:max-w-4xl mx-auto container">
       <Link to="/" className="absolute top-3 left-0 border-b border-primary"><FontAwesomeIcon icon={faArrowLeft} /> Go back</Link>
       <Hero/>
       <h1 className='text-3xl font-light tracking-wider mb-4'>{toSentenceCase(galleryCategory)}</h1>

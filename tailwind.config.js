@@ -3,6 +3,7 @@
 const colors = require('tailwindcss/colors')
 colors.primary = "#056608"
 colors.soft = "#ACD1AF"
+colors.seagreen = "#8fbc8f"
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",

@@ -11,7 +11,7 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="w-full bg-soft shadow">
+    <nav className="w-full bg-white shadow">
             <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
                 <div>
                     <div className="flex items-center justify-between py-3 md:block">
@@ -63,17 +63,20 @@ const Navbar = () => {
                         }`}
                     >
                         <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-                            <li className="text-gray-900 hover:text-primary">
-                                <Link to="/">Home</Link>
+                            <li className={ currentPage === "" ? "text-black font-bold" : "text-neutral-600 hover:text-primary"}>
+                                <Link to="/" onClick={() => setCurrentPage("")}>Home</Link>
                             </li>
-                            <li className="text-gray-900 hover:text-primary">
-                                <Link to="/contact">Contact</Link>
+                            <li className={ currentPage === "about" ? "text-black font-bold" : "text-neutral-600 hover:text-primary"}>
+                                <Link to="/about" onClick={() => setCurrentPage("about")}>About</Link>
                             </li>
-                            <li className="text-gray-900 hover:text-primary">
-                                <Link to="/links">Links</Link>
+                            <li className={ currentPage === "contact" ? "text-black font-bold" : "text-neutral-600 hover:text-primary"}>
+                                <Link to="/contact" onClick={() => setCurrentPage("contact")}>Contact</Link>
                             </li>
-                            <li className="text-gray-900 hover:text-primary">
-                                <Link to="/admin">Admin</Link>
+                            <li className={ currentPage === "links" ? "text-black font-bold" : "text-neutral-600 hover:text-primary"}>
+                                <Link to="/links" onClick={() => setCurrentPage("links")}>Links</Link>
+                            </li>
+                            <li className={ currentPage === "admin" ? "text-black font-bold" : "text-neutral-600 hover:text-primary"}>
+                                <Link to="/admin" onClick={() => setCurrentPage("admin")}>Admin</Link>
                             </li>
                         </ul>
                     </div>
