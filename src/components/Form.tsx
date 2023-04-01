@@ -47,22 +47,21 @@ const Form = (props: formProps) => {
     setImage(url)
   };
 
-  // const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-  //   setArtInfo({ ...artInfo, [e.target.name]: e.target.value });
-  // };
 
   const handleCheckBoxChange = (e: ChangeEvent<HTMLInputElement>) => {
     setForSale(!forSale);
   };
 
-  // const handleTextAreaChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-  //   setArtInfo({ ...artInfo, [e.target.name]: e.target.value });
-  // };
-
   const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setCategory(e.target.value)
     setCategoryId(categoryNameToId(e.target.value))
   };
+
+  const handleCancel = () => {
+    if (window.confirm("Are you sure you would like to cancel? Changes will not be saved.")) {
+      window.location.assign("/admin")
+    }
+  }
 
   const handleSubmit = async () => {
     const body = {
@@ -279,6 +278,7 @@ const Form = (props: formProps) => {
             <button
               type="button"
               className="text-sm font-semibold leading-6 text-gray-900 bg-neutral-200 py-2 px-3 rounded-md hover:drop-shadow-md"
+              onClick={handleCancel}
             >
               Cancel
             </button>
