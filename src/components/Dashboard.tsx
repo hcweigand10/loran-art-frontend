@@ -45,11 +45,11 @@ const Dashboard = () => {
       <div className="sm:flex sm:items-center sm:justify-between">
         <div>
           <div className="flex items-center gap-x-3">
-            <h2 className="text-3xl font-medium text-gray-800 dark:text-white">
+            <h2 className="text-3xl font-medium text-gray-800">
               All Art Pieces
             </h2>
 
-            <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full dark:bg-gray-800 dark:text-blue-400">
+            <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full  ">
               {art?.length || 0}
             </span>
           </div>
@@ -58,7 +58,7 @@ const Dashboard = () => {
 
       <div className="mt-6 md:flex md:items-end md:justify-between">
         <div className="mb-2">
-          <Link to={"/admin/create-new"} className="flex items-center justify-center px-2 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
+          <Link to={"/admin/create-new"} className="flex items-center justify-center px-2 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 gap-x-2 hover:bg-blue-600 -500 ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -103,18 +103,18 @@ const Dashboard = () => {
       <div className="mt-3">
         <div className="overflow-x-auto">
           <div className="inline-block min-w-full pt-2 pb-8 align-middle">
-            <div className="overflow-hidden border border-gray-200 dark:border-gray-700 rounded-lg drop-shadow-md">
+            <div className="overflow-hidden border border-gray-200  rounded-lg drop-shadow-md">
               {loading ? (
                 <Loading />
               ) : (
                 <>
                   {data ? (
-                    <table className="max-w-full min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-                      <thead className="bg-gray-50 dark:bg-gray-800">
+                    <table className="max-w-full min-w-full divide-y divide-gray-200 ">
+                      <thead className="bg-gray-50 ">
                         <tr>
                           <th
                             scope="col"
-                            className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                            className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 "
                           >
                             <button className="flex items-center gap-x-3 focus:outline-none">
                               <span>Title</span>
@@ -149,59 +149,59 @@ const Dashboard = () => {
 
                           <th
                             scope="col"
-                            className="pr-2 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                            className="pr-2 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "
                           >
                             Category
                           </th>
 
                           <th
                             scope="col"
-                            className="pr-2 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                            className="pr-2 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "
                           >
                             Description
                           </th>
 
                           <th
                             scope="col"
-                            className="pr-2 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                            className="pr-2 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "
                           >
                             Notes
                           </th>
 
                           <th
                             scope="col"
-                            className="pr-2 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                            className="pr-2 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "
                           >
                             Size
                           </th>
 
                           <th
                             scope="col"
-                            className="pr-2 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                            className="pr-2 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "
                           >
                             For Sale
                           </th>
                           <th
                             scope="col"
-                            className="pr-2 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                            className="pr-2 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "
                           >
                             Price
                           </th>
                           <th
                             scope="col"
-                            className="pr-2 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                            className="pr-2 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "
                           >
                             Image
                           </th>
                           <th
                             scope="col"
-                            className="pr-2 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400"
+                            className="pr-2 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "
                           >
                             Actions
                           </th>
                         </tr>
                       </thead>
-                      <tbody className="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
+                      <tbody className="bg-white divide-y divide-gray-200  ">
                         {art.filter((art:artPiece) => {
                           if (selectedCategroy === "All Categories") {
                             return true

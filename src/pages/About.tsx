@@ -4,7 +4,9 @@ import loran from "../assets/images/loran.jpeg";
 const About = () => {
   return (
     <div className="lg:max-w-4xl mx-auto my-8 pb-8">
-      <h1 className="text-4xl pb-6 pt-3">About</h1>
+      <h1 className="text-dark mb-6 text-[32px] font-bold uppercase text-4xl pt-10">
+        ABOUT
+      </h1>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 pt-5">
         <div className="col-span-1">
           <img src={loran} alt="picture of Loran Scruggs" />
@@ -27,19 +29,19 @@ const About = () => {
             caps. I've found most of my materials over the years, off the
             streets of large cities, garage sales and kind people.
           </p>
-          <br/>
+          <br />
           <p>
             I love giving items a new life liberating the recyclable to a place
             of value once more.
           </p>
-          <br/>
+          <br />
           <p>
             I am interested in joy. Color is joyous for me so I use painted tin
             cans for their color and glint. A lot of my work reference childhood
             and play, for myself play is a time of being in the moment, no past
             regrets or future worries, a time of joy.
           </p>
-          <br/>
+          <br />
           <p>
             I usually start with an object or image. For example I ponder Hunt’s
             tomato cans...tin cans are sharp…I cut myself... Hunt’s..red… hunt

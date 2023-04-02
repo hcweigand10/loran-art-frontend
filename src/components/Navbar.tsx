@@ -16,7 +16,7 @@ const Navbar = () => {
                 <div>
                     <div className="flex items-center justify-between py-3 md:block">
                         <Link to="/">
-                            <h2 className="text-2xl font-bold text-primary">Loran Scruggs</h2>
+                            <h2 className="text-2xl font-bold text-black">Bottlecaps Whistles and Art</h2>
                         </Link>
                         <div className="md:hidden">
                             <button

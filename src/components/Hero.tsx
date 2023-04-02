@@ -10,7 +10,7 @@ const Hero = () => {
               <div className='ml-5'>
                 <h2 className='text-4xl font-medium'>Loran Scruggs</h2>
                 <h5 className='text-neutral-400 font-light mt-2'>Port Townsend, WA</h5>
-                <h5 className='text-neutral-400 font-light mt-2'>Artist/Recycler</h5>
+                <h5 className='text-neutral-400 font-light mt-2'>Art made from Wood, Tin Cans and Bottlecaps</h5>
               </div>
             </div>
         </div>

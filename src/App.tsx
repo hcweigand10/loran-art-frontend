@@ -39,6 +39,7 @@ function App() {
       } catch (err) {
         console.log(err);
         localStorage.removeItem("jwt");
+        setLoading(false)
       }
     } else {
       setLoading(false)
