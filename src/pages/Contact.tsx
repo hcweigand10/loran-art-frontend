@@ -19,7 +19,7 @@ const Contact = () => {
   const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setFormInfo({...formInfo, [e.target.name]: e.target.value})
   }
-  console.log(process.env)
+  console.log(process.env.REACT_APP_EMAILJS_PUBLIC_KEY)
 
   const handleSubmit = async () => {
     const params: Record<string, string> = {...formInfo}
