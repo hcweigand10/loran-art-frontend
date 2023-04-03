@@ -19,10 +19,11 @@ const Contact = () => {
   const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setFormInfo({...formInfo, [e.target.name]: e.target.value})
   }
+  console.log(process.env)
 
   const handleSubmit = async () => {
     const params: Record<string, string> = {...formInfo}
-    const response = await emailjs.send("service_7p1f6le", "template_htlmpqh", params, "oiSfXg3DLg7od-9eF")
+    const response = await emailjs.send("service_7p1f6le", "template_htlmpqh", params, process.env.REACT_APP_EMAILJS_PUBLIC_KEY)
     console.log(response)
     setFormInfo({name: "", phone: "", email: "", message: ""})
     if (response.status === 200) {
