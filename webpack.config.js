@@ -49,13 +49,16 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin(),
-    // new Dotenv({
-    //   systemvars: true
-    // }),
+    new Dotenv({
+      systemvars: true
+    }),
     new HtmlWebpackPlugin({
       favicon: "./public/favicon.ico",
       template: path.join(__dirname, "public", "index.html"),
     }),
+    new webpack.DefinePlugin({
+      process: {env: {}}
+  }),
     new webpack.ProvidePlugin({
       "React": "react",
    }),
