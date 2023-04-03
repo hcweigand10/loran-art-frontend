@@ -50,6 +50,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin(),
     new Dotenv({
+      path: "./.env",
       systemvars: true
     }),
     new HtmlWebpackPlugin({
