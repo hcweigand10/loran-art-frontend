@@ -56,9 +56,6 @@ module.exports = {
       favicon: "./public/favicon.ico",
       template: path.join(__dirname, "public", "index.html"),
     }),
-    new webpack.DefinePlugin({
-      process: {env: {}}
-  }),
     new webpack.ProvidePlugin({
       "React": "react",
    }),
@@ -68,4 +65,5 @@ module.exports = {
     hot: true,
     historyApiFallback: true,
   },
+  mode: "production"
 };
