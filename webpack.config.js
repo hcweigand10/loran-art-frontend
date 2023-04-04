@@ -54,7 +54,7 @@ module.exports = {
       systemvars: true
     }),
     new HtmlWebpackPlugin({
-      favicon: "https://img.icons8.com/external-vectorslab-flat-vectorslab/256/external-whistle-travel-and-tour-camping-and-navigation-vectorslab-flat-vectorslab.png",
+      // favicon: "https://img.icons8.com/external-vectorslab-flat-vectorslab/256/external-whistle-travel-and-tour-camping-and-navigation-vectorslab-flat-vectorslab.png",
       template: path.join(__dirname, "public", "index.html"),
     }),
     new webpack.ProvidePlugin({
