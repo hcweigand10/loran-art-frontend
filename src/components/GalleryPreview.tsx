@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import toSentenceCase from "../utils/toSentenceCase";
 
@@ -9,7 +9,7 @@ interface props {
 
 const GalleryPreview = (props: props) => {
   return (
-    <div className="card hover:shadow-lg shadow-soft drop-shadow-md relative hover:opacity-100 opacity-90 transition-all">
+    <div className="card hover:shadow-xl drop-shadow-md relative hover:opacity-100 opacity-90 transition-all">
       <Link to={`/gallery/?category=${props.category}`}>
         <img
           src={props.image}
@@ -17,7 +17,7 @@ const GalleryPreview = (props: props) => {
           className="w-full object-cover h-60"
         />
         <h3
-          className="text-center absolute bottom-6 left-0 bg-seagreen border-r-2 border-t-2 border-b-2 border-neutral-700 p-2 shadow-md rounded-r text-white font-bold"
+          className="text-center absolute bottom-6 left-0 bg-neutral-200 border-r-2 border-t-2 border-b-2 border-neutral-400 p-2 shadow-md rounded-r text-neutral-800 tracking-wider"
           // style={{ textShadow: "-1px -1px 0 #000" }}
         >
           {toSentenceCase(props.category)}

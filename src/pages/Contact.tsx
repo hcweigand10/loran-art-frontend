@@ -1,6 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
 import { emailProps } from "../interfaces/interfaces";
-import galleryAPI from "../utils/axios";
 import emailjs from '@emailjs/browser';
 
 const Contact = () => {
@@ -19,7 +18,6 @@ const Contact = () => {
   const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setFormInfo({...formInfo, [e.target.name]: e.target.value})
   }
-  console.log(process.env.REACT_APP_EMAILJS_PUBLIC_KEY)
 
   const handleSubmit = async () => {
     const params: Record<string, string> = {...formInfo}
@@ -35,13 +33,11 @@ const Contact = () => {
 
   return (
     <div className="lg:max-w-4xl mx-auto my-8 pb-8">
-        <div className="mx-auto pt-10">
+              <h1 className='text-3xl font-light tracking-wider mb-6 pt-10'>Contact</h1>
+        <div className="mx-auto mt-8">
           <div className="-mx-4 flex flex-wrap lg:justify-between">
             <div className="w-full px-4 lg:w-1/2 xl:w-6/12">
               <div className="mb-12 max-w-[570px] lg:mb-0">
-                <h1 className="text-dark mb-6 text-[32px] font-bold uppercase text-4xl">
-                  GET IN TOUCH WITH ME
-                </h1>
                 <div className="mb-8 flex w-full max-w-[370px]">
                   <div className="bg-primary text-primary mr-6 flex h-[60px] w-full max-w-[60px] items-center justify-center overflow-hidden rounded bg-opacity-5 sm:h-[70px] sm:max-w-[70px]">
                     <svg
@@ -54,10 +50,10 @@ const Contact = () => {
                     </svg>
                   </div>
                   <div className="w-full">
-                    <h4 className="text-dark mb-1 text-xl font-bold">
+                    <h4 className="text-dark mb-1 text-xl">
                       Location
                     </h4>
-                    <p className="text-body-color text-base">
+                    <p className="text-body-color text-base italic">
                       Port Townsend, WA, USA
                     </p>
                   </div>
@@ -75,10 +71,10 @@ const Contact = () => {
                     </svg>
                   </div>
                   <div className="w-full">
-                    <h4 className="text-dark mb-1 text-xl font-bold">
+                    <h4 className="text-dark mb-1 text-xl">
                       Email Address
                     </h4>
-                    <p className="text-body-color text-base">
+                    <p className="text-body-color text-base italic">
                       loranscruggs8@gmail.com
                     </p>
                   </div>

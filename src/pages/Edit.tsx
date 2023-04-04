@@ -1,15 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useQuery } from "react-query";
-import galleryAPI from "../utils/axios";
 import userContext from "../contexts/userContext";
 import { useNavigate } from "react-router-dom";
-import { artPiece } from "../interfaces/interfaces";
 import Form from "../components/Form";
 import Loading from "../components/Loading";
-import categoryIdToName from "../utils/categoryIdToName";
 
 const Edit = () => {
-  const [art, setArt] = useState<artPiece>();
   const queryParameters = new URLSearchParams(window.location.search);
   const artId = queryParameters.get("id") || "1";
 
@@ -29,7 +24,7 @@ const Edit = () => {
         <Loading />
       ) : (
         <>
-        <h1 className="text-3xl">Edit</h1>
+        <h1 className="text-3xl font-light tracking-wider mb-4 pt-6">Edit</h1>
         <Form artId={parseInt(artId)}/>
         </>
       )}

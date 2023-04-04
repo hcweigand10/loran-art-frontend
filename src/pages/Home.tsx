@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import GalleryPreview from '../components/GalleryPreview'
 import largeheart from "../assets/images/large-heart.jpeg"
 import mediumbee from "../assets/images/medium-bee.jpeg"
@@ -9,7 +9,6 @@ import ratking from "../assets/images/rat-king.jpeg"
 import smallbee from "../assets/images/small-sunny-bee.jpeg"
 import turtle from "../assets/images/whistle-turtle.jpeg"
 import wholesale from "../assets/images/wholesale-whistles.jpeg"
-import { Link } from 'react-router-dom'
 import Hero from '../components/Hero'
 
 const Home = () => {

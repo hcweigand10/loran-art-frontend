@@ -4,9 +4,7 @@ import loran from "../assets/images/loran.jpeg";
 const About = () => {
   return (
     <div className="lg:max-w-4xl mx-auto my-8 pb-8">
-      <h1 className="text-dark mb-6 text-[32px] font-bold uppercase text-4xl pt-10">
-        ABOUT
-      </h1>
+      <h1 className='text-3xl font-light tracking-wider mb-6 pt-10'>About</h1>
       <div className="grid grid-cols-1 gap-6 md:grid-cols-2 pt-5">
         <div className="col-span-1">
           <img src={loran} alt="picture of Loran Scruggs" />

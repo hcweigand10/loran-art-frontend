@@ -1,5 +1,4 @@
-import React, { useContext, useState } from "react";
-import { Outlet } from "react-router-dom";
+import React, { useState } from "react";
 import whistle from "../assets/images/whistle.jpg";
 import { Link } from "react-router-dom";
 import "../css/navbar.css";
@@ -16,7 +15,7 @@ const Navbar = () => {
                 <div>
                     <div className="flex items-center justify-between py-3 md:block">
                         <Link to="/">
-                            <h2 className="text-2xl font-bold text-black">Bottlecaps Whistles and Art</h2>
+                            <h2 className="text-2xl text-black">Bottlecaps Whistles and Art</h2>
                         </Link>
                         <div className="md:hidden">
                             <button
@@ -63,19 +62,19 @@ const Navbar = () => {
                         }`}
                     >
                         <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-                            <li className={ currentPage === "" ? "text-black font-bold" : "text-neutral-600 hover:text-primary"}>
+                            <li className={ currentPage === "" ? "text-black font-bold" : "text-neutral-600 hover:text-black hover:border-b-2 hover:border-t-2 hover:border-t-white hover:border-b-black "}>
                                 <Link to="/" onClick={() => setCurrentPage("")}>Home</Link>
                             </li>
-                            <li className={ currentPage === "about" ? "text-black font-bold" : "text-neutral-600 hover:text-primary"}>
+                            <li className={ currentPage === "about" ? "text-black font-bold" : "text-neutral-600 hover:text-black hover:border-b-2 hover:border-t-2 hover:border-t-white hover:border-b-black"}>
                                 <Link to="/about" onClick={() => setCurrentPage("about")}>About</Link>
                             </li>
-                            <li className={ currentPage === "contact" ? "text-black font-bold" : "text-neutral-600 hover:text-primary"}>
+                            <li className={ currentPage === "contact" ? "text-black font-bold" : "text-neutral-600 hover:text-black hover:border-b-2 hover:border-t-2 hover:border-t-white hover:border-b-black"}>
                                 <Link to="/contact" onClick={() => setCurrentPage("contact")}>Contact</Link>
                             </li>
-                            <li className={ currentPage === "links" ? "text-black font-bold" : "text-neutral-600 hover:text-primary"}>
+                            <li className={ currentPage === "links" ? "text-black font-bold" : "text-neutral-600 hover:text-black hover:border-b-2 hover:border-t-2 hover:border-t-white hover:border-b-black"}>
                                 <Link to="/links" onClick={() => setCurrentPage("links")}>Links</Link>
                             </li>
-                            <li className={ currentPage === "admin" ? "text-black font-bold" : "text-neutral-600 hover:text-primary"}>
+                            <li className={ currentPage === "admin" ? "text-black font-bold" : "text-neutral-600 hover:text-black hover:border-b-2 hover:border-t-2 hover:border-t-white hover:border-b-black"}>
                                 <Link to="/admin" onClick={() => setCurrentPage("admin")}>Admin</Link>
                             </li>
                         </ul>

@@ -17,7 +17,7 @@ const Gallery = () => {
   const queryParameters = new URLSearchParams(window.location.search);
   const galleryCategory = queryParameters.get("category") || "wall";
 
-  const { data, isLoading, isSuccess, isError } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: [galleryCategory],
     queryFn: () =>
       galleryAPI.get(

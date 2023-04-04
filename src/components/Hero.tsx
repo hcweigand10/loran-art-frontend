@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import whistle from "../assets/images/whistle.jpg"
 
 const Hero = () => {

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import { tableRow } from "../interfaces/interfaces";
-import galleryAPI from "../utils/axios";
+
 
 const TableRow = (props: tableRow) => {
 
@@ -27,17 +27,15 @@ const TableRow = (props: tableRow) => {
       </td>
       <td className="pr-4 py-4 text-sm whitespace-nowrap">
         <div>
-          <h4 className="text-gray-700 dark:text-gray-200 truncate w-24">
-            {/* {props.description.length < 50 ? props.description : props.description.substring(0,49) + "..."} */}
-            {props.description}
+          <h4 className={props.description ? "text-gray-700 truncate w-24" : "text-gray-500 truncate w-24 italic"}>
+            {props.description ? props.description : "empty"}
           </h4>
         </div>
       </td>
       <td className="pr-4 py-4 text-sm whitespace-nowrap">
         <div className="w-20">
-          <h4 className="text-gray-700 dark:text-gray-200 truncate mr-0">
-            {/* {props.description.length < 50 ? props.description : props.description.substring(0,49) + "..."} */}
-            {props.notes}
+        <h4 className={props.notes ? "text-gray-700 truncate w-24" : "text-gray-500 truncate w-24 italic"}>
+            {props.notes ? props.notes : "empty"}
           </h4>
         </div>
       </td>
@@ -64,10 +62,10 @@ const TableRow = (props: tableRow) => {
 
       <td className="pr-4 py-4 text-sm whitespace-nowrap">
         <div className="flex items-center">
-          <Link to={`/admin/edit/?id=${props.id}`} className="rounded px-3 py-2 bg-neutral-200 mr-2">
+          <Link to={`/admin/edit/?id=${props.id}`} className="rounded px-3 py-2 bg-neutral-200 mr-2 hover:shadow-lg hover:bg-neutral-300">
             Edit
           </Link>
-          <button className="rounded p-2 bg-red-600 ml-2 text-white" onClick={deleteArt}>
+          <button className="rounded p-2 bg-red-600 ml-2 text-white hover:shadow-lg hover:bg-red-700" onClick={deleteArt}>
             Delete
           </button>
         </div>

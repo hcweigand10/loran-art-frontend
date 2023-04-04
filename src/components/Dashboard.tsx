@@ -1,7 +1,6 @@
-import React, { useState, ReactNode, ChangeEvent } from "react";
+import React, { useState, ChangeEvent } from "react";
 import { useQuery } from "react-query";
-import { Select, Option } from "@material-tailwind/react";
-import { artPiece, tableRow } from "../interfaces/interfaces";
+import { artPiece } from "../interfaces/interfaces";
 import galleryAPI from "../utils/axios";
 import Loading from "./Loading";
 import TableRow from "./TableRow";
@@ -13,7 +12,7 @@ const Dashboard = () => {
   const [selectedCategroy, setSelectedCategroy] = useState("All Categories");
   const [loading, setLoading] = useState<boolean>(false);
 
-  const { data, isLoading, isSuccess, isError, refetch } = useQuery({
+  const { data, refetch } = useQuery({
     queryKey: ["all-art"],
     queryFn: () => galleryAPI.get(`/api/art`),
     onSuccess: (data): void => {
@@ -45,7 +44,7 @@ const Dashboard = () => {
       <div className="sm:flex sm:items-center sm:justify-between">
         <div>
           <div className="flex items-center gap-x-3">
-            <h2 className="text-3xl font-medium text-gray-800">
+            <h2 className="text-3xl font-light tracking-wider">
               All Art Pieces
             </h2>
 

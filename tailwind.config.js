@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
 const colors = require('tailwindcss/colors')
-colors.primary = "#056608"
+colors.primary = "#6495ed"
 colors.soft = "#ACD1AF"
 colors.seagreen = "#8fbc8f"
 module.exports = {

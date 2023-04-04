@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from 'react'
+import React, {useEffect, useContext} from 'react'
 import userContext from "../contexts/userContext";
 import { useNavigate } from "react-router-dom";
 import Form from '../components/Form'
@@ -17,9 +17,7 @@ const Create = () => {
 
     return (
         <div className='pt-5 lg:max-w-4xl mx-auto container'>
-            <h2 className="text-2xl font-medium text-gray-800 dark:text-white">
-              Create New
-            </h2>
+            <h1 className="text-3xl font-light tracking-wider mb-4 pt-6">Edit</h1>
             <Form artId={0}/>
         </div>
     )
