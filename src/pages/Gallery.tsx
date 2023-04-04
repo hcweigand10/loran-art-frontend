@@ -13,7 +13,7 @@ import categoryIdToName from "../utils/categoryIdToName";
 
 const Gallery = () => {
   const [art, setArt] = useState<ReactNode>();
-  const [loading, setLoading] = useState<boolean>(true)
+  const [loading, setLoading] = useState<boolean>(true);
   const queryParameters = new URLSearchParams(window.location.search);
   const galleryCategory = queryParameters.get("category") || "wall";
 
@@ -41,21 +41,33 @@ const Gallery = () => {
           />
         ))
       );
-    }
+    },
   });
 
   return (
     <div className="relative lg:max-w-4xl mx-auto container">
-      <Link to="/" className="absolute top-3 left-0 border-b border-primary"><FontAwesomeIcon icon={faArrowLeft} /> Go back</Link>
+      <Link to="/" className="absolute top-3 left-0 border-b border-primary">
+        <FontAwesomeIcon icon={faArrowLeft}/> Go back
+      </Link>
       <Hero/>
-      <h1 className='text-3xl font-light tracking-wider mb-4'>{toSentenceCase(galleryCategory)}</h1>
-      <hr/>
+      <div className="flex justify-between">
+        <h1 className="text-3xl font-light tracking-wider mb-4 block">
+          {toSentenceCase(galleryCategory)}
+        </h1>
+        <p className="block flex align-items-bottom text-neutral-600 italic">
+          To purchase, email me at{" "}
+          <a href="mailto:loranscruggs8@gmail.com">loranscruggs8@gmail.com</a>
+        </p>
+      </div>
+      <hr />
       {isLoading ? (
         <div className="">
-          <Loading/>
+          <Loading />
         </div>
       ) : null}
-      {data ? <div className="grid grid-cols-1 md:grid-cols-2">{art}</div> : null}
+      {data ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">{art}</div>
+      ) : null}
     </div>
   );
 };

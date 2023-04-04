@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import GalleryPreview from '../components/GalleryPreview'
 import largeheart from "../assets/images/large-heart.jpeg"
 import mediumbee from "../assets/images/medium-bee.jpeg"
@@ -10,8 +10,19 @@ import smallbee from "../assets/images/small-sunny-bee.jpeg"
 import turtle from "../assets/images/whistle-turtle.jpeg"
 import wholesale from "../assets/images/wholesale-whistles.jpeg"
 import Hero from '../components/Hero'
+import galleryAPI from '../utils/axios'
 
 const Home = () => {
+
+  useEffect(() => {
+    fetchCategories()
+  }, [])
+  
+  const fetchCategories = async () => {
+    const categories = await galleryAPI.get("/api/categories")
+    console.log(categories)
+  }
+  
 
     return (
         <div className='lg:max-w-4xl mx-auto container pb-5'>
