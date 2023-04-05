@@ -56,7 +56,7 @@ const Gallery = () => {
         </h1>
         <p className="block flex align-items-bottom text-neutral-600 italic">
           To purchase, email me at{" "}
-          <a href="mailto:loranscruggs8@gmail.com">loranscruggs8@gmail.com</a>
+          <a className="ml-1 underline" href="mailto:loranscruggs8@gmail.com">loranscruggs8@gmail.com</a>
         </p>
       </div>
       <hr />
