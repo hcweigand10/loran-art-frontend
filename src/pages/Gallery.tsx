@@ -49,8 +49,8 @@ const Gallery = () => {
       <Link to="/" className="absolute top-3 left-0 border-b border-primary">
         <FontAwesomeIcon icon={faArrowLeft}/> Go back
       </Link>
-      <Hero/>
-      <div className="flex justify-between">
+      {/* <Hero/> */}
+      <div className="flex justify-between pt-12 mt-6">
         <h1 className="text-3xl font-light tracking-wider mb-4 block">
           {toSentenceCase(galleryCategory)}
         </h1>
