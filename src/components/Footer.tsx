@@ -66,12 +66,12 @@ const Footer = () => {
             </div>
             <div className="flex">
               <a
-                href="mailto:loran-scruggs@yahoo.com"
+                href="mailto:loranscruggs8@gmail.com"
                 className="underline flex"
               >
                 <FontAwesomeIcon icon={faEnvelope} className="mr-3 translate-y-1"/>
                 <p className="mb-4 flex items-center justify-center md:justify-start">
-                  loran-scruggs@yahoo.com
+                  loranscruggs8@gmail.com
                 </p>
               </a>
             </div>

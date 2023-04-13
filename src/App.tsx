@@ -18,10 +18,18 @@ import Create from "./pages/Create";
 function App() {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
+  const [tags, setTags] = useState<string[]>([])
+
 
   useEffect(() => {
     checkToken()
+    fetchTags()
   }, []);
+
+  const fetchTags = async () => {
+    const tagsData: any = await galleryAPI.get("/api/tags");
+    setTags(tagsData.data.map((tag: {id: number, name: string}) => tag.name))
+  };
 
   const checkToken = async () => {
     const token = localStorage.getItem("jwt");
@@ -54,7 +62,7 @@ function App() {
       <div className="container mx-auto" id="home">
         <Routes>
           <Route index={true} element={<Home />} />
-          <Route path="gallery/*" element={<Gallery />} />
+          <Route path="gallery/*" element={<Gallery tags={tags}/>} />
           <Route path="contact" element={<Contact />} />
           <Route path="about" element={<About />} />
           <Route path="links" element={<Links />} />

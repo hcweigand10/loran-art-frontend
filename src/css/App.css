@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --stripes-color: lightgray
+}
+
 body {
   font-family: "Haas Grot Text R Web", "Helvetica"
 }
@@ -15,3 +19,8 @@ body {
   min-height: calc(100vh - 56px - 287px);
 }
 
+.bg-stripey {
+  background-image:
+            linear-gradient(45deg, var(--stripes-color) 12.50%, transparent 12.50%, transparent 50%, var(--stripes-color) 50%, var(--stripes-color) 62.50%, transparent 62.50%, transparent 100%);
+  background-size: 5.66px 5.66px;
+}

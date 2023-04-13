@@ -37,7 +37,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="lg:max-w-4xl mx-auto my-8 pb-8">
+    <div className="lg:max-w-5xl mx-auto my-8 pb-8">
       <h1 className="text-3xl font-light tracking-wider mb-6 pt-10">Contact</h1>
       <div className="mx-auto mt-8">
         <div className="-mx-4 flex flex-wrap lg:justify-between">

@@ -4,11 +4,11 @@ import { artPieceNode } from "../interfaces/interfaces";
 const ArtPiece = (props: artPieceNode) => {
   return (
     <div className="group relative pb-3 bg-white rounded-md shadow-lg">
-      <div className="min-h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden bg-gray-200 h-80">
+      <div className="h-80 aspect-h-1 aspect-w-1 w-full overflow-hidden bg-stripey">
         <img
           src={props.image}
           alt={`Picture of ${props.title}`}
-          className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+          className="h-full w-full object-contain lg:h-full lg:w-full"
         />
       </div>
       <div className="pt-4 flex justify-between px-3 border-t-2">

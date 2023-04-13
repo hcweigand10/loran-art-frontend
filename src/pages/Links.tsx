@@ -97,7 +97,7 @@ const Links = () => {
   ]
 
   return (
-    <div className="lg:max-w-4xl mx-auto my-8 pb-8">
+    <div className="lg:max-w-5xl mx-auto my-8 pb-8">
       <h1 className='text-3xl font-light tracking-wider mb-6 pt-10'>Other Tin Artists</h1>
       <div className="">
         {artists.map((artist, index) => <ArtistCard artist={artist} key={index}/>)}
