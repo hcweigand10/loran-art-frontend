@@ -62,7 +62,7 @@ function App() {
       <div className="container mx-auto" id="home">
         <Routes>
           <Route index={true} element={<Home />} />
-          <Route path="gallery/*" element={<Gallery tags={tags}/>} />
+          <Route path="gallery/*" element={<Gallery/>} />
           <Route path="contact" element={<Contact />} />
           <Route path="about" element={<About />} />
           <Route path="links" element={<Links />} />

@@ -23,9 +23,7 @@ const Home = () => {
         {/* <h1 className="text-3xl font-light tracking-wider mb-4">Categories</h1>
         <hr /> */}
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3 py-6">
-          <GalleryPreview category="small-walls" image={smallbee}/>
-          <GalleryPreview category="medium-walls" image={mediumbee}/>
-          <GalleryPreview category="large-walls" image={largeheart}/>
+          <GalleryPreview category="wall-art" image={mediumbee}/>
           <GalleryPreview category="sculptures" image={ratking}/>
           <GalleryPreview category="toys" image={toys}/>
           <GalleryPreview category="whistles" image={turtle}/>

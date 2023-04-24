@@ -14,7 +14,7 @@ const ArtPiece = (props: artPieceNode) => {
       <div className="pt-4 flex justify-between px-3 border-t-2">
         <div className="">
           <h3 className="text-2xl tracking-wider text-neutral-800 align-middle">
-            {props.title} <span className="text-sm normal align-middle">({props.size})</span>
+            {props.title} <span className="text-sm normal align-middle">({props.height}'' x {props.width} {props.thickness !== 0 ? props.thickness : null})</span>
           </h3>
         </div>
         <div className="">
@@ -23,7 +23,7 @@ const ArtPiece = (props: artPieceNode) => {
                 ? "font-medium text-blue-600 align-baseline mt-1"
                 : "font-medium text-red-300 align-baseline mt-1"
             }>
-            {props.forSale ? `$${props.price}` : "Not for sale"}
+            {props.forSale ? `$${props.price}` : "Sold"}
           </p>
           {/* <p
             className={

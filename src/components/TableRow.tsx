@@ -41,7 +41,17 @@ const TableRow = (props: tableRow) => {
       </td>
       <td className="pr-4 py-4 text-sm whitespace-nowrap">
         <div className="flex items-center">
-          <p className="pl-1">{props.size}</p>
+          <p className="pl-1">{props.height}</p>
+        </div>
+      </td>
+      <td className="pr-4 py-4 text-sm whitespace-nowrap">
+        <div className="flex items-center">
+          <p className="pl-1">{props.width}</p>
+        </div>
+      </td>
+      <td className="pr-4 py-4 text-sm whitespace-nowrap">
+        <div className="flex items-center">
+          <p className="pl-1">{props.thickness}</p>
         </div>
       </td>
       <td className="pr-4 py-4 text-sm whitespace-nowrap">

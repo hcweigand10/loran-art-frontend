@@ -1,24 +1,18 @@
 export default (name: string) => {
   switch (name) {
-    case "Small Walls":
-      return 2;
-    case "Medium Walls":
-      return 3;
-    case "Large Walls":
-      return 4;
+    case "Wall Art":
+      return 1;
     case "Sculptures":
-      return 5;
-    case "Toys":
-      return 6;
-    case "Whistles":
-      return 7;
-    case "Wholesale":
-      return 8;
-    case "Planes":
-      return 9;
-    case "Past Works":
-      return 10;
-    default:
       return 2;
+    case "Toys":
+      return 3;
+    case "Whistles":
+      return 4;
+    case "Planes":
+      return 5;
+    case "Wholesale":
+      return 6;
+    default:
+      return 1;
   }
 };

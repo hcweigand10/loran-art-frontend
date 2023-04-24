@@ -4,7 +4,9 @@ export interface artPiece {
   id?: number;
   title: string;
   description: string;
-  size: string;
+  height: number;
+  width: number;
+  thickness: number;
   price: number;
   forSale: boolean;
   image: string;
@@ -22,7 +24,9 @@ export interface artPieceNode {
   id?: number;
   title: string;
   description: string;
-  size: string;
+  height: number;
+  width: number;
+  thickness: number;
   price: number;
   forSale: boolean;
   image: string;
@@ -35,7 +39,9 @@ export interface tableRow {
   id?: number;
   title: string;
   description: string;
-  size: string;
+  height: number;
+  width: number;
+  thickness: number;
   price: number;
   forSale: boolean;
   image: string;

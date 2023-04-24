@@ -13,6 +13,9 @@ const Form = (props: formProps) => {
   const [title, setTitle] = useState<string>("")
   const [description, setDescription] = useState<string>("")
   const [size, setSize] = useState<string>("")
+  const [height, setHeight] = useState<number>(0)
+  const [width, setWidth] = useState<number>(0)
+  const [thickness, setThickness] = useState<number>(0)
   const [price, setPrice] = useState<number>(0)
   const [forSale, setForSale] = useState<boolean>(true)
   const [image, setImage] = useState<string>("")
@@ -34,7 +37,9 @@ const Form = (props: formProps) => {
     onSuccess: (data): void => {
       setTitle(data.data.title)
       setDescription(data.data.description)
-      setSize(data.data.size)
+      setHeight(data.data.height)
+      setWidth(data.data.width)
+      setThickness(data.data.thickness)
       setPrice(data.data.price)
       setForSale(data.data.forSale)
       setImage(data.data.image)
@@ -70,7 +75,9 @@ const Form = (props: formProps) => {
     const body = {
       title,
       description,
-      size,
+      height,
+      width,
+      thickness,
       price,
       forSale,
       image,
@@ -82,6 +89,7 @@ const Form = (props: formProps) => {
       setLoading(true);
       const response = await galleryAPI.put(`/api/art/${props.artId}`, body);
       console.log(response);
+      setLoading(false);
       window.location.assign("/admin");
     } else {
       setLoading(true);
@@ -162,21 +170,57 @@ const Form = (props: formProps) => {
                 </div>
 
                 <div className="col-span-full grid grid-cols-1 md:grid-cols-6 gap-6">
-                  <div className="md:col-span-3">
+                  <div className="md:col-span-1">
                     <label
-                      htmlFor="size"
+                      htmlFor="height"
                       className="block text-md font-medium leading-6 text-gray-900"
                     >
-                      Size
+                      Height
                     </label>
                     <div className="mt-2">
                       <input
-                        type="text"
-                        name="size"
-                        id="size"
+                        type="number"
+                        name="height"
+                        id="height"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        value={size}
-                        onChange={(e)=>setSize(e.target.value)}
+                        value={height}
+                        onChange={(e)=>setHeight(parseInt(e.target.value))}
+                      />
+                    </div>
+                  </div>
+                  <div className="md:col-span-1">
+                    <label
+                      htmlFor="width"
+                      className="block text-md font-medium leading-6 text-gray-900"
+                    >
+                      Width
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        type="number"
+                        name="width"
+                        id="width"
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        value={width}
+                        onChange={(e)=>setWidth(parseInt(e.target.value))}
+                      />
+                    </div>
+                  </div>
+                  <div className="md:col-span-1">
+                    <label
+                      htmlFor="thickness"
+                      className="block text-md font-medium leading-6 text-gray-900"
+                    >
+                      Thickness
+                    </label>
+                    <div className="mt-2">
+                      <input
+                        type="number"
+                        name="thickness"
+                        id="thickness"
+                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        value={thickness}
+                        onChange={(e)=>setThickness(parseInt(e.target.value))}
                       />
                     </div>
                   </div>

@@ -1,24 +1,18 @@
 export default (id: number) => {
   switch (id) {
+    case 1:
+      return "Wall Art";
     case 2:
-      return "Small Walls"
+      return "Sculptures";
     case 3:
-      return "Medium Walls"
+      return "Toys";
     case 4:
-      return "Large Walls"
+      return "Whistles";
     case 5:
-      return "Sculptures"
+      return "Planes";
     case 6:
-      return "Toys"
-    case 7:
-      return "Whistles"
-    case 8:
-      return "Wholesale"
-    case 9:
-      return "Planes"
-    case 10:
-      return "Past Works"
-    default: 
-      return "Small Walls"
+      return "Wholesale";
+    default:
+      return "Wall Art";
   }
-}
+};

@@ -214,7 +214,9 @@ const Dashboard = () => {
                             key={art.id}
                             title={art.title}
                             description={art.description}
-                            size={art.size}
+                            height={art.height}
+                            width={art.width}
+                            thickness={art.thickness}
                             price={art.price}
                             forSale={art.forSale}
                             image={art.image}
