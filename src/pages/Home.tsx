@@ -29,7 +29,7 @@ const Home = () => {
           <GalleryPreview category="whistles" image={turtle}/>
           <GalleryPreview category="wholesale" image={wholesale}/>
           <GalleryPreview category="planes" image={planes}/>
-          <GalleryPreview category="past-works" image={pastworks}/>
+          {/* <GalleryPreview category="past-works" image={pastworks}/> */}
         </div>
       </div>
     </div>
