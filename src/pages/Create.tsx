@@ -16,8 +16,8 @@ const Create = () => {
   }, [])
 
     return (
-        <div className='pt-5 lg:max-w-4xl mx-auto container'>
-            <h1 className="text-3xl font-light tracking-wider mb-4 pt-6">Edit</h1>
+        <div className='pt-5 lg:max-w-4xl mx-auto'>
+            <h1 className="text-3xl font-light tracking-wider mb-4 pt-6">Create</h1>
             <Form artId={0}/>
         </div>
     )

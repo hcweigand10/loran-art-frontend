@@ -19,7 +19,7 @@ const Edit = () => {
   }, [loading, loggedIn])
 
   return (
-    <div className="pt-5 lg:max-w-4xl mx-auto container">
+    <div className="pt-5 lg:max-w-4xl mx-auto">
       {loading ? (
         <Loading />
       ) : (

@@ -18,12 +18,12 @@ const Gallery = () => {
   const [selectedTags, setSelectedTags] = useState<Option[]>([]);
   const [selectedSizes, setSelectedSizes] = useState<Option[]>([]);
   const [hideSold, setHideSold] = useState<boolean>(false);
-  const [sizeLimits, setSizeLimits] = useState<{
-    minHeight: number;
-    maxHeight: number;
-    minWidth: number;
-    maxWidth: number;
-  }>({ minHeight: 0, maxHeight: Infinity, minWidth: 0, maxWidth: Infinity });
+  // const [sizeLimits, setSizeLimits] = useState<{
+  //   minHeight: number;
+  //   maxHeight: number;
+  //   minWidth: number;
+  //   maxWidth: number;
+  // }>({ minHeight: 0, maxHeight: Infinity, minWidth: 0, maxWidth: Infinity });
 
   const queryParameters = new URLSearchParams(window.location.search);
   const galleryCategory = queryParameters.get("category") || "wall";
@@ -32,57 +32,11 @@ const Gallery = () => {
   //   return artpiece.Tags.some((tagObj: any) => selectedTags.map((option: Option) => option.value).includes(tagObj.name));
   // })
 
-  const applyFilters = (art: artPiece[]) => {
-    let filteredArt = [...art];
-    if (hideSold) {
-      filteredArt = filteredArt.filter(
-        (artPiece: artPiece) => artPiece.forSale
-      );
-    }
-    if (selectedSizes.length === 1 || selectedSizes.length === 2) {
-      // console.log(selectedSizes)
-      if (!selectedSizes.includes({label: "Small", value: "small"})) {
-        filteredArt = filteredArt.filter((artPiece: artPiece) => {
-          return Math.max(artPiece.height, artPiece.width) >= 8
-        })
-      }
-      if (!selectedSizes.includes({label: "Medium", value: "medium"})) {
-        filteredArt = filteredArt.filter((artPiece: artPiece) => {
-          return Math.max(artPiece.height, artPiece.width) <= 8 || Math.max(artPiece.height, artPiece.width) >= 18
-        })
-      }
-      if (!selectedSizes.includes({label: "Large", value: "large"})) {
-        filteredArt = filteredArt.filter((artPiece: artPiece) => {
-          return Math.max(artPiece.height, artPiece.width) <= 18
-        })
-      }
-    }
-    if (selectedTags.length !== 0) {
-      filteredArt = filteredArt.filter((artPiece: artPiece) => {
-        return artPiece.Tags.some((tagObj: any) =>
-          selectedTags
-            .map((option: Option) => option.value)
-            .includes(tagObj.name)
-        );
-      });
-    }
-    return filteredArt.map((art: artPiece) => (
-      <ArtPiece
-        id={art.id}
-        key={art.id}
-        title={art.title}
-        description={art.description}
-        height={art.height}
-        width={art.width}
-        thickness={art.thickness}
-        price={art.price}
-        forSale={art.forSale}
-        image={art.image}
-        category={categoryIdToName(art.CategoryId)}
-        tags={art.Tags.map((tagObj: any) => tagObj.name)}
-      />
-    ));
-  };
+  const sizeOptions = [
+    { label: `Small (largest dimension under 8")`, value: "small" },
+    { label: `Medium (largest dimension between 8" and 18")`, value: "medium" },
+    { label: `Large (largest dimension over 18")`, value: "large" },
+  ];
 
   const { data: tagsData, isLoading: tagsLoading } = useQuery({
     queryKey: ["tags"],
@@ -104,11 +58,66 @@ const Gallery = () => {
     },
   });
 
+  const applyFilters = (art: artPiece[]) => {
+    let filteredArt = [...art];
+    if (hideSold) {
+      filteredArt = filteredArt.filter(
+        (artPiece: artPiece) => artPiece.forSale
+      );
+    }
+    if (selectedSizes.length === 1 || selectedSizes.length === 2) {
+      // console.log(selectedSizes)
+      if (!selectedSizes.includes({ label: "Small", value: "small" })) {
+        filteredArt = filteredArt.filter((artPiece: artPiece) => {
+          return Math.max(artPiece.height, artPiece.width) >= 8;
+        });
+      }
+      if (!selectedSizes.includes({ label: "Medium", value: "medium" })) {
+        filteredArt = filteredArt.filter((artPiece: artPiece) => {
+          return (
+            Math.max(artPiece.height, artPiece.width) <= 8 ||
+            Math.max(artPiece.height, artPiece.width) >= 18
+          );
+        });
+      }
+      if (!selectedSizes.includes({ label: "Large", value: "large" })) {
+        filteredArt = filteredArt.filter((artPiece: artPiece) => {
+          return Math.max(artPiece.height, artPiece.width) <= 18;
+        });
+      }
+    }
+    if (selectedTags.length !== 0) {
+      filteredArt = filteredArt.filter((artPiece: artPiece) => {
+        return artPiece.Tags.some((tagObj: any) =>
+          selectedTags
+            .map((option: Option) => option.value)
+            .includes(tagObj.id)
+        );
+      });
+    }
+    return filteredArt.map((art: artPiece) => (
+      <ArtPiece
+        id={art.id}
+        key={art.id}
+        title={art.title}
+        description={art.description}
+        height={art.height}
+        width={art.width}
+        thickness={art.thickness}
+        price={art.price}
+        forSale={art.forSale}
+        image={art.image}
+        category={categoryIdToName(art.CategoryId)}
+        tags={art.Tags.map((tagObj: any) => tagObj.name)}
+      />
+    ));
+  };
+
   const handleCheckBoxChange = (e: ChangeEvent<HTMLInputElement>) => {
     setHideSold(!hideSold);
   };
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {};
+  // const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {};
 
   return (
     <div className="relative lg:max-w-5xl mx-auto">
@@ -142,6 +151,79 @@ const Gallery = () => {
             {tagsData ? (
               <>
                 <div className="my-4">
+                  <h4 className="font-bold">Sizes</h4>
+                  <label
+                    className="inline-block text-sm text-gray-600"
+                    htmlFor="min-height"
+                  >
+                    Select multiple sizes
+                  </label>
+                  <MultiSelect
+                    options={sizeOptions}
+                    value={selectedSizes}
+                    onChange={setSelectedSizes}
+                    labelledBy="Select"
+                    className="w-full"
+                  />
+                  {/* <div>
+                            <label
+                            className="inline-block text-sm text-gray-600"
+                            htmlFor="min-height"
+                            >
+                            Min Height (in.)
+                            </label>
+                            <input
+                            id="min-height"
+                            type="number"
+                            name="minHeight"
+                            onChange={handleInputChange}
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                            <label
+                            className="inline-block text-sm text-gray-600"
+                            htmlFor="max-height"
+                            >
+                            Max Height (in.)
+                            </label>
+                            <input
+                            id="max-height"
+                            type="number"
+                            name="maxHeight"
+                            onChange={handleInputChange}
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                            </div>
+                            <div>
+                            <label
+                            className="inline-block text-sm text-gray-600"
+                            htmlFor="min-width"
+                            >
+                            Min Width (in.)
+                            </label>
+                            <input
+                            id="min-width"
+                            type="number"
+                            name="minWidth"
+                            onChange={handleInputChange}
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                            <label
+                            className="inline-block text-sm text-gray-600"
+                            htmlFor="max-width"
+                            >
+                            Max Width (in.)
+                            </label>
+                            <input
+                            id="max-width"
+                            type="number"
+                            name="maxWidth"
+                            onChange={handleInputChange}
+                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                            />
+                          </div> */}
+                </div>
+                <hr className="w-full" />
+                <div className="my-5">
                   <h4 className="font-bold">Tags</h4>
                   <label
                     className="inline-block text-sm text-gray-600"
@@ -154,7 +236,7 @@ const Gallery = () => {
                       (tag: { id: number; name: string }) => {
                         return {
                           label: toSentenceCase(tag.name),
-                          value: tag.name,
+                          value: tag.id,
                         };
                       }
                     )}
@@ -184,83 +266,6 @@ const Gallery = () => {
                       Hide art that is not for sale
                     </label>
                   </div>
-                </div>
-                <hr className="w-full" />
-                <div className="my-4">
-                  <h4 className="font-bold">Sizes</h4>
-                  <label
-                      className="inline-block text-sm text-gray-600"
-                      htmlFor="min-height"
-                    >
-                      Select multiple sizes
-                    </label>
-                  <MultiSelect
-                    options={[
-                      { label: "Small", value: "small" },
-                      { label: "Medium", value: "medium" },
-                      { label: "Large", value: "large" },
-                    ]}
-                    value={selectedSizes}
-                    onChange={setSelectedSizes}
-                    labelledBy="Select"
-                    className="w-full"
-                  />
-                  {/* <div>
-                    <label
-                      className="inline-block text-sm text-gray-600"
-                      htmlFor="min-height"
-                    >
-                      Min Height (in.)
-                    </label>
-                    <input
-                      id="min-height"
-                      type="number"
-                      name="minHeight"
-                      onChange={handleInputChange}
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
-                    <label
-                      className="inline-block text-sm text-gray-600"
-                      htmlFor="max-height"
-                    >
-                      Max Height (in.)
-                    </label>
-                    <input
-                      id="max-height"
-                      type="number"
-                      name="maxHeight"
-                      onChange={handleInputChange}
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      className="inline-block text-sm text-gray-600"
-                      htmlFor="min-width"
-                    >
-                      Min Width (in.)
-                    </label>
-                    <input
-                      id="min-width"
-                      type="number"
-                      name="minWidth"
-                      onChange={handleInputChange}
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
-                    <label
-                      className="inline-block text-sm text-gray-600"
-                      htmlFor="max-width"
-                    >
-                      Max Width (in.)
-                    </label>
-                    <input
-                      id="max-width"
-                      type="number"
-                      name="maxWidth"
-                      onChange={handleInputChange}
-                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    />
-                  </div> */}
                 </div>
               </>
             ) : null}
