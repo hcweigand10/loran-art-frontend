@@ -13,6 +13,7 @@ export interface artPiece {
   notes: string;
   CategoryId: number;
   category?: string;
+  Tags: any[]
 }
 
 export interface formProps {
@@ -31,7 +32,7 @@ export interface artPieceNode {
   forSale: boolean;
   image: string;
   category: string;
-  setLoading: Dispatch<SetStateAction<boolean>>;
+  tags: string[]
 }
 
 export interface tableRow {

@@ -11,28 +11,85 @@ import { useQuery } from "react-query";
 import { MultiSelect, Option } from "react-multi-select-component";
 import Hero from "../components/Hero";
 import categoryIdToName from "../utils/categoryIdToName";
+import categoryNameToId from "../utils/categoryNameToId";
 
 const Gallery = () => {
-  const [art, setArt] = useState<ReactNode>();
-  const [tags, setTags] = useState<Option[]>();
-  const [selected, setSelected] = useState<Option[]>([]);
-  const [filteredArt, setFilteredArt] = useState<ReactNode>();
+  const [art, setArt] = useState<artPiece[]>([]);
+  const [selectedTags, setSelectedTags] = useState<Option[]>([]);
+  const [selectedSizes, setSelectedSizes] = useState<Option[]>([]);
   const [hideSold, setHideSold] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(true);
+  const [sizeLimits, setSizeLimits] = useState<{
+    minHeight: number;
+    maxHeight: number;
+    minWidth: number;
+    maxWidth: number;
+  }>({ minHeight: 0, maxHeight: Infinity, minWidth: 0, maxWidth: Infinity });
+
   const queryParameters = new URLSearchParams(window.location.search);
   const galleryCategory = queryParameters.get("category") || "wall";
+
+  // const filteredArt = selectedTags.length == 0 ? art.filter((artpiece: artPiece) => {
+  //   return artpiece.Tags.some((tagObj: any) => selectedTags.map((option: Option) => option.value).includes(tagObj.name));
+  // })
+
+  const applyFilters = (art: artPiece[]) => {
+    let filteredArt = [...art];
+    if (hideSold) {
+      filteredArt = filteredArt.filter(
+        (artPiece: artPiece) => artPiece.forSale
+      );
+    }
+    if (selectedSizes.length === 1 || selectedSizes.length === 2) {
+      // console.log(selectedSizes)
+      if (!selectedSizes.includes({label: "Small", value: "small"})) {
+        filteredArt = filteredArt.filter((artPiece: artPiece) => {
+          return Math.max(artPiece.height, artPiece.width) >= 8
+        })
+      }
+      if (!selectedSizes.includes({label: "Medium", value: "medium"})) {
+        filteredArt = filteredArt.filter((artPiece: artPiece) => {
+          return Math.max(artPiece.height, artPiece.width) <= 8 || Math.max(artPiece.height, artPiece.width) >= 18
+        })
+      }
+      if (!selectedSizes.includes({label: "Large", value: "large"})) {
+        filteredArt = filteredArt.filter((artPiece: artPiece) => {
+          return Math.max(artPiece.height, artPiece.width) <= 18
+        })
+      }
+    }
+    if (selectedTags.length !== 0) {
+      filteredArt = filteredArt.filter((artPiece: artPiece) => {
+        return artPiece.Tags.some((tagObj: any) =>
+          selectedTags
+            .map((option: Option) => option.value)
+            .includes(tagObj.name)
+        );
+      });
+    }
+    return filteredArt.map((art: artPiece) => (
+      <ArtPiece
+        id={art.id}
+        key={art.id}
+        title={art.title}
+        description={art.description}
+        height={art.height}
+        width={art.width}
+        thickness={art.thickness}
+        price={art.price}
+        forSale={art.forSale}
+        image={art.image}
+        category={categoryIdToName(art.CategoryId)}
+        tags={art.Tags.map((tagObj: any) => tagObj.name)}
+      />
+    ));
+  };
 
   const { data: tagsData, isLoading: tagsLoading } = useQuery({
     queryKey: ["tags"],
     queryFn: () => galleryAPI.get("/api/tags"),
-    onSuccess: (data: any): void => {
-      console.log(data);
-      setTags(
-        data.data.map((tag: { id: number; name: string }) => {
-          return { label: toSentenceCase(tag.name), value: tag.name };
-        })
-      );
-    },
+    // onSuccess: (res: any): void => {
+
+    // },
   });
 
   const { data: artData, isLoading: artLoading } = useQuery({
@@ -41,32 +98,17 @@ const Gallery = () => {
       galleryAPI.get(
         `/api/categories/byname/${toSentenceCase(galleryCategory)}`
       ),
-    onSuccess: (data): void => {
-      console.log(data);
-      const artPieces = data.data.Arts.map((art: artPiece) => (
-        <ArtPiece
-          id={art.id}
-          key={art.id}
-          title={art.title}
-          description={art.description}
-          height={art.height}
-          width={art.width}
-          thickness={art.thickness}
-          price={art.price}
-          forSale={art.forSale}
-          image={art.image}
-          category={categoryIdToName(art.CategoryId)}
-          setLoading={setLoading}
-        />
-      ));
+    onSuccess: (res): void => {
+      const artPieces = res.data.Arts;
       setArt(artPieces);
-      setFilteredArt(artPieces);
     },
   });
 
   const handleCheckBoxChange = (e: ChangeEvent<HTMLInputElement>) => {
     setHideSold(!hideSold);
   };
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {};
 
   return (
     <div className="relative lg:max-w-5xl mx-auto">
@@ -97,7 +139,7 @@ const Gallery = () => {
                 <Loading />
               </div>
             ) : null}
-            {tags ? (
+            {tagsData ? (
               <>
                 <div className="my-4">
                   <h4 className="font-bold">Tags</h4>
@@ -108,9 +150,16 @@ const Gallery = () => {
                     Select multiple tags
                   </label>
                   <MultiSelect
-                    options={tags}
-                    value={selected}
-                    onChange={setSelected}
+                    options={tagsData.data.map(
+                      (tag: { id: number; name: string }) => {
+                        return {
+                          label: toSentenceCase(tag.name),
+                          value: tag.name,
+                        };
+                      }
+                    )}
+                    value={selectedTags}
+                    onChange={setSelectedTags}
                     labelledBy="Select"
                     className="w-full"
                   />
@@ -138,13 +187,80 @@ const Gallery = () => {
                 </div>
                 <hr className="w-full" />
                 <div className="my-4">
-                  <h4 className="font-bold">Size</h4>
+                  <h4 className="font-bold">Sizes</h4>
                   <label
-                    className="inline-block text-sm text-gray-600"
-                    htmlFor="size-filter"
-                  >
-                    filter by size
-                  </label>
+                      className="inline-block text-sm text-gray-600"
+                      htmlFor="min-height"
+                    >
+                      Select multiple sizes
+                    </label>
+                  <MultiSelect
+                    options={[
+                      { label: "Small", value: "small" },
+                      { label: "Medium", value: "medium" },
+                      { label: "Large", value: "large" },
+                    ]}
+                    value={selectedSizes}
+                    onChange={setSelectedSizes}
+                    labelledBy="Select"
+                    className="w-full"
+                  />
+                  {/* <div>
+                    <label
+                      className="inline-block text-sm text-gray-600"
+                      htmlFor="min-height"
+                    >
+                      Min Height (in.)
+                    </label>
+                    <input
+                      id="min-height"
+                      type="number"
+                      name="minHeight"
+                      onChange={handleInputChange}
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                    <label
+                      className="inline-block text-sm text-gray-600"
+                      htmlFor="max-height"
+                    >
+                      Max Height (in.)
+                    </label>
+                    <input
+                      id="max-height"
+                      type="number"
+                      name="maxHeight"
+                      onChange={handleInputChange}
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      className="inline-block text-sm text-gray-600"
+                      htmlFor="min-width"
+                    >
+                      Min Width (in.)
+                    </label>
+                    <input
+                      id="min-width"
+                      type="number"
+                      name="minWidth"
+                      onChange={handleInputChange}
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                    <label
+                      className="inline-block text-sm text-gray-600"
+                      htmlFor="max-width"
+                    >
+                      Max Width (in.)
+                    </label>
+                    <input
+                      id="max-width"
+                      type="number"
+                      name="maxWidth"
+                      onChange={handleInputChange}
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                    />
+                  </div> */}
                 </div>
               </>
             ) : null}
@@ -158,7 +274,7 @@ const Gallery = () => {
           ) : null}
           {artData ? (
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
-              {art}
+              {applyFilters(art)}
             </div>
           ) : null}
         </div>

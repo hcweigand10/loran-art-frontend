@@ -14,7 +14,7 @@ const ArtPiece = (props: artPieceNode) => {
       <div className="pt-4 flex justify-between px-3 border-t-2">
         <div className="">
           <h3 className="text-2xl tracking-wider text-neutral-800 align-middle">
-            {props.title} <span className="text-sm normal align-middle">({props.height}'' x {props.width} {props.thickness !== 0 ? props.thickness : null})</span>
+            {props.title} <span className="text-sm normal align-middle">({props.thickness ? (`${props.height}" x ${props.width}" x ${props.thickness}"`) : (`${props.height}" x ${props.width}"`)})</span>
           </h3>
         </div>
         <div className="">
@@ -36,10 +36,20 @@ const ArtPiece = (props: artPieceNode) => {
           </p> */}
         </div>
       </div>
+
       <div className="px-3">
-        <p className="mt-1 text-sm">
-          <span className="italic text-gray-500">
+        <p className="mt-1 text-sm text-gray-500">
+            Description: {" "}
+          <span className="text-gray-500 italic text-gray-800">
             {props.description || "---"}
+          </span>
+        </p>
+      </div>
+      <div className="px-3">
+        <p className="mt-1 text-sm text-gray-500">
+            Tags: {" "}
+          <span className="text-gray-500 italic text-gray-800">
+            {props.tags.join(", ")}
           </span>
         </p>
       </div>
