@@ -7,7 +7,7 @@ const Links = () => {
     {
       name: "Jenny Fillius",
       description: "Jenny is a great artist who creates wondrous works in Tin, as well as staying in touch with a large collection of Tin workers. I stole this list of Tin artists from her. Many thanks Jenny.",
-      link: "http://jennyfillius.com/home.html/"
+      link: "https://jennyfillius.net/home.html/"
     },
     {
       name: "Robert Villamagna",

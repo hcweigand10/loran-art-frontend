@@ -20,19 +20,23 @@ const Contact = () => {
   };
 
   const handleSubmit = async () => {
-    const params: Record<string, string> = { ...formInfo };
-    const response = await emailjs.send(
-      "service_7p1f6le",
-      "template_htlmpqh",
-      params,
-      process.env.REACT_APP_EMAILJS_PUBLIC_KEY
-    );
-    console.log(response);
-    setFormInfo({ name: "", phone: "", email: "", message: "" });
-    if (response.status === 200) {
-      setResult("Message sent!");
+    if (formInfo.name && formInfo.email && formInfo.phone && formInfo.message) {
+      const params: Record<string, string> = { ...formInfo };
+      const response = await emailjs.send(
+        "service_7p1f6le",
+        "template_htlmpqh",
+        params,
+        process.env.REACT_APP_EMAILJS_PUBLIC_KEY
+      );
+      console.log(response);
+      setFormInfo({ name: "", phone: "", email: "", message: "" });
+      if (response.status === 200) {
+        setResult("Message sent!");
+      } else {
+        setResult("Error sending message :(");
+      }
     } else {
-      setResult("Error sending message :(");
+      alert("All fields must be filled")
     }
   };
 

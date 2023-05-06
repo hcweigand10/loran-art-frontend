@@ -24,8 +24,8 @@ const Edit = () => {
         <Loading />
       ) : (
         <>
-        <h1 className="text-3xl font-light tracking-wider mb-4 pt-6">Edit</h1>
-        <Form artId={parseInt(artId)}/>
+          <h1 className="text-3xl font-light tracking-wider mb-4 pt-6">Edit</h1>
+          <Form artId={parseInt(artId)}/>
         </>
       )}
     </div>

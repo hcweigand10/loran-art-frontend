@@ -47,6 +47,11 @@ const Form = (props: formProps) => {
       setForSale(data.data.forSale);
       setImage(data.data.image);
       setNotes(data.data.notes);
+      setTags(
+        data.data.Tags.map((tagObj: any) => {
+          return { label: tagObj.name, value: tagObj.id };
+        })
+      );
       setCategory(categoryIdToName(data.data.CategoryId));
       setCategoryId(data.data.CategoryId);
     },
@@ -86,8 +91,8 @@ const Form = (props: formProps) => {
   };
 
   const handleSubmit = async () => {
-    setErrorMsg("")
-    setIsError(false)
+    setErrorMsg("");
+    setIsError(false);
     const body = {
       title,
       description,
@@ -108,9 +113,9 @@ const Form = (props: formProps) => {
         window.location.assign("/admin");
       } catch (error: any) {
         setLoading(false);
-        console.log(error)
-        setIsError(true)
-        setErrorMsg(error.message)
+        console.log(error);
+        setIsError(true);
+        setErrorMsg(error.message);
       }
     } else {
       setLoading(true);
@@ -119,9 +124,9 @@ const Form = (props: formProps) => {
         window.location.assign("/admin");
       } catch (error: any) {
         setLoading(false);
-        console.log(error)
-        setIsError(true)
-        setErrorMsg(error.response.data.errors[0].message)
+        console.log(error);
+        setIsError(true);
+        setErrorMsg(error.response.data.errors[0].message);
       }
     }
   };
@@ -401,7 +406,7 @@ const Form = (props: formProps) => {
             </button>
             <button
               type="submit"
-              className="rounded-md bg-primary py-2 px-3 text-sm font-semibold text-white hover:drop-shadow-lg"
+              className="rounded-md bg-blue-600 py-2 px-3 text-sm font-semibold text-white hover:drop-shadow-lg"
               onClick={handleSubmit}
             >
               Save

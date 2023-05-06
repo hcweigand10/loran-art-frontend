@@ -1,20 +1,14 @@
-import React, { useEffect, useState, useContext } from "react";
+import React from "react";
 import GalleryPreview from "../components/GalleryPreview";
-import largeheart from "../assets/images/large-heart.jpeg";
 import mediumbee from "../assets/images/medium-bee.jpeg";
 import toys from "../assets/images/toys-rush-hour.jpeg";
-import pastworks from "../assets/images/past-works-heart.jpeg";
 import planes from "../assets/images/planes.jpeg";
 import ratking from "../assets/images/rat-king.jpeg";
-import smallbee from "../assets/images/small-sunny-bee.jpeg";
 import turtle from "../assets/images/whistle-turtle.jpeg";
 import wholesale from "../assets/images/wholesale-whistles.jpeg";
-import Hero from "../components/Hero";
-import galleryAPI from "../utils/axios";
+
 
 const Home = () => {
-  const [tags, setTags] = useState<string[]>([])
-
 
   return (
     <div className="lg:max-w-5xl mx-auto pb-5">

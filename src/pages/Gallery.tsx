@@ -18,19 +18,10 @@ const Gallery = () => {
   const [selectedTags, setSelectedTags] = useState<Option[]>([]);
   const [selectedSizes, setSelectedSizes] = useState<Option[]>([]);
   const [hideSold, setHideSold] = useState<boolean>(false);
-  // const [sizeLimits, setSizeLimits] = useState<{
-  //   minHeight: number;
-  //   maxHeight: number;
-  //   minWidth: number;
-  //   maxWidth: number;
-  // }>({ minHeight: 0, maxHeight: Infinity, minWidth: 0, maxWidth: Infinity });
+
 
   const queryParameters = new URLSearchParams(window.location.search);
   const galleryCategory = queryParameters.get("category") || "wall";
-
-  // const filteredArt = selectedTags.length == 0 ? art.filter((artpiece: artPiece) => {
-  //   return artpiece.Tags.some((tagObj: any) => selectedTags.map((option: Option) => option.value).includes(tagObj.name));
-  // })
 
   const sizeOptions = [
     { label: `Small (largest dimension under 8")`, value: "small" },
@@ -142,6 +133,7 @@ const Gallery = () => {
         {/* filters */}
         <div className="col-span-1 md:col-span-2">
           <h3 className="text-xl mt-4 font-light">Filters</h3>
+          {/* {galleryCategory === "wall-art" && } */}
           <div className="relative w-full">
             {tagsLoading ? (
               <div className="">
@@ -165,62 +157,6 @@ const Gallery = () => {
                     labelledBy="Select"
                     className="w-full"
                   />
-                  {/* <div>
-                            <label
-                            className="inline-block text-sm text-gray-600"
-                            htmlFor="min-height"
-                            >
-                            Min Height (in.)
-                            </label>
-                            <input
-                            id="min-height"
-                            type="number"
-                            name="minHeight"
-                            onChange={handleInputChange}
-                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            />
-                            <label
-                            className="inline-block text-sm text-gray-600"
-                            htmlFor="max-height"
-                            >
-                            Max Height (in.)
-                            </label>
-                            <input
-                            id="max-height"
-                            type="number"
-                            name="maxHeight"
-                            onChange={handleInputChange}
-                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            />
-                            </div>
-                            <div>
-                            <label
-                            className="inline-block text-sm text-gray-600"
-                            htmlFor="min-width"
-                            >
-                            Min Width (in.)
-                            </label>
-                            <input
-                            id="min-width"
-                            type="number"
-                            name="minWidth"
-                            onChange={handleInputChange}
-                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            />
-                            <label
-                            className="inline-block text-sm text-gray-600"
-                            htmlFor="max-width"
-                            >
-                            Max Width (in.)
-                            </label>
-                            <input
-                            id="max-width"
-                            type="number"
-                            name="maxWidth"
-                            onChange={handleInputChange}
-                            className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                            />
-                          </div> */}
                 </div>
                 <hr className="w-full" />
                 <div className="my-5">
@@ -247,6 +183,8 @@ const Gallery = () => {
                   />
                 </div>
                 <hr className="w-full" />
+                    </>
+                  ) : null}
                 <div className="my-4">
                   <h4 className="font-bold">For Sale</h4>
                   <div className="flex h-6 items-center">
@@ -267,8 +205,6 @@ const Gallery = () => {
                     </label>
                   </div>
                 </div>
-              </>
-            ) : null}
           </div>
         </div>
         <div className="col-span-1 md:col-span-6">
