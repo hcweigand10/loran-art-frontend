@@ -11,9 +11,24 @@ const Navbar = () => {
   const pages = [
     { name: "Home", path: "" },
     { name: "About", path: "/about" },
-    { name: "About", path: "/about" },
-    { name: "About", path: "/about" },
+    { name: "Contact", path: "/contact" },
+    { name: "Links", path: "/links" },
+    { name: "Admin", path: "/admin" },
   ];
+
+  const links = pages.map(page => {
+    return <li
+    className={
+      currentPage === page.name
+        ? "text-black text-lg font-medium"
+        : "text-lg text-neutral-500 font-medium hover:text-black tracking-wider"
+    }
+  >
+    <Link to={page.path} onClick={() => setCurrentPage(page.name)}>
+      {page.name}
+    </Link>
+  </li>
+  })
 
   return (
     <nav className="w-full bg-white shadow">
@@ -21,6 +36,7 @@ const Navbar = () => {
         <div>
           <div className="flex items-center justify-between py-3 md:block">
             <Link to="/">
+              <img src={whistle} alt="" className="h-10"/>
               <h2 className="text-2xl text-black">Loran Scruggs</h2>
               <h5 className="text-sm text-neutral-600">
                 Art, Toys, and Whistles
@@ -71,62 +87,8 @@ const Navbar = () => {
             }`}
           >
             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-              <li
-                className={
-                  currentPage === ""
-                    ? "text-black font-bold text-lg"
-                    : "text-lg text-neutral-600 hover:text-black hover:border-b-2 hover:border-t-2 hover:border-t-white hover:border-b-black "
-                }
-              >
-                <Link to="/" onClick={() => setCurrentPage("")}>
-                  Home
-                </Link>
-              </li>
-              <li
-                className={
-                  currentPage === "about"
-                    ? "text-black font-bold text-lg"
-                    : "text-lg text-neutral-600 hover:text-black hover:border-b-2 hover:border-t-2 hover:border-t-white hover:border-b-black"
-                }
-              >
-                <Link to="/about" onClick={() => setCurrentPage("about")}>
-                  About
-                </Link>
-              </li>
-              <li
-                className={
-                  currentPage === "contact"
-                    ? "text-black font-bold text-lg"
-                    : "text-lg text-neutral-600 hover:text-black hover:border-b-2 hover:border-t-2 hover:border-t-white hover:border-b-black"
-                }
-              >
-                <Link to="/contact" onClick={() => setCurrentPage("contact")}>
-                  Contact
-                </Link>
-              </li>
-              <li
-                className={
-                  currentPage === "links"
-                    ? "text-black font-bold text-lg"
-                    : "text-lg text-neutral-600 hover:text-black hover:border-b-2 hover:border-t-2 hover:border-t-white hover:border-b-black"
-                }
-              >
-                <Link to="/links" onClick={() => setCurrentPage("links")}>
-                  Links
-                </Link>
-              </li>
-              <li
-                className={
-                  currentPage === "admin"
-                    ? "text-black font-bold text-lg"
-                    : "text-lg text-neutral-600 hover:text-black hover:border-b-2 hover:border-t-2 hover:border-t-white hover:border-b-black"
-                }
-              >
-                <Link to="/admin" onClick={() => setCurrentPage("admin")}>
-                  Admin
-                </Link>
-              </li>
-            </ul>
+              {links}            
+              </ul>
           </div>
         </div>
       </div>
