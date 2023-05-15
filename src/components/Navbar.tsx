@@ -5,42 +5,49 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<string>(
-    window.location.pathname.slice(1)
+    `/${window.location.pathname.slice(1)}` || ""
   );
 
   const pages = [
-    { name: "Home", path: "" },
+    { name: "Home", path: "/" },
     { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
     { name: "Links", path: "/links" },
     { name: "Admin", path: "/admin" },
   ];
 
-  const links = pages.map(page => {
-    return <li
-    className={
-      currentPage === page.name
-        ? "text-black text-lg font-medium"
-        : "text-lg text-neutral-500 font-medium hover:text-black tracking-wider"
-    }
-  >
-    <Link to={page.path} onClick={() => setCurrentPage(page.name)}>
-      {page.name}
-    </Link>
-  </li>
-  })
+  const links = pages.map((page, index) => {
+    return (
+      <li
+        className={
+          currentPage === page.path
+            ? "text-black text-lg font-medium"
+            : "text-lg text-neutral-500 font-medium hover:text-black"
+        }
+        key={index}
+      >
+        <Link to={page.path} onClick={() => setCurrentPage(page.name)}>
+          {page.name}
+        </Link>
+      </li>
+    );
+  });
 
   return (
     <nav className="w-full bg-white shadow">
       <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
         <div>
           <div className="flex items-center justify-between py-3 md:block">
-            <Link to="/">
-              <img src={whistle} alt="" className="h-10"/>
-              <h2 className="text-2xl text-black">Loran Scruggs</h2>
-              <h5 className="text-sm text-neutral-600">
-                Art, Toys, and Whistles
-              </h5>
+            <Link to="/" className="flex">
+              <div className="pr-2">
+                <img src={whistle} alt="" className="h-12" />
+              </div>
+              <div className="">
+                <h2 className="text-2xl text-black">Loran Scruggs</h2>
+                <h5 className="text-sm text-neutral-600">
+                  Art, Toys, and Whistles
+                </h5>
+              </div>
             </Link>
             <div className="md:hidden">
               <button
@@ -87,8 +94,8 @@ const Navbar = () => {
             }`}
           >
             <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0">
-              {links}            
-              </ul>
+              {links}
+            </ul>
           </div>
         </div>
       </div>

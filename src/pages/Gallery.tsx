@@ -2,6 +2,13 @@ import React, { ChangeEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import {
+  Button,
+  Dialog,
+  DialogHeader,
+  DialogBody,
+  DialogFooter,
+} from "@material-tailwind/react";
 import galleryAPI from "../utils/axios";
 import Loading from "../components/Loading";
 import ArtPiece from "../components/ArtPiece";
@@ -12,15 +19,20 @@ import { MultiSelect, Option } from "react-multi-select-component";
 import Hero from "../components/Hero";
 import categoryIdToName from "../utils/categoryIdToName";
 import categoryNameToId from "../utils/categoryNameToId";
+import ArtModal from "../components/ArtModal";
 
 const Gallery = () => {
   const [art, setArt] = useState<artPiece[]>([]);
   const [selectedTags, setSelectedTags] = useState<Option[]>([]);
   const [selectedSizes, setSelectedSizes] = useState<Option[]>([]);
   const [hideSold, setHideSold] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false)
+  const [modalArt, setModalArt] = useState<artPiece>()
 
   const queryParameters = new URLSearchParams(window.location.search);
   const galleryCategory = queryParameters.get("category") || "wall";
+
+  const handleOpen = () => setShowModal(!showModal);
 
   const sizeOptions = [
     { label: `Small (largest dimension under 8")`, value: "small" },
@@ -84,20 +96,26 @@ const Gallery = () => {
       });
     }
     return filteredArt.map((art: artPiece) => (
-      <ArtPiece
-        id={art.id}
-        key={art.id}
-        title={art.title}
-        description={art.description}
-        height={art.height}
-        width={art.width}
-        thickness={art.thickness}
-        price={art.price}
-        forSale={art.forSale}
-        image={art.image}
-        category={categoryIdToName(art.CategoryId)}
-        tags={art.Tags.map((tagObj: any) => tagObj.name)}
-      />
+      <div onClick={() => {
+        setShowModal(true)
+        setModalArt(art)
+      }}
+      className="hover:cursor-pointer">
+        <ArtPiece
+          id={art.id}
+          key={art.id}
+          title={art.title}
+          description={art.description}
+          height={art.height}
+          width={art.width}
+          thickness={art.thickness}
+          price={art.price}
+          forSale={art.forSale}
+          image={art.image}
+          category={categoryIdToName(art.CategoryId)}
+          tags={art.Tags.map((tagObj: any) => tagObj.name)}
+        />
+      </div>
     ));
   };
 
@@ -220,6 +238,9 @@ const Gallery = () => {
           ) : null}
         </div>
       </div>
+      {showModal && modalArt ? (
+               <ArtModal artpiece={modalArt} setShowModal={setShowModal}/>
+            ) : null}
     </div>
   );
 };
