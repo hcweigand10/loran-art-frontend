@@ -100,7 +100,7 @@ const Gallery = () => {
         setShowModal(true)
         setModalArt(art)
       }}
-      className="hover:cursor-pointer">
+      >
         <ArtPiece
           id={art.id}
           key={art.id}
@@ -126,7 +126,7 @@ const Gallery = () => {
   // const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {};
 
   return (
-    <div className="relative lg:max-w-5xl mx-auto">
+    <div className="relative lg:max-w-6xl mx-auto">
       <Link
         to="/"
         className="absolute top-2 left-0 border-b border-primary text-neutral-500"

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<string>(
-    `/${window.location.pathname.slice(1)}` || ""
+    `/${window.location.pathname.slice(1).split("/")[0]}` || ""
   );
 
   const pages = [
