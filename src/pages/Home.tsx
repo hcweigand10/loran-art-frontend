@@ -21,8 +21,8 @@ const Home = () => {
           <GalleryPreview category="sculptures" image={ratking}/>
           <GalleryPreview category="toys" image={toys}/>
           <GalleryPreview category="whistles" image={turtle}/>
-          <GalleryPreview category="wholesale" image={wholesale}/>
           <GalleryPreview category="planes" image={planes}/>
+          <GalleryPreview category="wholesale" image={wholesale}/>
           {/* <GalleryPreview category="past-works" image={pastworks}/> */}
         </div>
       </div>

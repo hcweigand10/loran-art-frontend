@@ -26,13 +26,11 @@ const Gallery = () => {
   const [selectedTags, setSelectedTags] = useState<Option[]>([]);
   const [selectedSizes, setSelectedSizes] = useState<Option[]>([]);
   const [hideSold, setHideSold] = useState<boolean>(false);
-  const [showModal, setShowModal] = useState<boolean>(false)
-  const [modalArt, setModalArt] = useState<artPiece>()
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [modalArt, setModalArt] = useState<artPiece>();
 
   const queryParameters = new URLSearchParams(window.location.search);
-  const galleryCategory = queryParameters.get("category") || "wall";
-
-  const handleOpen = () => setShowModal(!showModal);
+  const galleryCategory = queryParameters.get("category") || "wall-art";
 
   const sizeOptions = [
     { label: `Small (largest dimension under 8")`, value: "small" },
@@ -96,10 +94,11 @@ const Gallery = () => {
       });
     }
     return filteredArt.map((art: artPiece) => (
-      <div onClick={() => {
-        setShowModal(true)
-        setModalArt(art)
-      }}
+      <div
+        onClick={() => {
+          setShowModal(true);
+          setModalArt(art);
+        }}
       >
         <ArtPiece
           id={art.id}
@@ -123,6 +122,50 @@ const Gallery = () => {
     setHideSold(!hideSold);
   };
 
+  const purchaseString = () => {
+    const email = (
+      <p className="block flex align-items-bottom text-neutral-600">
+        To purchase, email me at
+        <a className="ml-1 underline" href="mailto:loranscruggs8@gmail.com">
+          loranscruggs8@gmail.com
+        </a>
+      </p>
+    );
+    const etsy = (
+      <p className="block flex align-items-bottom text-neutral-600">
+        To purchase, view on{" "}
+        <a
+          className="ml-1 underline"
+          href="https://www.etsy.com/shop/bottlecapwhistles/?etsrc=sdt"
+        >
+          Etsy
+        </a>
+      </p>
+    );
+    switch (galleryCategory) {
+      case "wall-art":
+        return email;
+        break;
+      case "sculptures":
+        return email;
+        break;
+      case "toys":
+        return email;
+        break;
+      case "planes":
+        return etsy;
+        break;
+      case "whistles":
+        return etsy;
+        break;
+      case "wholesale":
+        return etsy;
+        break;
+      default:
+        break;
+    }
+  };
+
   // const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {};
 
   return (
@@ -134,14 +177,11 @@ const Gallery = () => {
         <FontAwesomeIcon icon={faArrowLeft} /> Go back
       </Link>
       {/* <Hero/> */}
-      <div className="flex justify-between pt-12 mt-6">
-        <h1 className="text-2xl font-light tracking-wider mb-4 block">
+      <div className="pt-12 mt-6 mb-4">
+        <h1 className="text-2xl font-light tracking-wider block">
           {toSentenceCase(galleryCategory)}
         </h1>
-        {/* <p className="block flex align-items-bottom text-neutral-600 italic">
-          To purchase, email me at{" "}
-          <a className="ml-1 underline" href="mailto:loranscruggs8@gmail.com">loranscruggs8@gmail.com</a>
-        </p> */}
+        {purchaseString()}
       </div>
       <hr />
       <div className="grid grid-cols-1 md:grid-cols-8 gap-4">
@@ -239,8 +279,8 @@ const Gallery = () => {
         </div>
       </div>
       {showModal && modalArt ? (
-               <ArtModal artpiece={modalArt} setShowModal={setShowModal}/>
-            ) : null}
+        <ArtModal artpiece={modalArt} setShowModal={setShowModal} />
+      ) : null}
     </div>
   );
 };
