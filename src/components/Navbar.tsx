@@ -21,12 +21,12 @@ const Navbar = () => {
       <li
         className={
           currentPage === page.path
-            ? "text-black text-lg font-medium"
-            : "text-lg text-neutral-500 font-medium hover:text-black"
+            ? "text-lg tracking-wider text-black font-medium"
+            : "text-lg tracking-wider text-neutral-400 font-medium hover:text-black"
         }
         key={index}
       >
-        <Link to={page.path} onClick={() => setCurrentPage(page.name)}>
+        <Link to={page.path} onClick={() => setCurrentPage(page.path)}>
           {page.name}
         </Link>
       </li>
