@@ -145,22 +145,16 @@ const Gallery = () => {
     switch (galleryCategory) {
       case "wall-art":
         return email;
-        break;
       case "sculptures":
         return email;
-        break;
       case "toys":
         return email;
-        break;
       case "planes":
         return etsy;
-        break;
       case "whistles":
         return etsy;
-        break;
       case "wholesale":
         return etsy;
-        break;
       default:
         break;
     }
@@ -272,7 +266,7 @@ const Gallery = () => {
             </div>
           ) : null}
           {artData ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+            <div className="grid grid-cols-1 md:grid-cols-1 gap-6 my-8">
               {applyFilters(art)}
             </div>
           ) : null}
@@ -286,3 +280,5 @@ const Gallery = () => {
 };
 
 export default Gallery;
+
+

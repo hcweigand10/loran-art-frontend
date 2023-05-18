@@ -28,7 +28,7 @@ const ArtModal = (props: props) => {
         onClick={() => props.setShowModal(false)}
       ></div>
       <div className="flex items-center min-h-screen px-4 py-8">
-        <div className="relative w-full max-w-lg mx-auto bg-white rounded-md shadow-lg">
+        <div className="relative w-full max-w-6xl mx-auto bg-white rounded-md shadow-lg">
           {/* header */}
           <div className="px-4 py-4">
             <img
