@@ -33,9 +33,9 @@ const Gallery = () => {
   const galleryCategory = queryParameters.get("category") || "wall-art";
 
   const sizeOptions = [
-    { label: `Small (largest dimension under 8")`, value: "small" },
-    { label: `Medium (largest dimension between 8" and 18")`, value: "medium" },
-    { label: `Large (largest dimension over 18")`, value: "large" },
+    { label: `Small (under 8")`, value: 1 },
+    { label: `Medium (between 8" and 18")`, value: 2 },
+    { label: `Large (over 18")`, value: 3 },
   ];
 
   const { data: tagsData, isLoading: tagsLoading } = useQuery({
@@ -59,32 +59,35 @@ const Gallery = () => {
   });
 
   const applyFilters = (art: artPiece[]) => {
-    let filteredArt = [...art];
+    let filteredArt: any[] = art.map((artPiece: artPiece) => {
+
+      if (Math.max(artPiece.height, artPiece.width) <= 8) {
+        return {
+          ...artPiece,
+          size: 1
+        }
+      } else if (Math.max(artPiece.height, artPiece.width) >= 8 && Math.max(artPiece.height, artPiece.width) <= 18) {
+        return {
+          ...artPiece,
+          size: 2
+        }
+      }
+      else {
+        return {
+          ...artPiece,
+          size: 3
+        }
+      }
+    });
+    if (selectedSizes.length === 1 || selectedSizes.length === 2) {
+      filteredArt = filteredArt.filter((artPiece: any) => {
+        return selectedSizes.map((option: Option) => option.value).includes(artPiece.size)
+      });
+    }
     if (hideSold) {
       filteredArt = filteredArt.filter(
         (artPiece: artPiece) => artPiece.forSale
       );
-    }
-    if (selectedSizes.length === 1 || selectedSizes.length === 2) {
-      // console.log(selectedSizes)
-      if (!selectedSizes.includes({ label: "Small", value: "small" })) {
-        filteredArt = filteredArt.filter((artPiece: artPiece) => {
-          return Math.max(artPiece.height, artPiece.width) >= 8;
-        });
-      }
-      if (!selectedSizes.includes({ label: "Medium", value: "medium" })) {
-        filteredArt = filteredArt.filter((artPiece: artPiece) => {
-          return (
-            Math.max(artPiece.height, artPiece.width) <= 8 ||
-            Math.max(artPiece.height, artPiece.width) >= 18
-          );
-        });
-      }
-      if (!selectedSizes.includes({ label: "Large", value: "large" })) {
-        filteredArt = filteredArt.filter((artPiece: artPiece) => {
-          return Math.max(artPiece.height, artPiece.width) <= 18;
-        });
-      }
     }
     if (selectedTags.length !== 0) {
       filteredArt = filteredArt.filter((artPiece: artPiece) => {
@@ -93,6 +96,7 @@ const Gallery = () => {
         );
       });
     }
+    console.log(filteredArt)
     return filteredArt.map((art: artPiece) => (
       <div
         onClick={() => {
