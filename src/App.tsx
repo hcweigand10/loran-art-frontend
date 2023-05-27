@@ -14,6 +14,7 @@ import UserContext from "./contexts/userContext";
 import galleryAPI from "./utils/axios";
 import Edit from "./pages/Edit";
 import Create from "./pages/Create";
+import WallArt from "./pages/WallArt";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
@@ -62,6 +63,7 @@ function App() {
       <div className="container mx-auto" id="home">
         <Routes>
           <Route index={true} element={<Home />} />
+          <Route path="gallery/wall-art" element={<WallArt/>} />
           <Route path="gallery/*" element={<Gallery/>} />
           <Route path="contact" element={<Contact />} />
           <Route path="about" element={<About />} />

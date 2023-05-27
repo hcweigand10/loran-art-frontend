@@ -22,7 +22,7 @@ const Navbar = () => {
         className={
           currentPage === page.path
             ? "text-lg tracking-wider text-black font-medium"
-            : "text-lg tracking-wider text-neutral-400 font-medium hover:text-black"
+            : "text-lg tracking-wider text-neutral-500 font-medium hover:text-black"
         }
         key={index}
       >

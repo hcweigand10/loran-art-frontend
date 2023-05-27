@@ -2,13 +2,6 @@ import React, { ChangeEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-import {
-  Button,
-  Dialog,
-  DialogHeader,
-  DialogBody,
-  DialogFooter,
-} from "@material-tailwind/react";
 import galleryAPI from "../utils/axios";
 import Loading from "../components/Loading";
 import ArtPiece from "../components/ArtPiece";
@@ -18,33 +11,19 @@ import { useQuery } from "react-query";
 import { MultiSelect, Option } from "react-multi-select-component";
 import Hero from "../components/Hero";
 import categoryIdToName from "../utils/categoryIdToName";
-import categoryNameToId from "../utils/categoryNameToId";
 import ArtModal from "../components/ArtModal";
+import WallArt from "./WallArt";
 
 const Gallery = () => {
   const [art, setArt] = useState<artPiece[]>([]);
   const [selectedTags, setSelectedTags] = useState<Option[]>([]);
   const [selectedSizes, setSelectedSizes] = useState<Option[]>([]);
   const [hideSold, setHideSold] = useState<boolean>(false);
-  const [showModal, setShowModal] = useState<boolean>(false);
-  const [modalArt, setModalArt] = useState<artPiece>();
+  // const [showModal, setShowModal] = useState<boolean>(false);
+  // const [modalArt, setModalArt] = useState<artPiece>();
 
   const queryParameters = new URLSearchParams(window.location.search);
-  const galleryCategory = queryParameters.get("category") || "wall-art";
-
-  const sizeOptions = [
-    { label: `Small (under 8")`, value: 1 },
-    { label: `Medium (between 8" and 18")`, value: 2 },
-    { label: `Large (over 18")`, value: 3 },
-  ];
-
-  const { data: tagsData, isLoading: tagsLoading } = useQuery({
-    queryKey: ["tags"],
-    queryFn: () => galleryAPI.get("/api/tags"),
-    // onSuccess: (res: any): void => {
-
-    // },
-  });
+  const galleryCategory = queryParameters.get("category") || "toys";
 
   const { data: artData, isLoading: artLoading } = useQuery({
     queryKey: [galleryCategory],
@@ -57,74 +36,6 @@ const Gallery = () => {
       setArt(artPieces);
     },
   });
-
-  const applyFilters = (art: artPiece[]) => {
-    let filteredArt: any[] = art.map((artPiece: artPiece) => {
-
-      if (Math.max(artPiece.height, artPiece.width) <= 8) {
-        return {
-          ...artPiece,
-          size: 1
-        }
-      } else if (Math.max(artPiece.height, artPiece.width) >= 8 && Math.max(artPiece.height, artPiece.width) <= 18) {
-        return {
-          ...artPiece,
-          size: 2
-        }
-      }
-      else {
-        return {
-          ...artPiece,
-          size: 3
-        }
-      }
-    });
-    if (selectedSizes.length === 1 || selectedSizes.length === 2) {
-      filteredArt = filteredArt.filter((artPiece: any) => {
-        return selectedSizes.map((option: Option) => option.value).includes(artPiece.size)
-      });
-    }
-    if (hideSold) {
-      filteredArt = filteredArt.filter(
-        (artPiece: artPiece) => artPiece.forSale
-      );
-    }
-    if (selectedTags.length !== 0) {
-      filteredArt = filteredArt.filter((artPiece: artPiece) => {
-        return artPiece.Tags.some((tagObj: any) =>
-          selectedTags.map((option: Option) => option.value).includes(tagObj.id)
-        );
-      });
-    }
-    console.log(filteredArt)
-    return filteredArt.map((art: artPiece) => (
-      <div
-        onClick={() => {
-          setShowModal(true);
-          setModalArt(art);
-        }}
-      >
-        <ArtPiece
-          id={art.id}
-          key={art.id}
-          title={art.title}
-          description={art.description}
-          height={art.height}
-          width={art.width}
-          thickness={art.thickness}
-          price={art.price}
-          forSale={art.forSale}
-          image={art.image}
-          category={categoryIdToName(art.CategoryId)}
-          tags={art.Tags.map((tagObj: any) => tagObj.name)}
-        />
-      </div>
-    ));
-  };
-
-  const handleCheckBoxChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setHideSold(!hideSold);
-  };
 
   const purchaseString = () => {
     const email = (
@@ -147,8 +58,6 @@ const Gallery = () => {
       </p>
     );
     switch (galleryCategory) {
-      case "wall-art":
-        return email;
       case "sculptures":
         return email;
       case "toys":
@@ -164,125 +73,58 @@ const Gallery = () => {
     }
   };
 
-  // const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {};
-
   return (
-    <div className="relative lg:max-w-6xl mx-auto">
-      <Link
-        to="/"
-        className="absolute top-2 left-0 border-b border-primary text-neutral-500"
-      >
-        <FontAwesomeIcon icon={faArrowLeft} /> Go back
-      </Link>
-      {/* <Hero/> */}
-      <div className="pt-12 mt-6 mb-4">
-        <h1 className="text-2xl font-light tracking-wider block">
-          {toSentenceCase(galleryCategory)}
-        </h1>
-        {purchaseString()}
-      </div>
-      <hr />
-      <div className="grid grid-cols-1 md:grid-cols-8 gap-4">
-        {/* filters */}
-        <div className="col-span-1 md:col-span-2">
-          <h3 className="text-xl mt-4 font-light">Filters</h3>
-          <div className="relative w-full">
-            {galleryCategory === "wall-art" && (
-              <>
-                {tagsLoading ? (
-                  <div className="">
-                    <Loading />
-                  </div>
-                ) : null}
-                {tagsData ? (
-                  <>
-                    <div className="my-4">
-                      <h4 className="font-bold">Sizes</h4>
-                      <label
-                        className="inline-block text-sm text-gray-600"
-                        htmlFor="min-height"
-                      >
-                        Select multiple sizes
-                      </label>
-                      <MultiSelect
-                        options={sizeOptions}
-                        value={selectedSizes}
-                        onChange={setSelectedSizes}
-                        labelledBy="Select"
-                        className="w-full"
+        <div className="relative lg:max-w-5xl mx-auto">
+          <Link
+            to="/"
+            className="absolute top-2 left-0 border-b border-primary text-neutral-500"
+          >
+            <FontAwesomeIcon icon={faArrowLeft} /> Go back
+          </Link>
+          {/* <Hero/> */}
+          <div className="pt-12 mt-6 mb-4">
+            <h1 className="text-2xl font-light tracking-wider block">
+              {toSentenceCase(galleryCategory)}
+            </h1>
+            {purchaseString()}
+          </div>
+          <hr />
+          <div className="grid grid-cols-1 md:grid-cols-8 gap-4">
+            <div className="col-span-1 md:col-span-6">
+              {artLoading ? (
+                <div className="">
+                  <Loading />
+                </div>
+              ) : null}
+              {artData ? (
+                <div className="grid grid-cols-1 md:grid-cols-1 gap-6 my-8">
+                  {art.map((art: artPiece) => {
+                    return (
+                      <ArtPiece
+                        id={art.id}
+                        key={art.id}
+                        title={art.title}
+                        description={art.description}
+                        height={art.height}
+                        width={art.width}
+                        thickness={art.thickness}
+                        price={art.price}
+                        forSale={art.forSale}
+                        image={art.image}
+                        category={categoryIdToName(art.CategoryId)}
+                        tags={art.Tags.map((tagObj: any) => tagObj.name)}
                       />
-                    </div>
-                    <hr className="w-full" />
-                    <div className="my-5">
-                      <h4 className="font-bold">Tags</h4>
-                      <label
-                        className="inline-block text-sm text-gray-600"
-                        htmlFor="tags"
-                      >
-                        Select multiple tags
-                      </label>
-                      <MultiSelect
-                        options={tagsData.data.map(
-                          (tag: { id: number; name: string }) => {
-                            return {
-                              label: toSentenceCase(tag.name),
-                              value: tag.id,
-                            };
-                          }
-                        )}
-                        value={selectedTags}
-                        onChange={setSelectedTags}
-                        labelledBy="Select"
-                        className="w-full"
-                      />
-                    </div>
-                    <hr className="w-full" />
-                  </>
-                ) : null}
-              </>
-            )}
-            <div className="my-4">
-              <h4 className="font-bold">For Sale</h4>
-              <div className="flex h-6 items-center">
-                <input
-                  id="forSale"
-                  name="forSale"
-                  title="forSale"
-                  type="checkbox"
-                  className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-                  onChange={handleCheckBoxChange}
-                  checked={hideSold}
-                />
-                <label
-                  htmlFor="forSale"
-                  className="font-normal text-sm text-gray-900 ml-2"
-                >
-                  Hide art that is not for sale
-                </label>
-              </div>
+                    );
+                  })}
+                </div>
+              ) : null}
             </div>
           </div>
-        </div>
-        <div className="col-span-1 md:col-span-6">
-          {artLoading ? (
-            <div className="">
-              <Loading />
-            </div>
-          ) : null}
-          {artData ? (
-            <div className="grid grid-cols-1 md:grid-cols-1 gap-6 my-8">
-              {applyFilters(art)}
-            </div>
-          ) : null}
-        </div>
-      </div>
-      {showModal && modalArt ? (
+          {/* {showModal && modalArt ? (
         <ArtModal artpiece={modalArt} setShowModal={setShowModal} />
-      ) : null}
-    </div>
+      ) : null} */}
+        </div>
   );
 };
 
 export default Gallery;
-
-

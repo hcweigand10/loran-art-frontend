@@ -10,7 +10,7 @@ interface props {
 const GalleryPreview = (props: props) => {
   return (
     <div className="card hover:shadow-xl drop-shadow-md relative hover:opacity-100 opacity-90 transition-all">
-      <Link to={`/gallery/?category=${props.category}`}>
+      <Link to={props.category == "wall-art" ? `/gallery/wall-art` : `/gallery/?category=${props.category}`}>
         <img
           src={props.image}
           alt={toSentenceCase(props.category)}
