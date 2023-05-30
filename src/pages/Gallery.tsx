@@ -13,6 +13,7 @@ import Hero from "../components/Hero";
 import categoryIdToName from "../utils/categoryIdToName";
 import ArtModal from "../components/ArtModal";
 import WallArt from "./WallArt";
+import Back from "../components/Back";
 
 const Gallery = () => {
   const [art, setArt] = useState<artPiece[]>([]);
@@ -39,7 +40,7 @@ const Gallery = () => {
 
   const purchaseString = () => {
     const email = (
-      <p className="block flex align-items-bottom text-neutral-600">
+      <p className="block align-items-bottom text-neutral-600 text-sm md:text-md">
         To purchase, email me at
         <a className="ml-1 underline" href="mailto:loranscruggs8@gmail.com">
           loranscruggs8@gmail.com
@@ -47,7 +48,7 @@ const Gallery = () => {
       </p>
     );
     const etsy = (
-      <p className="block flex align-items-bottom text-neutral-600">
+      <p className="block align-items-bottom text-neutral-600 text-sm md:text-md">
         To purchase, view on{" "}
         <a
           className="ml-1 underline"
@@ -75,29 +76,23 @@ const Gallery = () => {
 
   return (
         <div className="relative lg:max-w-5xl mx-auto">
-          <Link
-            to="/"
-            className="absolute top-2 left-0 border-b border-primary text-neutral-500"
-          >
-            <FontAwesomeIcon icon={faArrowLeft} /> Go back
-          </Link>
+          <Back/>
           {/* <Hero/> */}
           <div className="pt-12 mt-6 mb-4">
-            <h1 className="text-2xl font-light tracking-wider block">
+            <h1 className="text-3xl tracking-wider block">
               {toSentenceCase(galleryCategory)}
             </h1>
             {purchaseString()}
           </div>
           <hr />
-          <div className="grid grid-cols-1 md:grid-cols-8 gap-4">
-            <div className="col-span-1 md:col-span-6">
+          <div className="my-4 pt-2 max-w-2xl mx-auto">
               {artLoading ? (
                 <div className="">
                   <Loading />
                 </div>
               ) : null}
               {artData ? (
-                <div className="grid grid-cols-1 md:grid-cols-1 gap-6 my-8">
+                <div className="">
                   {art.map((art: artPiece) => {
                     return (
                       <ArtPiece
@@ -118,7 +113,6 @@ const Gallery = () => {
                   })}
                 </div>
               ) : null}
-            </div>
           </div>
           {/* {showModal && modalArt ? (
         <ArtModal artpiece={modalArt} setShowModal={setShowModal} />

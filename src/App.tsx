@@ -15,6 +15,7 @@ import galleryAPI from "./utils/axios";
 import Edit from "./pages/Edit";
 import Create from "./pages/Create";
 import WallArt from "./pages/WallArt";
+import Settings from "./pages/Settings";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
@@ -71,6 +72,7 @@ function App() {
           <Route path="admin" element={<Admin />} />
           <Route path="admin/edit/*" element={<Edit />} />
           <Route path="admin/create-new" element={<Create />} />
+          <Route path="admin/settings" element={<Settings />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>

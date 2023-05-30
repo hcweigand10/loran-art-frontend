@@ -12,8 +12,7 @@ const Navbar = () => {
     { name: "Home", path: "/" },
     { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
-    { name: "Links", path: "/links" },
-    { name: "Admin", path: "/admin" },
+    { name: "Links", path: "/links" }
   ];
 
   const links = pages.map((page, index) => {
@@ -35,7 +34,7 @@ const Navbar = () => {
 
   return (
     <nav className="w-full bg-white shadow">
-      <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
+      <div className="justify-between px-4 mx-auto md:items-center md:flex md:px-8">
         <div>
           <div className="flex items-center justify-between py-3 md:block">
             <Link to="/" className="flex">

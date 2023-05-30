@@ -12,6 +12,7 @@ import { MultiSelect, Option } from "react-multi-select-component";
 import Hero from "../components/Hero";
 import categoryIdToName from "../utils/categoryIdToName";
 import ArtModal from "../components/ArtModal";
+import Back from "../components/Back";
 
 const WallArt = () => {
   const [art, setArt] = useState<artPiece[]>([]);
@@ -118,7 +119,7 @@ const WallArt = () => {
   };
 
   const purchaseString = (
-    <p className="block flex align-items-bottom text-neutral-600">
+    <p className="block align-items-bottom text-neutral-600 text-sm md:text-md">
       To purchase, email me at
       <a className="ml-1 underline" href="mailto:loranscruggs8@gmail.com">
         loranscruggs8@gmail.com
@@ -128,24 +129,18 @@ const WallArt = () => {
 
   return (
     <div className="relative lg:max-w-5xl mx-auto">
-      <Link
-        to="/"
-        className="absolute top-2 left-0 border-b border-primary text-neutral-500"
-      >
-        <FontAwesomeIcon icon={faArrowLeft} /> Go back
-      </Link>
+      <Back/>
       {/* <Hero/> */}
       <div className="pt-12 mt-6 mb-4">
-        <h1 className="text-2xl font-light tracking-wider block">
+        <h1 className="text-3xl tracking-wider block">
           {toSentenceCase(galleryCategory)}
         </h1>
         {purchaseString}
       </div>
       <hr />
-      <div className="grid grid-cols-1 md:grid-cols-8 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-10 gap-4">
         {/* filters */}
         <div className="col-span-1 md:col-span-2">
-          <h3 className="text-xl mt-4 font-light">Filters</h3>
           <div className="relative w-full">
             {tagsLoading ? (
               <div className="">
@@ -154,8 +149,8 @@ const WallArt = () => {
             ) : null}
             {tagsData ? (
               <>
-                <div className="my-4">
-                  <h4 className="font-bold">Sizes</h4>
+                <div className="my-3">
+                  <h4 className="text-md md:text-lg font-normal">Sizes</h4>
                   <label
                     className="inline-block text-sm text-gray-600"
                     htmlFor="min-height"
@@ -171,8 +166,8 @@ const WallArt = () => {
                   />
                 </div>
                 <hr className="w-full" />
-                <div className="my-5">
-                  <h4 className="font-bold">Tags</h4>
+                <div className="my-3">
+                  <h4 className="font-normal">Tags</h4>
                   <label
                     className="inline-block text-sm text-gray-600"
                     htmlFor="tags"
@@ -184,7 +179,7 @@ const WallArt = () => {
                       (tag: { id: number; name: string }) => {
                         return {
                           label: toSentenceCase(tag.name),
-                          value: tag.id,
+                          value: tag.id
                         };
                       }
                     )}
@@ -198,8 +193,8 @@ const WallArt = () => {
               </>
             ) : null}
 
-            <div className="my-4">
-              <h4 className="font-bold">For Sale</h4>
+            <div className="my-3">
+              <h4 className="font-normal">For Sale</h4>
               <div className="flex h-6 items-center">
                 <input
                   id="forSale"
@@ -219,15 +214,16 @@ const WallArt = () => {
               </div>
             </div>
           </div>
+            <hr className="md:hidden"/>
         </div>
-        <div className="col-span-1 md:col-span-6">
+        <div className="col-span-1 md:col-span-8">
           {artLoading ? (
             <div className="">
               <Loading />
             </div>
           ) : null}
           {artData ? (
-            <div className="grid grid-cols-1 md:grid-cols-1 gap-6 my-8">
+            <div className="grid grid-cols-1 md:grid-cols-1 gap-6 mt-3 max-w-4xl">
               {applyFilters(art)}
             </div>
           ) : null}

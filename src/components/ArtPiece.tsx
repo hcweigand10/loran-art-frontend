@@ -6,7 +6,7 @@ import { faRuler } from "@fortawesome/free-solid-svg-icons";
 const ArtPiece = (props: artPieceNode) => {
   return (
     <div className="flex flex-col justify-center">
-      <div className="flex flex-col space-y-3 rounded-xl p-3 mx-auto w-full hover:cursor-pointer hover:opacity-80">
+      <div className="flex flex-col space-y-2 rounded-xl pb-2 mx-auto w-full">
         <div className="w-full grid place-items-center">
           <img
             src={props.image}
@@ -14,27 +14,32 @@ const ArtPiece = (props: artPieceNode) => {
             className="rounded-xl w-full"
           />
         </div>
-        <div className="w-full flex flex-col space-y-2 p-3">
+        <div className="w-full flex flex-col px-3 py-1">
+          <h3 className="font-black text-gray-800 md:text-2xl text-xl">
+            {props.title}
+          </h3>
+          <p className="text-md md:text-lg text-gray-500 text-base">
+            {props.description}
+          </p>
           <div className="flex justify-between item-center">
             <div className="flex items-center">
-              <FontAwesomeIcon icon={faRuler}/>
-              <p className="text-gray-500 text-sm ml-2">
+              <FontAwesomeIcon icon={faRuler} />
+              <p className="text-gray-500 text-md md:text-lg ml-2">
                 {props.thickness
                   ? `${props.height}" x ${props.width}" x ${props.thickness}"`
                   : `${props.height}" x ${props.width}"`}
               </p>
             </div>
-            <div className={props.tags.length>0 ? "bg-gray-200 px-3 py-1 rounded-full text-xs font-medium text-gray-800 italic" : "bg-gray-200 px-3 py-1 rounded-full text-xs font-medium text-gray-800 italic hidden"}>
-              {props.tags && props.tags.join(", ")}
-            </div>
+            <p
+              className={
+                props.forSale
+                  ? "text-md md:text-lg text-gray-500"
+                  : "text-md md:text-lg italic text-red-400"
+              }
+            >
+              {props.forSale ? `$${props.price}` : "Sold"}
+            </p>
           </div>
-          <h3 className="font-black text-gray-800 md:text-3xl text-xl">
-            {props.title}
-          </h3>
-          <p className="md:text-lg text-gray-500 text-base">
-            {props.description}
-          </p>
-          <p className={props.forSale ? "text-xl font-black text-gray-800" : "text-xl italic text-red-400"}>{props.forSale ? `$${props.price}` : "Sold"}</p>
         </div>
       </div>
     </div>

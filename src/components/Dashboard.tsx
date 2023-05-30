@@ -1,17 +1,23 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { useState, ChangeEvent, FormEvent, useContext } from "react";
 import { useQuery } from "react-query";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashCan, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { artPiece } from "../interfaces/interfaces";
+import userContext from "../contexts/userContext";
 import galleryAPI from "../utils/axios";
 import Loading from "./Loading";
-import TableRow from "./TableRow";
+import ArtModal from "./ArtModal";
 import categoryIdToName from "../utils/categoryIdToName";
-import { Link } from "react-router-dom";
+import Table from "./Table";
 
 const Dashboard = () => {
   const [art, setArt] = useState<artPiece[]>([]);
   const [selectedCategroy, setSelectedCategroy] = useState("All Categories");
   const [newTag, setNewTag] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false);
+  const [modalArt, setModalArt] = useState<artPiece>();
 
   const { data, refetch } = useQuery({
     queryKey: ["all-art"],
@@ -33,6 +39,8 @@ const Dashboard = () => {
     staleTime: 10000,
   });
 
+  const { setLoggedIn } = useContext(userContext);
+
   const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const category = e.target.value;
     setSelectedCategroy(category);
@@ -45,7 +53,7 @@ const Dashboard = () => {
 
   const deleteArt = async (id: number, title: string) => {
     if (
-      window.confirm(`Are you sure you want to delete art piece '${title}?'`)
+      window.confirm(`Are you sure you'd like to delete art piece '${title}'?`)
     ) {
       setLoading(true);
       await galleryAPI.delete(`/api/art/${id}`);
@@ -55,14 +63,61 @@ const Dashboard = () => {
 
   const createTag = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (newTag) {
-      const res = await galleryAPI.post("/api/tags", {
-        name: newTag,
-      });
-      console.log("res: " + res);
-      setNewTag("")
-      tagFetch()
+    if (newTag && tagsData) {
+      if (
+        !tagsData.data
+          .map((tagObj: { id: number; name: string }) => tagObj.name)
+          .includes(newTag)
+      ) {
+        const res = await galleryAPI.post("/api/tags", {
+          name: newTag,
+        });
+        console.log("res: " + res);
+        setNewTag("");
+        tagFetch();
+      } else {
+        alert("That tag already exists");
+      }
     }
+  };
+
+  const deleteTag = async (tagId: number, tagName: string) => {
+    try {
+      if (window.confirm(`Are you sure you'd like to delete tag ${tagName}`)) {
+        const res = await galleryAPI.delete(`/api/tags/${tagId}`);
+        console.log(res);
+        if (res.status == 200) {
+          tagFetch();
+        }
+      }
+    } catch (error) {
+      alert(error);
+      console.log(error);
+    }
+  };
+
+  const editTag = async (tagId: number, tagName: string) => {
+    try {
+      const newName = window.prompt(
+        `What would you like to change '${tagName}' to?`
+      );
+      if (newName) {
+        const res = await galleryAPI.put(`/api/tags/${tagId}`, {
+          name: newName,
+        });
+        console.log(res);
+        if (res.status == 200) {
+          tagFetch();
+        }
+      }
+    } catch (error) {
+      alert(error);
+      console.log(error);
+    }
+  };
+
+  const changepassword = () => {
+    const newpassword = window.prompt("What would you like your n");
   };
 
   return (
@@ -70,9 +125,7 @@ const Dashboard = () => {
       <div className="sm:flex sm:items-center sm:justify-between">
         <div>
           <div className="flex items-center gap-x-3">
-            <h2 className="text-3xl font-light tracking-wider">
-              All Art Pieces
-            </h2>
+            <h2 className="text-3xl tracking-wide">All Art Pieces</h2>
 
             <span className="px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full  ">
               {art?.length || 0}
@@ -81,7 +134,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="mt-6 md:flex md:items-end md:justify-between">
+      <div className="mt-2 flex items-end justify-between">
         <div className="mb-2">
           <Link
             to={"/admin/create-new"}
@@ -126,155 +179,103 @@ const Dashboard = () => {
         </div>
       </div>
 
-      <div className="mt-3">
+      <div className="my-3">
         <div className="overflow-x-auto">
-          <div className="inline-block min-w-full pt-2 pb-8 align-middle">
+          <div className="inline-block min-w-full pt-2 align-middle">
             <div className="overflow-hidden border border-gray-200  rounded-lg drop-shadow-md">
               {loading ? (
                 <Loading />
               ) : (
-                <>
-                  {data ? (
-                    <table className="max-w-full min-w-full divide-y divide-gray-200 ">
-                      <thead className="bg-gray-50 ">
-                        <tr>
-                          <th
-                            scope="col"
-                            className="py-3.5 px-4 text-sm font-normal text-left rtl:text-right text-gray-500 "
-                          >
-                            <button className="flex items-center gap-x-3 focus:outline-none">
-                              <span>Title</span>
-                            </button>
-                          </th>
-
-                          <th
-                            scope="col"
-                            className="px-2 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "
-                          >
-                            Category
-                          </th>
-
-                          <th
-                            scope="col"
-                            className="px-2 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "
-                          >
-                            Description
-                          </th>
-
-                          <th
-                            scope="col"
-                            className="px-2 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "
-                          >
-                            Notes
-                          </th>
-
-                          <th
-                            scope="col"
-                            className="px-2 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "
-                          >
-                            Size
-                          </th>
-
-                          <th
-                            scope="col"
-                            className="px-2 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "
-                          >
-                            For Sale
-                          </th>
-                          <th
-                            scope="col"
-                            className="px-2 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "
-                          >
-                            Price
-                          </th>
-                          <th
-                            scope="col"
-                            className="px-2 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 "
-                          >
-                            Image
-                          </th>
-                          <th
-                            scope="col"
-                            className="px-2 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500"
-                          >
-                            Actions
-                          </th>
-                        </tr>
-                      </thead>
-                      <tbody className="bg-white divide-y divide-gray-200  ">
-                        {art
-                          .filter((art: artPiece) => {
-                            if (selectedCategroy === "All Categories") {
-                              return true;
-                            } else {
-                              return (
-                                categoryIdToName(art.CategoryId) ===
-                                selectedCategroy
-                              );
-                            }
-                          })
-                          .map((art: artPiece) => (
-                            <TableRow
-                              id={art.id}
-                              key={art.id}
-                              title={art.title}
-                              description={art.description}
-                              height={art.height}
-                              width={art.width}
-                              thickness={art.thickness}
-                              price={art.price}
-                              forSale={art.forSale}
-                              image={art.image}
-                              notes={art.notes}
-                              category={categoryIdToName(art.CategoryId)}
-                              setLoading={setLoading}
-                              delete={deleteArt}
-                            />
-                          ))}
-                      </tbody>
-                    </table>
-                  ) : (
-                    <h2>Error loading art</h2>
-                  )}
-                </>
+                <Table
+                  art={art}
+                  selectedCategory={selectedCategroy}
+                  deleteArt={deleteArt}
+                  setModalArt={setModalArt}
+                  setShowModal={setShowModal}
+                />
               )}
             </div>
           </div>
         </div>
+        <p className="text-neutral-500">Click any row for preview</p>
       </div>
-      <div>
-        <h3 className="text-2xl tracking-wide">Current Tags</h3>
+      <div className="max-w-lg">
+        <h3 className="text-2xl tracking-wide mb-3">Tags</h3>
         <ul>
           {tagsLoading ? (
             <Loading />
           ) : (
-            tagsData?.data.map((tag: any) => (
-              <li className="text-neutral-700 italic" key={tag.id}>
-                {tag.name}
+            tagsData?.data.map((tag: { id: number; name: string }) => (
+              <li
+                className="flex p-2 bg-neutral-200 mb-2 rounded justify-between"
+                key={tag.id}
+              >
+                <p>{tag.name}</p>
+                <div>
+                  <button
+                    onClick={() => editTag(tag.id, tag.name)}
+                    className="bg-blue-200 rounded-full px-3 mx-2 hover:bg-blue-400"
+                  >
+                    <FontAwesomeIcon icon={faEdit} />
+                  </button>
+                  <button
+                    onClick={() => deleteTag(tag.id, tag.name)}
+                    className="bg-red-200 rounded-full px-3 mx-2 hover:bg-red-400"
+                  >
+                    <FontAwesomeIcon icon={faTrashCan} />
+                  </button>
+                </div>
               </li>
             ))
           )}
         </ul>
         <form onSubmit={createTag}>
           <div className="my-2">
-            <label htmlFor="new-tag" className="text-xl">
+            <label htmlFor="new-tag" className="text-lg">
               Add a new tag
             </label>
-            <input
-              name="new-tag"
-              id="new-tag"
-              type="text"
-              placeholder="e.g. 'Nature'"
-              value={newTag}
-              onChange={handleInputChange}
-              className="block"
-            />
+            <div className="flex">
+              <input
+                name="new-tag"
+                id="new-tag"
+                type="text"
+                placeholder="e.g. 'Nature'"
+                value={newTag}
+                onChange={handleInputChange}
+                className="block"
+              />
+              <button className="btn text-white bg-blue-500 p-2 rounded hover:bg-blue-600 ml-3">
+                Create
+              </button>
+            </div>
           </div>
-          <button className="btn text-white bg-blue-500 p-2 rounded hover:bg-blue-600">
-            Create New Tag
-          </button>
         </form>
       </div>
+      <div className="mt-4">
+        <h2 className="text-2xl mb-3">Settings</h2>
+        <ul className="">
+          <li>
+            <Link to="/admin/settings" className="text-blue-500 underline">
+              Change Password
+            </Link>
+          </li>
+          <li>
+            <button
+              className="text-blue-500 underline"
+              onClick={() => {
+                setLoggedIn(false);
+                localStorage.removeItem("jwt");
+                window.location.assign("/admin");
+              }}
+            >
+              Logout
+            </button>
+          </li>
+        </ul>
+      </div>
+      {showModal && modalArt ? (
+        <ArtModal artpiece={modalArt} setShowModal={setShowModal} />
+      ) : null}
     </section>
   );
 };

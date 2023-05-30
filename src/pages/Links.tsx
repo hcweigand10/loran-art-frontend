@@ -47,12 +47,12 @@ const Links = () => {
     {
       name: "Jeri Moe",
       description: "Southwest tinsmith Jeri Moe creates 3D tin works of art that are well thought out and highly desireable",
-      link: "http://sanangelfolkart.com/jerimoe/index.htm"
+      link: "http://sanangelfolkart.com/jerimoe"
     },
     {
       name: "Burnt Offerings",
       description: "Brunt Offerings is the website for Opie & Linda O'Brien who create all sorts of fun and lively artwork with tin and other found objects. They also teach and have published books on the subjects of their talents. Their site has a wealth of information about who they are.",
-      link: "http://www.burntofferings.com/TinMetalCollage/index.html"
+      link: "http://www.burntofferings.com/TinMetalCollage"
     },
     {
       name: "Chris Griffin",
@@ -62,17 +62,17 @@ const Links = () => {
     {
       name: "Nia Michaels",
       description: "Nia works primarily with vintage tin and tin types. Each artwork is like a treasured jewel.",
-      link: "http://niamichaels.com/home.html"
+      link: "http://niamichaels.com/"
     },
     {
       name: "Deborah Paul",
       description: "Deborah is a fearless artist, always pushing her tin work a little further and trying new ways to represent the material while incorporating other recyclables into her work.",
-      link: "http://deborahpaulart.com/portrait.html"
+      link: "http://deborahpaulart.com"
     },
     {
       name: "Mimi Cahalan",
       description: "Mimi Cahalan creates wall-mounted and 3d constructions in painted metal and wood, working in both small and large-scale artwork for interior and exterior spaces.",
-      link: "http://www.mimicahalan.com/index.html"
+      link: "http://www.mimicahalan.com"
     },
     {
       name: "William Herberholz",

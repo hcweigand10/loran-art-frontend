@@ -1,9 +1,11 @@
 import React, { SetStateAction, useState, Dispatch } from "react";
 import { artPiece } from "../interfaces/interfaces";
+import ArtPiece from "./ArtPiece";
+import categoryIdToName from "../utils/categoryIdToName";
 
 interface props {
   artpiece: {
-    id?: number;
+    id: number;
     title: string;
     description: string;
     height: number;
@@ -28,27 +30,22 @@ const ArtModal = (props: props) => {
         onClick={() => props.setShowModal(false)}
       ></div>
       <div className="flex items-center min-h-screen px-4 py-8">
-        <div className="relative w-full max-w-6xl mx-auto bg-white rounded-md shadow-lg">
+        <div className="relative w-full max-w-2xl mx-auto bg-white rounded-md shadow-lg pt-3">
           {/* header */}
-          <div className="px-4 py-4">
-            <img
-              src={props.artpiece.image}
-              alt="enlarged image"
-              className="w-full rounded-xl"
-            />
-          </div>
-          <div className="px-8 py-2">
-          <h3 className="font-black text-gray-800 md:text-3xl text-xl">
-            {props.artpiece.title}
-          </h3>
-          <p className={props.artpiece.forSale ? "text-xl text-gray-800" : "text-xl text-red-500"}>{props.artpiece.forSale ? `$${props.artpiece.price}` : "Sold"}</p>
-          </div>
-          {/* body */}
-          <div className="px-8 mt-2">
-          <p className="md:text-lg text-gray-500 text-base">
-            {props.artpiece.description}
-          </p>
-          </div>
+          <ArtPiece 
+          id={props.artpiece.id}
+          key={props.artpiece.id}
+          title={props.artpiece.title}
+          description={props.artpiece.description}
+          height={props.artpiece.height}
+          width={props.artpiece.width}
+          thickness={props.artpiece.thickness}
+          price={props.artpiece.price}
+          forSale={props.artpiece.forSale}
+          image={props.artpiece.image}
+          category={categoryIdToName(props.artpiece.CategoryId)}
+          tags={props.artpiece.Tags.map((tagObj: any) => tagObj.name)}
+          />
           {/* footer  */}
           <div className="items-center gap-2 mt-2 bg-gray-50 py-2 px-4 flex justify-end rounded-md">
             <button

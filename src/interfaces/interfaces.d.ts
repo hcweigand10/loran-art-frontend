@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 
 export interface artPiece {
-  id?: number;
+  id: number;
   title: string;
   description: string;
   height: number;
@@ -22,7 +22,7 @@ export interface formProps {
 
 export interface artPieceNode {
   key?: number;
-  id?: number;
+  id: number;
   title: string;
   description: string;
   height: number;
@@ -35,9 +35,17 @@ export interface artPieceNode {
   tags: string[]
 }
 
+export interface table {
+  art: artPiece[];
+  selectedCategory: string;
+  deleteArt: (id: number, title: string) => Promise<void>;
+  setModalArt: Dispatch<SetStateAction<artPiece | undefined>>;
+  setShowModal: Dispatch<SetStateAction<boolean>>;
+}
+
 export interface tableRow {
   key?: number;
-  id?: number;
+  id: number;
   title: string;
   description: string;
   height: number;
@@ -48,8 +56,9 @@ export interface tableRow {
   image: string;
   category: string;
   notes: string;
-  setLoading: Dispatch<SetStateAction<boolean>>;
   delete: (id: number, title: string) => Promise<void>;
+  setModalArt: () => void;
+  setShowModal: () => void;
 }
 
 export interface userInterface {

@@ -143,9 +143,9 @@ const Form = (props: formProps) => {
         <Loading />
       ) : (
         <form>
-          <div className="space-y-12">
+          <div className="">
             <div className="border-b border-gray-900/10 pb-12">
-              <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 md:grid-cols-6">
+              <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-4 md:grid-cols-6">
                 <div className="md:col-span-3">
                   <label
                     htmlFor="title"
@@ -198,13 +198,16 @@ const Form = (props: formProps) => {
                     htmlFor="description"
                     className="block text-lg font-medium leading-6 text-gray-900"
                   >
-                    Description
+                    Description{" "}
+                    <span className="text-sm text-gray-500">
+                        (optional)
+                      </span>
                   </label>
                   <div className="mt-2">
                     <textarea
                       id="description"
                       name="description"
-                      rows={3}
+                      rows={2}
                       className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
                       value={description}
                       onChange={(e) => setDescription(e.target.value)}
@@ -217,13 +220,16 @@ const Form = (props: formProps) => {
                     htmlFor="notes"
                     className="block text-lg font-medium leading-6 text-gray-900"
                   >
-                    Notes (private)
+                    Notes{" "}
+                    <span className="text-sm text-gray-500">
+                        (optional)
+                      </span>
                   </label>
                   <div className="mt-2">
                     <textarea
                       id="notes"
                       name="notes"
-                      rows={3}
+                      rows={2}
                       className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
                       value={notes}
                       onChange={(e) => setNotes(e.target.value)}
@@ -364,12 +370,15 @@ const Form = (props: formProps) => {
                     </div>
                   </div>
                 </div>
-                <div className="md:col-span-full">
+                <div className="md:col-span-3">
                   <label
                     htmlFor="price"
                     className="block text-lg font-medium leading-6 text-gray-900"
                   >
-                    Tags
+                    Tags{" "}
+                    <span className="text-sm text-gray-500">
+                        (optional)
+                      </span>
                   </label>
                   {tagsData ? (
                     <div className="mt-2">
