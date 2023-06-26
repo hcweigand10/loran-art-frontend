@@ -4,6 +4,7 @@ const colors = require('tailwindcss/colors')
 colors.primary = "#6495ed"
 colors.soft = "#ACD1AF"
 colors.seagreen = "#8fbc8f"
+colors.insta = "#C13584"
 
 const toRgba = (hexCode, opacity = 50) => {
   let hex = hexCode.replace('#', '');

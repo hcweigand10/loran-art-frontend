@@ -26,9 +26,9 @@ const WallArt = () => {
   const galleryCategory = queryParameters.get("category") || "wall-art";
 
   const sizeOptions = [
-    { label: `Small (under 8")`, value: 1 },
-    { label: `Medium (between 8" and 18")`, value: 2 },
-    { label: `Large (over 18")`, value: 3 },
+    { label: `Small (under 8")`, value: "S" },
+    { label: `Medium (between 8" and 18")`, value: "M" },
+    { label: `Large (over 18")`, value: "L" },
   ];
 
   const { data: tagsData, isLoading: tagsLoading } = useQuery({
@@ -53,7 +53,7 @@ const WallArt = () => {
       if (Math.max(artPiece.height, artPiece.width) <= 8) {
         return {
           ...artPiece,
-          size: 1,
+          size: "S",
         };
       } else if (
         Math.max(artPiece.height, artPiece.width) >= 8 &&
@@ -61,12 +61,12 @@ const WallArt = () => {
       ) {
         return {
           ...artPiece,
-          size: 2,
+          size: "M",
         };
       } else {
         return {
           ...artPiece,
-          size: 3,
+          size: "L",
         };
       }
     });
@@ -82,7 +82,7 @@ const WallArt = () => {
         (artPiece: artPiece) => artPiece.forSale
       );
     }
-    if (selectedTags.length !== 0) {
+    if (selectedTags.length !== 0 && selectedSizes.length !== tagsData?.data.length) {
       filteredArt = filteredArt.filter((artPiece: artPiece) => {
         return artPiece.Tags.some((tagObj: any) =>
           selectedTags.map((option: Option) => option.value).includes(tagObj.id)
@@ -129,16 +129,16 @@ const WallArt = () => {
 
   return (
     <div className="relative lg:max-w-5xl mx-auto">
-      <Back/>
+      {/* <Back/> */}
       {/* <Hero/> */}
-      <div className="pt-12 mt-6 mb-4">
+      <div className="mt-12 mb-4">
         <h1 className="text-3xl tracking-wider block">
           {toSentenceCase(galleryCategory)}
         </h1>
         {purchaseString}
       </div>
       <hr />
-      <div className="grid grid-cols-1 md:grid-cols-10 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-10 gap-4 mb-4">
         {/* filters */}
         <div className="col-span-1 md:col-span-2">
           <div className="relative w-full">
@@ -151,29 +151,19 @@ const WallArt = () => {
               <>
                 <div className="my-3">
                   <h4 className="text-md md:text-lg font-normal">Sizes</h4>
-                  <label
-                    className="inline-block text-sm text-gray-600"
-                    htmlFor="min-height"
-                  >
-                    Select multiple sizes
-                  </label>
+
                   <MultiSelect
                     options={sizeOptions}
                     value={selectedSizes}
                     onChange={setSelectedSizes}
                     labelledBy="Select"
                     className="w-full"
+                    hasSelectAll={false}
                   />
                 </div>
                 <hr className="w-full" />
                 <div className="my-3">
                   <h4 className="font-normal">Tags</h4>
-                  <label
-                    className="inline-block text-sm text-gray-600"
-                    htmlFor="tags"
-                  >
-                    Select multiple tags
-                  </label>
                   <MultiSelect
                     options={tagsData.data.map(
                       (tag: { id: number; name: string }) => {
@@ -187,6 +177,7 @@ const WallArt = () => {
                     onChange={setSelectedTags}
                     labelledBy="Select"
                     className="w-full"
+                    hasSelectAll={false}
                   />
                 </div>
                 <hr className="w-full" />
@@ -222,7 +213,7 @@ const WallArt = () => {
               <Loading />
             </div>
           ) : null}
-          {artData ? (
+          {artData && tagsData ? (
             <div className="grid grid-cols-1 md:grid-cols-1 gap-6 mt-3 max-w-4xl">
               {applyFilters(art)}
             </div>

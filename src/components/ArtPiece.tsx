@@ -15,16 +15,15 @@ const ArtPiece = (props: artPieceNode) => {
           />
         </div>
         <div className="w-full flex flex-col px-3 py-1">
-          <h3 className="font-black text-gray-800 md:text-2xl text-xl">
+          <h3 className="font-black text-gray-900 md:text-2xl text-xl font-normal tracking-wider">
             {props.title}
           </h3>
-          <p className="text-md md:text-lg text-gray-500 text-base">
+          <p className="text-md md:text-lg text-gray-500 text-base tracking-wider">
             {props.description}
           </p>
           <div className="flex justify-between item-center">
             <div className="flex items-center">
-              <FontAwesomeIcon icon={faRuler} />
-              <p className="text-gray-500 text-md md:text-lg ml-2">
+              <p className="text-gray-500 text-md md:text-lg tracking-wider">
                 {props.thickness
                   ? `${props.height}" x ${props.width}" x ${props.thickness}"`
                   : `${props.height}" x ${props.width}"`}

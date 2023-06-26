@@ -76,9 +76,9 @@ const Gallery = () => {
 
   return (
         <div className="relative lg:max-w-5xl mx-auto">
-          <Back/>
+          {/* <Back/> */}
           {/* <Hero/> */}
-          <div className="pt-12 mt-6 mb-4">
+          <div className="mt-12 mb-4">
             <h1 className="text-3xl tracking-wider block">
               {toSentenceCase(galleryCategory)}
             </h1>

@@ -15,7 +15,7 @@ const Home = () => {
     <div className="lg:max-w-5xl mx-auto pb-5">
       <Hero/>
       <div className="pt-6 my-6">
-        <h1 className="text-2xl font-light tracking-wider mb-4">Categories</h1>
+        <h1 className="text-xl md:text-2xl font-light tracking-wider mb-4">Categories</h1>
         <hr />
         <div className="grid grid-cols-1 gap-10 md:grid-cols-3 py-6">
           <GalleryPreview category="wall-art" image={mediumbee}/>

@@ -5,6 +5,7 @@ import {
   faFlickr,
   faPinterest,
   faFacebook,
+  faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 
 const Footer = () => {
@@ -22,11 +23,19 @@ const Footer = () => {
             </h5>
             <div className="mt-6 lg:mb-0 mb-6">
               <button
-                className="bg-white text-lightBlue-400 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 hover:-translate-y-1"
+                className="bg-white text-lightBlue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 hover:-translate-y-1"
                 type="button"
               >
-                <a href="https://twitter.com/recycledtoys" target="_blank" rel="noreferrer">
-                <FontAwesomeIcon icon={faTwitter}/>
+                <a href="https://www.facebook.com/671809086" target="_blank" rel="noreferrer">
+                <FontAwesomeIcon icon={faFacebook}/>
+                </a>
+              </button>
+              <button
+                className="bg-white text-insta shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 hover:-translate-y-1"
+                type="button"
+              >
+                <a href="https://www.facebook.com/671809086" target="_blank" rel="noreferrer">
+                <FontAwesomeIcon icon={faInstagram}/>
                 </a>
               </button>
               <button
@@ -43,14 +52,6 @@ const Footer = () => {
               >
                 <a href="https://pinterest.com/loranscruggs" target="_blank" rel="noreferrer">
                 <FontAwesomeIcon icon={faPinterest}/>
-                </a>
-              </button>
-              <button
-                className="bg-white text-lightBlue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 hover:-translate-y-1"
-                type="button"
-              >
-                <a href="https://www.facebook.com/671809086" target="_blank" rel="noreferrer">
-                <FontAwesomeIcon icon={faFacebook}/>
                 </a>
               </button>
             </div>

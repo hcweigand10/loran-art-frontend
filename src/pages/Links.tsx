@@ -7,7 +7,7 @@ const Links = () => {
     {
       name: "Jenny Fillius",
       description: "Jenny is a great artist who creates wondrous works in Tin, as well as staying in touch with a large collection of Tin workers. I stole this list of Tin artists from her. Many thanks Jenny.",
-      link: "https://jennyfillius.net/home.html/"
+      link: "https://jennyfillius.com/home.html"
     },
     {
       name: "Robert Villamagna",
@@ -55,11 +55,6 @@ const Links = () => {
       link: "http://www.burntofferings.com/TinMetalCollage"
     },
     {
-      name: "Chris Griffin",
-      description: "Chris is a self described mixed media artist. Check out this cool video and see her work and oh so very excellent tin collection. Chris is represented by Snyderman-Works Gallery http://www.snyderman-works.com/artists/93",
-      link: "http://www.opb.org/television/video/mixed-media-artist-chris-giffin/"
-    },
-    {
       name: "Nia Michaels",
       description: "Nia works primarily with vintage tin and tin types. Each artwork is like a treasured jewel.",
       link: "http://niamichaels.com/"
@@ -67,7 +62,7 @@ const Links = () => {
     {
       name: "Deborah Paul",
       description: "Deborah is a fearless artist, always pushing her tin work a little further and trying new ways to represent the material while incorporating other recyclables into her work.",
-      link: "http://deborahpaulart.com"
+      link: "https://www.youtube.com/watch?v=dSVdVP6vVDI"
     },
     {
       name: "Mimi Cahalan",
@@ -87,12 +82,7 @@ const Links = () => {
     {
       name: "David Buckingham",
       description: "David's artwork has an LA kind of esthetic, it's clean and bold and in your face, in a good way",
-      link: "http://www.buckinghamstudio.com/portfolio-categories/color-studies/"
-    },
-    {
-      name: "Rand Carlson",
-      description: "Rand has been around for years. His work is bold and colorful, and he plays a lot with words, cutting out letters from car name pieces. I like his landscapes the best.",
-      link: "http://www.randomshots.com/tin/LargerPieces.html"
+      link: "http://www.buckinghamstudio.com/"
     },
   ]
 
