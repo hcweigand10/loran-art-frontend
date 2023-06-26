@@ -51,7 +51,7 @@ const Gallery = () => {
       <p className="block align-items-bottom text-neutral-600 text-sm md:text-md">
         To purchase, view on{" "}
         <a
-          className="ml-1 underline"
+          className="underline"
           href="https://www.etsy.com/shop/bottlecapwhistles/?etsrc=sdt"
         >
           Etsy
@@ -60,15 +60,31 @@ const Gallery = () => {
     );
     switch (galleryCategory) {
       case "sculptures":
-        return email;
+        return (<div>
+          <h4 className="text-neutral-600 text-sm md:text-md">3 Dimensional art work created out of tin cans and found objects</h4>
+          {email}
+        </div>);
       case "toys":
-        return email;
+        return (<div>
+          <h4 className="text-neutral-600 text-sm md:text-md">Wooden toys covered in tin cans  with bottle cap wheels</h4>
+          {etsy}
+        </div>);
       case "planes":
-        return etsy;
+        return (<div>
+          <h4 className="text-neutral-600 text-sm md:text-md">Airplanes made from tin cans, look great hung in a tree or rear view mirror</h4>
+          {etsy}
+        </div>);
       case "whistles":
-        return etsy;
+        return (<div>
+          <h4 className="text-neutral-600 text-sm md:text-md">A working whistle made from bottle caps and tin.</h4>
+          {etsy}
+        </div>);
       case "wholesale":
-        return etsy;
+        return (<div>
+          <h4 className="text-neutral-600 text-sm md:text-md">25 Whistles: All Soda cap whistles, $250</h4>
+          <h4 className="text-neutral-600 text-sm md:text-md">Mixture of 13 Soda cap and 12 beer caps. $231.25</h4>
+          {etsy}
+        </div>);
       default:
         break;
     }

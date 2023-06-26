@@ -36,7 +36,7 @@ const Navbar = () => {
   return (
     <nav className="w-full bg-white shadow">
       <div className="justify-between px-4 mx-auto md:items-center md:flex md:px-8 h-16">
-        <div className="flex items-center justify-between md:block h-full">
+        <div className="flex items-center justify-between h-full">
           <Link to="/" className="flex">
             <div className="pr-2">
               <img src={whistle} alt="" className="h-12" />
