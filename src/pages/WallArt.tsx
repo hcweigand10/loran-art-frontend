@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -15,7 +15,7 @@ import ArtModal from "../components/ArtModal";
 import Back from "../components/Back";
 
 const WallArt = () => {
-  const [art, setArt] = useState<artPiece[]>([]);
+  const [art, setArt] = useState<JSX.Element[]>([]);
   const [selectedTags, setSelectedTags] = useState<Option[]>([]);
   const [selectedSizes, setSelectedSizes] = useState<Option[]>([]);
   const [hideSold, setHideSold] = useState<boolean>(false);
@@ -42,76 +42,87 @@ const WallArt = () => {
       galleryAPI.get(
         `/api/categories/byname/${toSentenceCase(galleryCategory)}`
       ),
-    onSuccess: (res): void => {
-      const artPieces = res.data.Arts;
-      setArt(artPieces);
-    },
+    // onSuccess: (res): void => {
+    //   const artPieces = res.data.Arts;
+    //   setArt(artPieces);
+    // },
   });
 
-  const applyFilters = (art: artPiece[]) => {
-    let filteredArt: any[] = art.map((artPiece: artPiece) => {
-      if (Math.max(artPiece.height, artPiece.width) <= 8) {
-        return {
-          ...artPiece,
-          size: "S",
-        };
-      } else if (
-        Math.max(artPiece.height, artPiece.width) >= 8 &&
-        Math.max(artPiece.height, artPiece.width) <= 18
-      ) {
-        return {
-          ...artPiece,
-          size: "M",
-        };
-      } else {
-        return {
-          ...artPiece,
-          size: "L",
-        };
-      }
-    });
-    if (selectedSizes.length === 1 || selectedSizes.length === 2) {
-      filteredArt = filteredArt.filter((artPiece: any) => {
-        return selectedSizes
-          .map((option: Option) => option.value)
-          .includes(artPiece.size);
+  useEffect(() => {
+    applyFilters();
+  }, [selectedSizes, selectedTags, artData, hideSold]);
+
+  const applyFilters = () => {
+    if (!artData) {
+      setArt([]);
+    } else {
+      let filteredArt: any[] = artData?.data.Arts.map((artPiece: artPiece) => {
+        if (Math.max(artPiece.height, artPiece.width) <= 8) {
+          return {
+            ...artPiece,
+            size: "S",
+          };
+        } else if (
+          Math.max(artPiece.height, artPiece.width) >= 8 &&
+          Math.max(artPiece.height, artPiece.width) <= 18
+        ) {
+          return {
+            ...artPiece,
+            size: "M",
+          };
+        } else {
+          return {
+            ...artPiece,
+            size: "L",
+          };
+        }
       });
-    }
-    if (hideSold) {
-      filteredArt = filteredArt.filter(
-        (artPiece: artPiece) => artPiece.forSale
+      console.log(filteredArt);
+      if (selectedSizes.length === 1 || selectedSizes.length === 2) {
+        filteredArt = filteredArt.filter((artPiece: any) => {
+          return selectedSizes
+            .map((option: Option) => option.value)
+            .includes(artPiece.size);
+        });
+      }
+      if (hideSold) {
+        filteredArt = filteredArt.filter(
+          (artPiece: artPiece) => artPiece.forSale
+        );
+      }
+      if (
+        selectedTags.length !== 0 &&
+        selectedTags.length !== tagsData?.data.length
+      ) {
+        filteredArt = filteredArt.filter((artPiece: artPiece) => {
+          return artPiece.Tags.some((tagObj: any) =>
+            selectedTags
+              .map((option: Option) => option.value)
+              .includes(tagObj.id)
+          );
+        });
+      }
+      setArt(
+        filteredArt.map((art: artPiece) => (
+          <div>
+            <ArtPiece
+              id={art.id}
+              key={art.id}
+              title={art.title}
+              description={art.description}
+              height={art.height}
+              width={art.width}
+              thickness={art.thickness}
+              price={art.price}
+              forSale={art.forSale}
+              image={art.image}
+              category={categoryIdToName(art.CategoryId)}
+              tags={art.Tags.map((tagObj: any) => tagObj.name)}
+            />
+          </div>
+        ))
       );
     }
-    if (selectedTags.length !== 0 && selectedSizes.length !== tagsData?.data.length) {
-      filteredArt = filteredArt.filter((artPiece: artPiece) => {
-        return artPiece.Tags.some((tagObj: any) =>
-          selectedTags.map((option: Option) => option.value).includes(tagObj.id)
-        );
-      });
-    }
-    return filteredArt.map((art: artPiece) => (
-      <div
-      // onClick={() => {
-      //   setShowModal(true);
-      //   setModalArt(art);
-      // }}
-      >
-        <ArtPiece
-          id={art.id}
-          key={art.id}
-          title={art.title}
-          description={art.description}
-          height={art.height}
-          width={art.width}
-          thickness={art.thickness}
-          price={art.price}
-          forSale={art.forSale}
-          image={art.image}
-          category={categoryIdToName(art.CategoryId)}
-          tags={art.Tags.map((tagObj: any) => tagObj.name)}
-        />
-      </div>
-    ));
   };
 
   const handleCheckBoxChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -169,7 +180,7 @@ const WallArt = () => {
                       (tag: { id: number; name: string }) => {
                         return {
                           label: toSentenceCase(tag.name),
-                          value: tag.id
+                          value: tag.id,
                         };
                       }
                     )}
@@ -205,7 +216,7 @@ const WallArt = () => {
               </div>
             </div>
           </div>
-            <hr className="md:hidden"/>
+          <hr className="md:hidden" />
         </div>
         <div className="col-span-1 md:col-span-8">
           {artLoading ? (
@@ -215,7 +226,7 @@ const WallArt = () => {
           ) : null}
           {artData && tagsData ? (
             <div className="grid grid-cols-1 md:grid-cols-1 gap-6 mt-3 max-w-4xl">
-              {applyFilters(art)}
+              {art}
             </div>
           ) : null}
         </div>
