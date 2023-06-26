@@ -5,14 +5,14 @@ import { Link } from "react-router-dom";
 const Navbar = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<string>(
-    `/${window.location.pathname.slice(1).split("/")[0]}` || ""
+    `/${window.location.pathname.slice(1).split("/")[0]}` || "gallery"
   );
 
   const pages = [
-    { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
-    { name: "Contact", path: "/contact" },
-    { name: "Links", path: "/links" },
+    { name: "Gallery", path: "/gallery", link: "/" },
+    { name: "About", path: "/about", link: "/about" },
+    { name: "Contact", path: "/contact", link: "/contact" },
+    { name: "Links", path: "/links", link: "/links" },
   ];
 
   const links = pages.map((page, index) => {
@@ -26,7 +26,7 @@ const Navbar = () => {
         }
         key={index}
       >
-        <Link className="h-full flex items-center" to={page.path} onClick={() => setCurrentPage(page.path)}>
+        <Link className="h-full flex items-center" to={page.link} onClick={() => setCurrentPage(page.path)}>
           {page.name}
         </Link>
       </li>
