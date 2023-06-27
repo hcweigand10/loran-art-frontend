@@ -188,7 +188,6 @@ const WallArt = () => {
                     onChange={setSelectedTags}
                     labelledBy="Select"
                     className="w-full"
-                    hasSelectAll={false}
                   />
                 </div>
                 <hr className="w-full" />
