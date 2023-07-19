@@ -30,7 +30,7 @@ const ArtModal = (props: props) => {
         onClick={() => props.setShowModal(false)}
       ></div>
       <div className="flex items-center min-h-screen px-4 py-8">
-        <div className="relative w-full max-w-2xl mx-auto bg-white rounded-md shadow-lg pt-3">
+        <div className="relative w-full max-w-2xl mx-auto bg-white rounded-md shadow-lg">
           {/* header */}
           <ArtPiece 
           id={props.artpiece.id}

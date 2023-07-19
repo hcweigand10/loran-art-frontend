@@ -131,11 +131,12 @@ const TableRow = (props: tableRow) => {
   };
 
   return (
-    <tr className="h-20 hover:bg-neutral-100 hover:cursor-pointer"
-    onClick={() => {
-      props.setModalArt()
-      props.setShowModal()
-    }}>
+    <tr className="h-20 hover:bg-neutral-100"
+    // onClick={() => {
+    //   props.setModalArt()
+    //   props.setShowModal()
+    // }}
+    >
       <td className="py-4 text-md font-medium">
           <h2 className="px-4 text-gray-800 dark:text-white font-semibold">
             {props.title}
@@ -217,7 +218,7 @@ const TableRow = (props: tableRow) => {
             to={`/admin/edit/?id=${props.id}`}
             className="rounded px-3 py-2 bg-neutral-200 mr-2 hover:shadow-lg hover:bg-neutral-300"
           >
-            Edit
+            View/Edit
           </Link>
           <button
             className="rounded p-2 bg-red-600 ml-2 text-white hover:shadow-lg hover:bg-red-700"

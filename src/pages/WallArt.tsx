@@ -14,26 +14,39 @@ import categoryIdToName from "../utils/categoryIdToName";
 import ArtModal from "../components/ArtModal";
 import Back from "../components/Back";
 
+
+const sizeOptions = [
+  { label: `Small (under 8")`, value: "S" },
+  { label: `Medium (between 8" and 18")`, value: "M" },
+  { label: `Large (over 18")`, value: "L" },
+];
+
+
 const WallArt = () => {
   const [art, setArt] = useState<JSX.Element[]>([]);
   const [selectedTags, setSelectedTags] = useState<Option[]>([]);
-  const [selectedSizes, setSelectedSizes] = useState<Option[]>([]);
-  const [hideSold, setHideSold] = useState<boolean>(false);
+  const [selectedSizes, setSelectedSizes] = useState<Option[]>(sizeOptions);
+  const [hideSold, setHideSold] = useState<boolean>(true);
   // const [showModal, setShowModal] = useState<boolean>(false);
   // const [modalArt, setModalArt] = useState<artPiece>();
 
   const queryParameters = new URLSearchParams(window.location.search);
   const galleryCategory = queryParameters.get("category") || "wall-art";
 
-  const sizeOptions = [
-    { label: `Small (under 8")`, value: "S" },
-    { label: `Medium (between 8" and 18")`, value: "M" },
-    { label: `Large (over 18")`, value: "L" },
-  ];
 
   const { data: tagsData, isLoading: tagsLoading } = useQuery({
     queryKey: ["tags"],
     queryFn: () => galleryAPI.get("/api/tags"),
+    onSuccess: (data) => {
+      setSelectedTags(data.data.map(
+        (tag: { id: number; name: string }) => {
+          return {
+            label: toSentenceCase(tag.name),
+            value: tag.id,
+          };
+        }
+      ))
+    },
   });
 
   const { data: artData, isLoading: artLoading } = useQuery({
@@ -77,7 +90,6 @@ const WallArt = () => {
           };
         }
       });
-      console.log(filteredArt);
       if (selectedSizes.length === 1 || selectedSizes.length === 2) {
         filteredArt = filteredArt.filter((artPiece: any) => {
           return selectedSizes
@@ -104,7 +116,7 @@ const WallArt = () => {
       }
       setArt(
         filteredArt.map((art: artPiece) => (
-          <div>
+          <div key={art.id}>
             <ArtPiece
               id={art.id}
               key={art.id}

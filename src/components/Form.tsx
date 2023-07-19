@@ -207,7 +207,7 @@ const Form = (props: formProps) => {
                     <textarea
                       id="description"
                       name="description"
-                      rows={2}
+                      rows={4}
                       className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
                       value={description}
                       onChange={(e) => setDescription(e.target.value)}
@@ -229,7 +229,7 @@ const Form = (props: formProps) => {
                     <textarea
                       id="notes"
                       name="notes"
-                      rows={2}
+                      rows={4}
                       className="block w-full rounded-md border-0 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:py-1.5 sm:text-sm sm:leading-6"
                       value={notes}
                       onChange={(e) => setNotes(e.target.value)}
