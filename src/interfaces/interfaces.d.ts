@@ -13,6 +13,9 @@ export interface artPiece {
   notes: string;
   CategoryId: number;
   category?: string;
+  hours: number;
+  oldPrice: number;
+  date: string;
   Tags: any[]
 }
 

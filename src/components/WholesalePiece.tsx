@@ -23,7 +23,7 @@ const WholesalePiece = (props: artPieceNode) => {
           {blocks.length > 1 ? (
             blocks.slice(1).map((block, index) => {
               return (
-                <div key={index}>
+                <div className="mt-0" key={index}>
                   <br />
                   <p className="text-md md:text-lg text-gray-500 text-base tracking-wider">{block.trim()}</p>
                 </div>

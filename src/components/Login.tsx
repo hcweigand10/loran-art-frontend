@@ -2,6 +2,7 @@ import React, { ChangeEvent, useState, useContext, FormEvent } from "react";
 import Loading from "./Loading";
 import userContext from "../contexts/userContext";
 import galleryAPI from "../utils/axios";
+import { AxiosError } from "axios";
 
 const Login = () => {
   const [loginInfo, setLoginInfo] = useState<{
@@ -29,11 +30,11 @@ const Login = () => {
       if (response.status === 200) {
         setLoggedIn(true);
         localStorage.setItem("jwt", response.data.token);
-      }
-    } catch (error) {
+      } 
+    } catch (error: any) {
       setLoading(false)
       setLoginInfo({email: "", password: ""})
-      setAlert("Invalid credentials!")
+      setAlert(error.response.data.err)
     }
   };
 

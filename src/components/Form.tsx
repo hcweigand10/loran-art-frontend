@@ -23,6 +23,9 @@ const Form = (props: formProps) => {
   const [categoryId, setCategoryId] = useState<number>(1);
   const [category, setCategory] = useState<string>("Wall Art");
   const [notes, setNotes] = useState<string>("");
+  const [date, setDate] = useState<string>("");
+  const [hours, setHours] = useState<number>();
+  const [oldPrice, setOldPrice] = useState<number>();
   const [tags, setTags] = useState<Option[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string>("");
@@ -146,7 +149,7 @@ const Form = (props: formProps) => {
           <div className="">
             <div className="border-b border-gray-900/10 pb-12">
               <div className="mt-5 grid grid-cols-1 gap-x-6 gap-y-4 md:grid-cols-6">
-                <div className="md:col-span-3">
+                <div className="md:col-span-2">
                   <label
                     htmlFor="title"
                     className="block text-lg font-medium leading-6 text-gray-900"
@@ -167,7 +170,7 @@ const Form = (props: formProps) => {
                     </div>
                   </div>
                 </div>
-                <div className="md:col-span-3">
+                <div className="md:col-span-2">
                   <label
                     htmlFor="price"
                     className="block text-lg font-medium leading-6 text-gray-900"
@@ -192,6 +195,25 @@ const Form = (props: formProps) => {
                     </select>
                   </div>
                 </div>
+                <div className="md:col-span-2">
+                  <label
+                    htmlFor="date"
+                    className="block text-lg font-medium leading-6 text-gray-900"
+                  >
+                    Date{" "}
+                    <span className="text-sm text-gray-500">(optional)</span>
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      type="number"
+                      name="date"
+                      id="date"
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      value={date}
+                      onChange={(e) => setDate(e.target.value)}
+                    />
+                  </div>
+                </div>
 
                 <div className="col-span-full">
                   <label
@@ -199,9 +221,7 @@ const Form = (props: formProps) => {
                     className="block text-lg font-medium leading-6 text-gray-900"
                   >
                     Description{" "}
-                    <span className="text-sm text-gray-500">
-                        (optional)
-                      </span>
+                    <span className="text-sm text-gray-500">(optional)</span>
                   </label>
                   <div className="mt-2">
                     <textarea
@@ -221,9 +241,7 @@ const Form = (props: formProps) => {
                     className="block text-lg font-medium leading-6 text-gray-900"
                   >
                     Notes{" "}
-                    <span className="text-sm text-gray-500">
-                        (optional)
-                      </span>
+                    <span className="text-sm text-gray-500">(optional)</span>
                   </label>
                   <div className="mt-2">
                     <textarea
@@ -376,9 +394,7 @@ const Form = (props: formProps) => {
                     className="block text-lg font-medium leading-6 text-gray-900"
                   >
                     Tags{" "}
-                    <span className="text-sm text-gray-500">
-                        (optional)
-                      </span>
+                    <span className="text-sm text-gray-500">(optional)</span>
                   </label>
                   {tagsData ? (
                     <div className="mt-2">
@@ -400,6 +416,63 @@ const Form = (props: formProps) => {
                   ) : (
                     <Loading />
                   )}
+                </div>
+                <div className="md:col-span-2">
+                  <label
+                    htmlFor="size"
+                    className="block text-lg font-medium leading-6 text-gray-900"
+                  >
+                    Size{" "}
+                    <span className="text-sm text-gray-500">(optional)</span>
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      type="number"
+                      name="size"
+                      id="size"
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      value={size}
+                      onChange={(e) => setSize(e.target.value)}
+                    />
+                  </div>
+                </div>
+                <div className="md:col-span-2">
+                  <label
+                    htmlFor="hours"
+                    className="block text-lg font-medium leading-6 text-gray-900"
+                  >
+                    Hours{" "}
+                    <span className="text-sm text-gray-500">(optional)</span>
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      type="number"
+                      name="hours"
+                      id="hours"
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      value={hours}
+                      onChange={(e) => setHours(parseInt(e.target.value))}
+                    />
+                  </div>
+                </div>
+                <div className="md:col-span-2">
+                  <label
+                    htmlFor="oldPrice"
+                    className="block text-lg font-medium leading-6 text-gray-900"
+                  >
+                    Old Price{" "}
+                    <span className="text-sm text-gray-500">(optional)</span>
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      type="number"
+                      name="oldPrice"
+                      id="oldPrice"
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      value={oldPrice}
+                      onChange={(e) => setOldPrice(parseInt(e.target.value))}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
