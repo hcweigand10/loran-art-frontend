@@ -22,8 +22,9 @@ const ArtPiece = (props: artPieceNode) => {
           </p>
           {blocks.length > 1 ? (
             blocks.slice(1).map((block, index) => {
-              return (
+              return (block.length > 0 ?
                   <p className="text-md md:text-lg text-gray-500 text-base tracking-wider text-center" key={index}>{block.trim()}</p>
+                  : <br/>
               )
             })
           ) : null}
