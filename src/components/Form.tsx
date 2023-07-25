@@ -117,6 +117,7 @@ const Form = (props: formProps) => {
         await galleryAPI.put(`/api/art/tags/${props.artId}`, {
           tags: tags.map((tag) => tag.value),
         });
+        setLoading(false)
         setIsHappy(true);
         setHappyMsg("Updated this art piece");
         // window.location.assign("/admin");
