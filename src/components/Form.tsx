@@ -107,12 +107,14 @@ const Form = (props: formProps) => {
       image,
       notes,
       CategoryId: categoryId,
-      tags: tags.map((tag) => tag.value),
     };
     if (props.artId !== 0) {
       setLoading(true);
       try {
         await galleryAPI.put(`/api/art/${props.artId}`, body);
+        await galleryAPI.put(`/api/art/tags${props.artId}`, {
+          tags: tags.map((tag) => tag.value),
+        });
         window.location.assign("/admin");
       } catch (error: any) {
         setLoading(false);
