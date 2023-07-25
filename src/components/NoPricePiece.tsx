@@ -17,25 +17,16 @@ const NoPricePiece = (props: artPieceNode) => {
           <h3 className="font-black text-gray-900 md:text-2xl text-xl font-normal tracking-wider text-center">
             {props.title}
           </h3>
-          <p className="text-md md:text-lg text-gray-500 text-base tracking-wider">
+          <p className="text-md md:text-lg text-gray-500 text-base tracking-wider text-center">
             {blocks[0]}
           </p>
           {blocks.length > 1 ? (
             blocks.slice(1).map((block, index) => {
               return (
-                <p className="text-md md:text-lg text-gray-500 text-base tracking-wider" key={index}>{block.trim()}</p>
+                <p className="text-md md:text-lg text-gray-500 text-base tracking-wider text-center" key={index}>{block.trim()}</p>
               )
             })
           ) : null}
-          <div className="flex justify-between item-center">
-            <div className="flex items-center">
-              <p className="text-gray-500 text-md md:text-lg tracking-wider">
-                {props.thickness
-                  ? `${props.height}" x ${props.width}" x ${props.thickness}"`
-                  : `${props.height}" x ${props.width}"`}
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </div>

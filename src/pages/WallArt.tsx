@@ -25,7 +25,7 @@ const sizeOptions = [
 const WallArt = () => {
   const [art, setArt] = useState<JSX.Element[]>([]);
   const [selectedTags, setSelectedTags] = useState<Option[]>([]);
-  const [selectedSizes, setSelectedSizes] = useState<Option[]>(sizeOptions);
+  const [selectedSizes, setSelectedSizes] = useState<Option[]>([]);
   const [hideSold, setHideSold] = useState<boolean>(true);
   // const [showModal, setShowModal] = useState<boolean>(false);
   // const [modalArt, setModalArt] = useState<artPiece>();
@@ -38,14 +38,14 @@ const WallArt = () => {
     queryKey: ["tags"],
     queryFn: () => galleryAPI.get("/api/tags"),
     onSuccess: (data) => {
-      setSelectedTags(data.data.map(
-        (tag: { id: number; name: string }) => {
-          return {
-            label: toSentenceCase(tag.name),
-            value: tag.id,
-          };
-        }
-      ))
+      // setSelectedTags(data.data.map(
+      //   (tag: { id: number; name: string }) => {
+      //     return {
+      //       label: toSentenceCase(tag.name),
+      //       value: tag.id,
+      //     };
+      //   }
+      // ))
     },
   });
 

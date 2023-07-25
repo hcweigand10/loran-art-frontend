@@ -27,17 +27,6 @@ const WholesalePiece = (props: artPieceNode) => {
               )
             })
           ) : null}
-          <div className="flex">
-            <p
-              className={
-                props.forSale
-                  ? "text-md md:text-lg text-gray-500 text-center"
-                  : "text-md md:text-lg italic text-red-400 text-center"
-              }
-            >
-              {props.forSale ? `$${props.price}` : "Sold"}
-            </p>
-          </div>
         </div>
       </div>
     </div>

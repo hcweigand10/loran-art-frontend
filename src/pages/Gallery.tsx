@@ -57,7 +57,7 @@ const Gallery = () => {
       To purchase, view on{" "}
       <a
         className="underline"
-        href="https://www.etsy.com/shop/bottlecapwhistles/?etsrc=sdt"
+        href="https://www.etsy.com/shop/BottleCapWhistles"
       >
         Etsy
       </a>
@@ -78,7 +78,7 @@ const Gallery = () => {
         setNodes(
           art.map((art: artPiece) => {
             return (
-              <ArtPiece
+              <NoPricePiece
                 id={art.id}
                 key={art.id}
                 title={art.title}
@@ -133,7 +133,6 @@ const Gallery = () => {
               Airplanes made from tin cans, look great hung in a tree or rear view
               mirror
             </h4>
-            {etsy}
           </div>
         );
         setNodes(
@@ -191,12 +190,8 @@ const Gallery = () => {
         setPurchaseString(
           <div>
             <h4 className="text-neutral-600 text-sm md:text-lg">
-              25 Whistles: All Soda cap whistles, $250
+              Wholesale Whistles
             </h4>
-            <h4 className="text-neutral-600 text-sm md:text-lg">
-              Mixture of 13 Soda cap and 12 beer caps, $231.25
-            </h4>
-            {etsy}
           </div>
         );
         setNodes(
