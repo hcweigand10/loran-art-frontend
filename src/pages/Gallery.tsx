@@ -253,7 +253,7 @@ const Gallery = () => {
   
 
   return (
-    <div className="relative lg:max-w-5xl mx-auto">
+    <div className="relative lg:max-w-4xl mx-auto">
       {/* <Back/> */}
       {/* <Hero/> */}
       <div className="mt-12 mb-4">
@@ -263,7 +263,7 @@ const Gallery = () => {
         {purchaseString}
       </div>
       <hr />
-      <div className="my-4 pt-2 max-w-2xl mx-auto">
+      <div className="my-4 pt-2 max-w-lg mx-auto">
         {artLoading ? (
           <div className="">
             <Loading />

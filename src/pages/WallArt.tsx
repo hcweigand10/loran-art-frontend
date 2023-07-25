@@ -151,7 +151,7 @@ const WallArt = () => {
   );
 
   return (
-    <div className="relative lg:max-w-5xl mx-auto">
+    <div className="relative lg:max-w-4xl mx-auto">
       {/* <Back/> */}
       {/* <Hero/> */}
       <div className="mt-12 mb-4">
@@ -161,7 +161,7 @@ const WallArt = () => {
         {purchaseString}
       </div>
       <hr />
-      <div className="grid grid-cols-1 md:grid-cols-10 gap-4 mb-4">
+      <div className="grid grid-cols-1 md:grid-cols-6 gap-4 mb-4">
         {/* filters */}
         <div className="col-span-1 md:col-span-2">
           <div className="relative w-full">
@@ -229,7 +229,7 @@ const WallArt = () => {
           </div>
           <hr className="md:hidden" />
         </div>
-        <div className="col-span-1 md:col-span-8">
+        <div className="col-span-1 md:col-span-4">
           {artLoading ? (
             <div className="">
               <Loading />
