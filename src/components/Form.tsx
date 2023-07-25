@@ -112,7 +112,7 @@ const Form = (props: formProps) => {
       setLoading(true);
       try {
         await galleryAPI.put(`/api/art/${props.artId}`, body);
-        await galleryAPI.put(`/api/art/tags${props.artId}`, {
+        await galleryAPI.put(`/api/art/tags/${props.artId}`, {
           tags: tags.map((tag) => tag.value),
         });
         window.location.assign("/admin");
