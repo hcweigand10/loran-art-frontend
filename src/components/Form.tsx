@@ -30,6 +30,8 @@ const Form = (props: formProps) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string>("");
   const [isError, setIsError] = useState<boolean>(false);
+  const [happyMsg, setHappyMsg] = useState<string>("");
+  const [isHappy, setIsHappy] = useState<boolean>(false);
 
   useEffect(() => {
     if (props.artId !== 0) {
@@ -115,7 +117,9 @@ const Form = (props: formProps) => {
         await galleryAPI.put(`/api/art/tags/${props.artId}`, {
           tags: tags.map((tag) => tag.value),
         });
-        window.location.assign("/admin");
+        setIsHappy(true);
+        setHappyMsg("Updated this art piece");
+        // window.location.assign("/admin");
       } catch (error: any) {
         setLoading(false);
         console.log(error);
@@ -142,6 +146,12 @@ const Form = (props: formProps) => {
         <div>
           <h3 className="text-red-700 text-lg">Failed to create. Error:</h3>
           <p className="text-red-700">{errorMsg}</p>
+        </div>
+      ) : null}
+      {isHappy ? (
+        <div>
+          <h3 className="text-green-700 text-lg">Success!</h3>
+          <p className="text-green-700">{happyMsg}</p>
         </div>
       ) : null}
       {isLoading || loading ? (
