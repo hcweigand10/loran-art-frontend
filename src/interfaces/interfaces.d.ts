@@ -16,6 +16,9 @@ export interface artPiece {
   hours: number;
   oldPrice: number;
   date: string;
+  sortPriority: number,
+  linkUrl: string,
+  linkText: string,
   Tags: any[]
 }
 
@@ -35,6 +38,9 @@ export interface artPieceNode {
   forSale: boolean;
   image: string;
   category: string;
+  sortPriority: number,
+  linkUrl: string,
+  linkText: string,
   tags: string[]
 }
 

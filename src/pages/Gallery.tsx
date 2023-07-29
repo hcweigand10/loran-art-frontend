@@ -39,7 +39,8 @@ const Gallery = () => {
         `/api/categories/byname/${toSentenceCase(galleryCategory)}`
       ),
     onSuccess: (res): void => {
-      const artPieces = res.data.Arts;
+      const artPieces = res.data.Arts.sort((a: artPiece,b: artPiece) => b.sortPriority - a.sortPriority);
+      console.log(artPieces)
       setArt(artPieces);
     },
   });
@@ -89,6 +90,9 @@ const Gallery = () => {
                 price={art.price}
                 forSale={art.forSale}
                 image={art.image}
+                sortPriority={art.sortPriority}
+                linkUrl={art.linkUrl}
+                linkText={art.linkText}
                 category={categoryIdToName(art.CategoryId)}
                 tags={art.Tags.map((tagObj: any) => tagObj.name)}
               />
@@ -119,6 +123,9 @@ const Gallery = () => {
                 price={art.price}
                 forSale={art.forSale}
                 image={art.image}
+                sortPriority={art.sortPriority}
+                linkUrl={art.linkUrl}
+                linkText={art.linkText}
                 category={categoryIdToName(art.CategoryId)}
                 tags={art.Tags.map((tagObj: any) => tagObj.name)}
               />
@@ -149,6 +156,9 @@ const Gallery = () => {
                 price={art.price}
                 forSale={art.forSale}
                 image={art.image}
+                sortPriority={art.sortPriority}
+                linkUrl={art.linkUrl}
+                linkText={art.linkText}
                 category={categoryIdToName(art.CategoryId)}
                 tags={art.Tags.map((tagObj: any) => tagObj.name)}
               />
@@ -179,6 +189,9 @@ const Gallery = () => {
                 price={art.price}
                 forSale={art.forSale}
                 image={art.image}
+                sortPriority={art.sortPriority}
+                linkUrl={art.linkUrl}
+                linkText={art.linkText}
                 category={categoryIdToName(art.CategoryId)}
                 tags={art.Tags.map((tagObj: any) => tagObj.name)}
               />
@@ -208,6 +221,9 @@ const Gallery = () => {
                 price={art.price}
                 forSale={art.forSale}
                 image={art.image}
+                sortPriority={art.sortPriority}
+                linkUrl={art.linkUrl}
+                linkText={art.linkText}
                 category={categoryIdToName(art.CategoryId)}
                 tags={art.Tags.map((tagObj: any) => tagObj.name)}
               />
@@ -238,6 +254,9 @@ const Gallery = () => {
                 price={art.price}
                 forSale={art.forSale}
                 image={art.image}
+                sortPriority={art.sortPriority}
+                linkUrl={art.linkUrl}
+                linkText={art.linkText}
                 category={categoryIdToName(art.CategoryId)}
                 tags={art.Tags.map((tagObj: any) => tagObj.name)}
               />
@@ -263,7 +282,7 @@ const Gallery = () => {
         {purchaseString}
       </div>
       <hr />
-      <div className="my-4 pt-2 max-w-lg mx-auto">
+      <div className="my-4 pt-2 max-w-md mx-auto">
         {artLoading ? (
           <div className="">
             <Loading />

@@ -26,6 +26,9 @@ const Form = (props: formProps) => {
   const [date, setDate] = useState<string>("");
   const [hours, setHours] = useState<number>();
   const [oldPrice, setOldPrice] = useState<number>();
+  const [sortPriority, setSortPriority] = useState<number>();
+  const [linkText, setLinkText] = useState<string>("");
+  const [linkUrl, setLinkUrl] = useState<string>("");
   const [tags, setTags] = useState<Option[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string>("");
@@ -117,7 +120,7 @@ const Form = (props: formProps) => {
         await galleryAPI.put(`/api/art/tags/${props.artId}`, {
           tags: tags.map((tag) => tag.value),
         });
-        setLoading(false)
+        setLoading(false);
         setIsHappy(true);
         setHappyMsg("Updated this art piece");
         // window.location.assign("/admin");
@@ -371,7 +374,7 @@ const Form = (props: formProps) => {
                   className={
                     forSale
                       ? "py-4 md:p-0 md:col-span-2"
-                      : "hidden  md:col-span-1"
+                      : "disabled  md:col-span-2"
                   }
                 >
                   <label
@@ -382,7 +385,14 @@ const Form = (props: formProps) => {
                         : "block text-lg font-medium leading-6 text-gray-500"
                     }
                   >
-                    Price
+                    Price{" "}
+                    {forSale ? (
+                      ""
+                    ) : (
+                      <span className="text-sm text-gray-500">
+                        (disabled when not for sale)
+                      </span>
+                    )}
                   </label>
                   <div className="mt-2">
                     <div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 sm:max-w-md">
@@ -436,11 +446,13 @@ const Form = (props: formProps) => {
                     className="block text-lg font-medium leading-6 text-gray-900"
                   >
                     Size{" "}
-                    <span className="text-sm text-gray-500">(optional)</span>
+                    <span className="text-sm text-gray-500">
+                      (optional, use 'S', 'M', or 'L')
+                    </span>
                   </label>
                   <div className="mt-2">
                     <input
-                      type="number"
+                      type="text"
                       name="size"
                       id="size"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -484,6 +496,65 @@ const Form = (props: formProps) => {
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       value={oldPrice}
                       onChange={(e) => setOldPrice(parseInt(e.target.value))}
+                    />
+                  </div>
+                </div>
+                <div className="md:col-span-2">
+                  <label
+                    htmlFor="sortPriority"
+                    className="block text-lg font-medium leading-6 text-gray-900"
+                  >
+                    Sorting Priority{" "}
+                    <span className="text-sm text-gray-500">
+                      (optional)
+                    </span>
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      type="number"
+                      name="sortPriority"
+                      id="sortPriority"
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      value={sortPriority}
+                      onChange={(e) => setSortPriority(parseInt(e.target.value))}
+                    />
+                  </div>
+                </div>
+                <div className="md:col-span-2">
+                  <label
+                    htmlFor="linkUrl"
+                    className="block text-lg font-medium leading-6 text-gray-900"
+                  >
+                    Link URL{" "}
+                    <span className="text-sm text-gray-500">(optional)</span>
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      type="number"
+                      name="linkUrl"
+                      id="linkUrl"
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      value={linkUrl}
+                      onChange={(e) => setLinkUrl((e.target.value))}
+                    />
+                  </div>
+                </div>
+                <div className="md:col-span-2">
+                  <label
+                    htmlFor="linkText"
+                    className="block text-lg font-medium leading-6 text-gray-900"
+                  >
+                    Link Text{" "}
+                    <span className="text-sm text-gray-500">(optional)</span>
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      type="number"
+                      name="linkText"
+                      id="linkText"
+                      className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      value={linkText}
+                      onChange={(e) => setLinkText((e.target.value))}
                     />
                   </div>
                 </div>

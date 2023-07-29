@@ -14,13 +14,11 @@ import categoryIdToName from "../utils/categoryIdToName";
 import ArtModal from "../components/ArtModal";
 import Back from "../components/Back";
 
-
 const sizeOptions = [
   { label: `Small (under 8")`, value: "S" },
   { label: `Medium (between 8" and 18")`, value: "M" },
   { label: `Large (over 18")`, value: "L" },
 ];
-
 
 const WallArt = () => {
   const [art, setArt] = useState<JSX.Element[]>([]);
@@ -32,7 +30,6 @@ const WallArt = () => {
 
   const queryParameters = new URLSearchParams(window.location.search);
   const galleryCategory = queryParameters.get("category") || "wall-art";
-
 
   const { data: tagsData, isLoading: tagsLoading } = useQuery({
     queryKey: ["tags"],
@@ -128,6 +125,9 @@ const WallArt = () => {
               price={art.price}
               forSale={art.forSale}
               image={art.image}
+              sortPriority={art.sortPriority}
+              linkUrl={art.linkUrl}
+              linkText={art.linkText}
               category={categoryIdToName(art.CategoryId)}
               tags={art.Tags.map((tagObj: any) => tagObj.name)}
             />
