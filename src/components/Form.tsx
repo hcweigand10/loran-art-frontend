@@ -111,6 +111,13 @@ const Form = (props: formProps) => {
       forSale,
       image,
       notes,
+      size,
+      date,
+      oldPrice,
+      hours,
+      sortPriority,
+      linkUrl,
+      linkText,
       CategoryId: categoryId,
     };
     if (props.artId !== 0) {
