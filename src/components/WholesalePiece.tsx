@@ -35,9 +35,9 @@ const WholesalePiece = (props: artPieceNode) => {
               })
             : null}
           {props.linkUrl ? (
-            <a href={props.linkUrl} target="_blank" rel="noreferrer">
-              {props.linkText || props.linkUrl}
-            </a>
+            <a href={props.linkUrl} target="_blank" rel="noreferrer" className="underline text-md md:text-lg text-blue-500 text-base tracking-wider">
+            {props.linkText || props.linkUrl}
+          </a>
           ) : null}
         </div>
       </div>

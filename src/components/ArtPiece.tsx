@@ -28,7 +28,9 @@ const ArtPiece = (props: artPieceNode) => {
               )
             })
           ) : null}
-          {props.linkUrl ? (<a href={props.linkUrl} target="_blank" ref="noreferrer">{props.linkText || props.linkUrl}</a>) : null}
+          {props.linkUrl ? (<a href={props.linkUrl} target="_blank" rel="noreferrer" className="underline text-md md:text-lg text-blue-500 text-base tracking-wider">
+              {props.linkText || props.linkUrl}
+            </a>) : null}
           <div className="flex justify-between item-center">
             <div className="flex items-center">
               <p className="text-gray-500 text-md md:text-lg tracking-wider">
