@@ -138,12 +138,12 @@ const TableRow = (props: tableRow) => {
     // }}
     >
       <td className="py-4 text-md font-medium">
-          <h2 className="px-4 text-gray-800 dark:text-white font-semibold">
+          <h2 className="px-4 text-gray-800 font-semibold">
             {props.title}
           </h2>
       </td>
       <td className="py-4 text-sm font-medium whitespace-nowrap">
-        <h4 className="inline px-3 text-sm font-normal dark:text-white">
+        <h4 className="inline px-3 text-sm font-normal">
           {props.category}
         </h4>
       </td>
