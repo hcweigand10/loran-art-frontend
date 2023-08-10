@@ -1,4 +1,5 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import galleryAPI from "../utils/axios";
 import userContext from "../contexts/userContext";
 
@@ -7,8 +8,16 @@ const Settings = () => {
   const [newPassword, setNewPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
 
-  const {setLoggedIn} = useContext(userContext)
+  const {setLoggedIn,loggedIn} = useContext(userContext)
+  
+  const navigate = useNavigate()
 
+
+  useEffect(() => {
+    if(!loggedIn) {
+      navigate("/admin")
+    }
+  }, [loggedIn])
 
   const changePassword = async (e: any) => {
     e.preventDefault()

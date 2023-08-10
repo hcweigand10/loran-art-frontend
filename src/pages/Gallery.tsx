@@ -10,8 +10,8 @@ import { artPiece } from "../interfaces/interfaces";
 import { useQuery } from "react-query";
 import { MultiSelect, Option } from "react-multi-select-component";
 import Hero from "../components/Hero";
-import categoryIdToName from "../utils/categoryIdToName";
-import ArtModal from "../components/ArtModal";
+import CategoryIdToName from "../utils/categoryIdToName";
+// import ArtModal from "../components/ArtModal";
 import WallArt from "./WallArt";
 import Back from "../components/Back";
 import NoPricePiece from "../components/NoPricePiece";
@@ -39,7 +39,7 @@ const Gallery = () => {
         `/api/categories/byname/${toSentenceCase(galleryCategory)}`
       ),
     onSuccess: (res): void => {
-      const artPieces = res.data.Arts.sort((a: artPiece,b: artPiece) => b.sortPriority - a.sortPriority);
+      const artPieces = res.data.Arts.sort((a: artPiece,b: artPiece) => b.web_sort - a.web_sort);
       console.log(artPieces)
       setArt(artPieces);
     },
@@ -80,20 +80,25 @@ const Gallery = () => {
           art.map((art: artPiece) => {
             return (
               <NoPricePiece
-                id={art.id}
-                key={art.id}
+                mdk={art.mdk}
+                key={art.mdk}
                 title={art.title}
                 description={art.description}
                 height={art.height}
                 width={art.width}
-                thickness={art.thickness}
+                depth={art.depth}
                 price={art.price}
-                forSale={art.forSale}
+                web={art.web}
                 image={art.image}
-                sortPriority={art.sortPriority}
-                linkUrl={art.linkUrl}
-                linkText={art.linkText}
-                category={categoryIdToName(art.CategoryId)}
+                web_sort={art.web_sort}
+                link_url={art.link_url}
+                link_text={art.link_text}
+                sold={art.sold}
+                sold_date={art.sold_date}
+                sold_location={art.sold_location}
+                history={art.history}
+                location={art.location}
+                category={CategoryIdToName(art.CategoryId)}
                 tags={art.Tags.map((tagObj: any) => tagObj.name)}
               />
             );
@@ -113,20 +118,25 @@ const Gallery = () => {
           art.map((art: artPiece) => {
             return (
               <NoPricePiece
-                id={art.id}
-                key={art.id}
+                mdk={art.mdk}
+                key={art.mdk}
                 title={art.title}
                 description={art.description}
                 height={art.height}
                 width={art.width}
-                thickness={art.thickness}
+                depth={art.depth}
                 price={art.price}
-                forSale={art.forSale}
+                web={art.web}
                 image={art.image}
-                sortPriority={art.sortPriority}
-                linkUrl={art.linkUrl}
-                linkText={art.linkText}
-                category={categoryIdToName(art.CategoryId)}
+                web_sort={art.web_sort}
+                link_url={art.link_url}
+                link_text={art.link_text}
+                sold={art.sold}
+                sold_date={art.sold_date}
+                sold_location={art.sold_location}
+                history={art.history}
+                location={art.location}
+                category={CategoryIdToName(art.CategoryId)}
                 tags={art.Tags.map((tagObj: any) => tagObj.name)}
               />
             );
@@ -146,20 +156,25 @@ const Gallery = () => {
           art.map((art: artPiece) => {
             return (
               <NoPricePiece
-                id={art.id}
-                key={art.id}
+                mdk={art.mdk}
+                key={art.mdk}
                 title={art.title}
                 description={art.description}
                 height={art.height}
                 width={art.width}
-                thickness={art.thickness}
+                depth={art.depth}
                 price={art.price}
-                forSale={art.forSale}
+                web={art.web}
                 image={art.image}
-                sortPriority={art.sortPriority}
-                linkUrl={art.linkUrl}
-                linkText={art.linkText}
-                category={categoryIdToName(art.CategoryId)}
+                web_sort={art.web_sort}
+                link_url={art.link_url}
+                link_text={art.link_text}
+                sold={art.sold}
+                sold_date={art.sold_date}
+                sold_location={art.sold_location}
+                history={art.history}
+                location={art.location}
+                category={CategoryIdToName(art.CategoryId)}
                 tags={art.Tags.map((tagObj: any) => tagObj.name)}
               />
             );
@@ -179,20 +194,25 @@ const Gallery = () => {
           art.map((art: artPiece) => {
             return (
               <NoPricePiece
-                id={art.id}
-                key={art.id}
+                mdk={art.mdk}
+                key={art.mdk}
                 title={art.title}
                 description={art.description}
                 height={art.height}
                 width={art.width}
-                thickness={art.thickness}
+                depth={art.depth}
                 price={art.price}
-                forSale={art.forSale}
+                web={art.web}
                 image={art.image}
-                sortPriority={art.sortPriority}
-                linkUrl={art.linkUrl}
-                linkText={art.linkText}
-                category={categoryIdToName(art.CategoryId)}
+                web_sort={art.web_sort}
+                link_url={art.link_url}
+                link_text={art.link_text}
+                sold={art.sold}
+                sold_date={art.sold_date}
+                sold_location={art.sold_location}
+                history={art.history}
+                location={art.location}
+                category={CategoryIdToName(art.CategoryId)}
                 tags={art.Tags.map((tagObj: any) => tagObj.name)}
               />
             );
@@ -211,20 +231,25 @@ const Gallery = () => {
           art.map((art: artPiece) => {
             return (
               <WholesalePiece
-                id={art.id}
-                key={art.id}
+                mdk={art.mdk}
+                key={art.mdk}
                 title={art.title}
                 description={art.description}
                 height={art.height}
                 width={art.width}
-                thickness={art.thickness}
+                depth={art.depth}
                 price={art.price}
-                forSale={art.forSale}
+                web={art.web}
                 image={art.image}
-                sortPriority={art.sortPriority}
-                linkUrl={art.linkUrl}
-                linkText={art.linkText}
-                category={categoryIdToName(art.CategoryId)}
+                web_sort={art.web_sort}
+                link_url={art.link_url}
+                link_text={art.link_text}
+                sold={art.sold}
+                sold_date={art.sold_date}
+                sold_location={art.sold_location}
+                history={art.history}
+                location={art.location}
+                category={CategoryIdToName(art.CategoryId)}
                 tags={art.Tags.map((tagObj: any) => tagObj.name)}
               />
             );
@@ -244,20 +269,25 @@ const Gallery = () => {
           art.map((art: artPiece) => {
             return (
               <ArtPiece
-                id={art.id}
-                key={art.id}
+                mdk={art.mdk}
+                key={art.mdk}
                 title={art.title}
                 description={art.description}
                 height={art.height}
                 width={art.width}
-                thickness={art.thickness}
+                depth={art.depth}
                 price={art.price}
-                forSale={art.forSale}
+                web={art.web}
                 image={art.image}
-                sortPriority={art.sortPriority}
-                linkUrl={art.linkUrl}
-                linkText={art.linkText}
-                category={categoryIdToName(art.CategoryId)}
+                web_sort={art.web_sort}
+                link_url={art.link_url}
+                link_text={art.link_text}
+                sold={art.sold}
+                sold_date={art.sold_date}
+                sold_location={art.sold_location}
+                history={art.history}
+                location={art.location}
+                category={CategoryIdToName(art.CategoryId)}
                 tags={art.Tags.map((tagObj: any) => tagObj.name)}
               />
             );

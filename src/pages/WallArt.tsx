@@ -10,8 +10,8 @@ import { artPiece } from "../interfaces/interfaces";
 import { useQuery } from "react-query";
 import { MultiSelect, Option } from "react-multi-select-component";
 import Hero from "../components/Hero";
-import categoryIdToName from "../utils/categoryIdToName";
-import ArtModal from "../components/ArtModal";
+import CategoryIdToName from "../utils/categoryIdToName";
+// import ArtModal from "../components/ArtModal";
 import Back from "../components/Back";
 
 const sizeOptions = [
@@ -52,10 +52,9 @@ const WallArt = () => {
       galleryAPI.get(
         `/api/categories/byname/${toSentenceCase(galleryCategory)}`
       ),
-    // onSuccess: (res): void => {
-    //   const artPieces = res.data.Arts;
-    //   setArt(artPieces);
-    // },
+    onSuccess: (res): void => {
+      // console.log(res)
+    },
   });
 
   useEffect(() => {
@@ -63,6 +62,7 @@ const WallArt = () => {
   }, [selectedSizes, selectedTags, artData, hideSold]);
 
   const applyFilters = () => {
+    
     if (!artData) {
       setArt([]);
     } else {
@@ -96,7 +96,7 @@ const WallArt = () => {
       }
       if (hideSold) {
         filteredArt = filteredArt.filter(
-          (artPiece: artPiece) => artPiece.forSale
+          (artPiece: artPiece) => artPiece.web
         );
       }
       if (
@@ -113,22 +113,27 @@ const WallArt = () => {
       }
       setArt(
         filteredArt.map((art: artPiece) => (
-          <div key={art.id}>
+          <div key={art.mdk}>
             <ArtPiece
-              id={art.id}
-              key={art.id}
+              mdk={art.mdk}
+              key={art.mdk}
               title={art.title}
               description={art.description}
               height={art.height}
               width={art.width}
-              thickness={art.thickness}
+              depth={art.depth}
               price={art.price}
-              forSale={art.forSale}
+              web={art.web}
               image={art.image}
-              sortPriority={art.sortPriority}
-              linkUrl={art.linkUrl}
-              linkText={art.linkText}
-              category={categoryIdToName(art.CategoryId)}
+              web_sort={art.web_sort}
+              link_url={art.link_url}
+              link_text={art.link_text}
+              sold={art.sold}
+              sold_date={art.sold_date}
+              sold_location={art.sold_location}
+              history={art.history}
+              location={art.location}
+              category={CategoryIdToName(art.CategoryId)}
               tags={art.Tags.map((tagObj: any) => tagObj.name)}
             />
           </div>
@@ -210,16 +215,16 @@ const WallArt = () => {
               <h4 className="font-normal">For Sale</h4>
               <div className="flex h-6 items-center">
                 <input
-                  id="forSale"
-                  name="forSale"
-                  title="forSale"
+                  id="web"
+                  name="web"
+                  title="web"
                   type="checkbox"
                   className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                   onChange={handleCheckBoxChange}
                   checked={hideSold}
                 />
                 <label
-                  htmlFor="forSale"
+                  htmlFor="web"
                   className="font-normal text-sm text-gray-900 ml-2"
                 >
                   Hide art that is not for sale

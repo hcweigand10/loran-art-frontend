@@ -8,7 +8,7 @@ const NoPricePiece = (props: artPieceNode) => {
       <div className="flex flex-col rounded-xl pb-2 mx-auto w-full">
         <div className="w-full grid place-items-center">
           <img
-            src={props.image}
+            src={`https://energysims.com/pics/${props.image}`}
             alt={props.title}
             className="rounded-xl w-full"
           />
@@ -34,9 +34,9 @@ const NoPricePiece = (props: artPieceNode) => {
                 );
               })
             : null}
-          {props.linkUrl ? (
-            <a href={props.linkUrl} target="_blank" rel="noreferrer" className="underline text-md md:text-lg text-blue-500 text-base tracking-wider">
-              {props.linkText || props.linkUrl}
+          {props.link_url ? (
+            <a href={props.link_url} target="_blank" rel="noreferrer" className="underline text-md md:text-lg text-blue-500 text-base tracking-wider">
+              {props.link_text || props.link_url}
             </a>
           ) : null}
         </div>

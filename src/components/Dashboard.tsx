@@ -7,14 +7,16 @@ import { artPiece } from "../interfaces/interfaces";
 import userContext from "../contexts/userContext";
 import galleryAPI from "../utils/axios";
 import Loading from "./Loading";
-import ArtModal from "./ArtModal";
-import categoryIdToName from "../utils/categoryIdToName";
+// import ArtModal from "./ArtModal";
+import CategoryIdToName from "../utils/categoryIdToName";
 import Table from "./Table";
+import Upload from "./Upload";
 
 const Dashboard = () => {
   const [art, setArt] = useState<artPiece[]>([]);
   const [selectedCategroy, setSelectedCategroy] = useState("All Categories");
   const [newTag, setNewTag] = useState<string>("");
+  const [infotext, setInfotext] = useState<string>("")
   const [loading, setLoading] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [modalArt, setModalArt] = useState<artPiece>();
@@ -52,14 +54,30 @@ const Dashboard = () => {
   };
 
   const deleteArt = async (id: number, title: string) => {
-    if (
-      window.confirm(`Are you sure you'd like to delete art piece '${title}'?`)
-    ) {
-      setLoading(true);
-      await galleryAPI.delete(`/api/art/${id}`);
-      refetch();
+    try {
+      if (
+        window.confirm(
+          `Are you sure you'd like to delete art piece '${title}'?`
+        )
+      ) {
+        setLoading(true);
+        const res = await galleryAPI.delete(`/api/art/${id}`);
+        info("Successfully deleted!")
+        setLoading(false);
+        refetch();
+      }
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
     }
   };
+
+  const info = (text: string) => {
+    setInfotext(text)
+    setTimeout(() => {
+      setInfotext("")
+    }, 3000);
+  }
 
   const createTag = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -116,10 +134,6 @@ const Dashboard = () => {
     }
   };
 
-  const changepassword = () => {
-    const newpassword = window.prompt("What would you like your n");
-  };
-
   return (
     <section className="mx-auto py-8">
       <div className="sm:flex sm:items-center sm:justify-between">
@@ -135,7 +149,7 @@ const Dashboard = () => {
       </div>
 
       <div className="mt-2 flex items-end justify-between">
-        <div className="mb-2">
+        <div className="mb-2 flex">
           <Link
             to={"/admin/create-new"}
             className="flex items-center justify-center px-2 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 gap-x-2 hover:bg-blue-600 -500 "
@@ -157,6 +171,7 @@ const Dashboard = () => {
 
             <span>Add</span>
           </Link>
+          <p className="ml-4 text-lg text-yellow-600">{infotext}</p>
         </div>
 
         <div className="">
@@ -180,24 +195,18 @@ const Dashboard = () => {
       </div>
 
       <div className="my-3">
-        <div className="overflow-x-auto">
-          <div className="inline-block min-w-full pt-2 align-middle">
-            <div className="overflow-hidden border border-gray-200  rounded-lg drop-shadow-md">
-              {loading ? (
-                <Loading />
-              ) : (
-                <Table
-                  art={art}
-                  selectedCategory={selectedCategroy}
-                  deleteArt={deleteArt}
-                  setModalArt={setModalArt}
-                  setShowModal={setShowModal}
-                />
-              )}
-            </div>
-          </div>
-        </div>
-        <p className="text-neutral-500">Click any row for preview</p>
+        {loading ? (
+          <Loading />
+        ) : (
+          <Table
+            art={art}
+            tagsData={tagsData?.data}
+            selectedCategory={selectedCategroy}
+            deleteArt={deleteArt}
+            setModalArt={setModalArt}
+            setShowModal={setShowModal}
+          />
+        )}
       </div>
       <div className="max-w-lg">
         <h3 className="text-2xl tracking-wide mb-3">Tags</h3>
@@ -272,10 +281,11 @@ const Dashboard = () => {
             </button>
           </li>
         </ul>
+        <Upload info={info}/>
       </div>
-      {showModal && modalArt ? (
+      {/* {showModal && modalArt ? (
         <ArtModal artpiece={modalArt} setShowModal={setShowModal} />
-      ) : null}
+      ) : null} */}
     </section>
   );
 };

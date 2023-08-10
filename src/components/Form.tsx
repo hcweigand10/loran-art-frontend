@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 import galleryAPI from "../utils/axios";
 import { artPiece, formProps } from "../interfaces/interfaces";
 import CloudinaryBtn from "./CloudinaryBtn";
-import categoryIdToName from "../utils/categoryIdToName";
+import CategoryIdToName from "../utils/categoryIdToName";
 import Loading from "./Loading";
 import categoryNameToId from "../utils/categoryNameToId";
 import { useNavigate } from "react-router-dom";
@@ -16,19 +16,19 @@ const Form = (props: formProps) => {
   const [size, setSize] = useState<string>("");
   const [height, setHeight] = useState<number>(0);
   const [width, setWidth] = useState<number>(0);
-  const [thickness, setThickness] = useState<number>(0);
+  const [depth, setdepth] = useState<number>(0);
   const [price, setPrice] = useState<number>(0);
-  const [forSale, setForSale] = useState<boolean>(true);
+  const [web, setweb] = useState<boolean>(true);
   const [image, setImage] = useState<string>("");
-  const [categoryId, setCategoryId] = useState<number>(1);
+  const [CategoryId, setCategoryId] = useState<number>(1);
   const [category, setCategory] = useState<string>("Wall Art");
   const [notes, setNotes] = useState<string>("");
   const [date, setDate] = useState<string>("");
   const [hours, setHours] = useState<number>();
   const [oldPrice, setOldPrice] = useState<number>();
-  const [sortPriority, setSortPriority] = useState<number>();
-  const [linkText, setLinkText] = useState<string>("");
-  const [linkUrl, setLinkUrl] = useState<string>("");
+  const [web_sort, setweb_sort] = useState<number>();
+  const [link_text, setlink_text] = useState<string>("");
+  const [link_url, setlink_url] = useState<string>("");
   const [tags, setTags] = useState<Option[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string>("");
@@ -50,9 +50,9 @@ const Form = (props: formProps) => {
       setDescription(data.data.description);
       setHeight(data.data.height);
       setWidth(data.data.width);
-      setThickness(data.data.thickness);
+      setdepth(data.data.depth);
       setPrice(data.data.price);
-      setForSale(data.data.forSale);
+      setweb(data.data.web);
       setImage(data.data.image);
       setNotes(data.data.notes);
       setTags(
@@ -60,7 +60,7 @@ const Form = (props: formProps) => {
           return { label: tagObj.name, value: tagObj.id };
         })
       );
-      setCategory(categoryIdToName(data.data.CategoryId));
+      setCategory(CategoryIdToName(data.data.CategoryId));
       setCategoryId(data.data.CategoryId);
     },
     // staleTime: 10000,
@@ -80,7 +80,7 @@ const Form = (props: formProps) => {
   };
 
   const handleCheckBoxChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setForSale(!forSale);
+    setweb(!web);
   };
 
   const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -106,19 +106,19 @@ const Form = (props: formProps) => {
       description,
       height,
       width,
-      thickness,
+      depth,
       price,
-      forSale,
+      web,
       image,
       notes,
       size,
       date,
       oldPrice,
       hours,
-      sortPriority,
-      linkUrl,
-      linkText,
-      CategoryId: categoryId,
+      web_sort,
+      link_url,
+      link_text,
+      CategoryId: CategoryId,
     };
     if (props.artId !== 0) {
       setLoading(true);
@@ -317,10 +317,10 @@ const Form = (props: formProps) => {
                   </div>
                   <div className="md:col-span-2">
                     <label
-                      htmlFor="thickness"
+                      htmlFor="depth"
                       className="block text-lg font-medium leading-6 text-gray-900"
                     >
-                      Thickness{" "}
+                      depth{" "}
                       <span className="text-sm text-gray-500">
                         (leave as 0 for 2D art)
                       </span>
@@ -328,11 +328,11 @@ const Form = (props: formProps) => {
                     <div className="mt-2">
                       <input
                         type="number"
-                        name="thickness"
-                        id="thickness"
+                        name="depth"
+                        id="depth"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        value={thickness}
-                        onChange={(e) => setThickness(parseInt(e.target.value))}
+                        value={depth}
+                        onChange={(e) => setdepth(parseInt(e.target.value))}
                       />
                     </div>
                   </div>
@@ -359,7 +359,7 @@ const Form = (props: formProps) => {
                 <div className="relative flex gap-x-3 md:col-span-1">
                   <div className="leading-6">
                     <label
-                      htmlFor="forSale"
+                      htmlFor="web"
                       className="font-medium text-lg text-gray-900"
                     >
                       For Sale
@@ -367,19 +367,19 @@ const Form = (props: formProps) => {
                   </div>
                   <div className="h-6 items-center">
                     <input
-                      id="forSale"
-                      name="forSale"
-                      title="forSale"
+                      id="web"
+                      name="web"
+                      title="web"
                       type="checkbox"
                       className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
                       onChange={handleCheckBoxChange}
-                      checked={forSale}
+                      checked={web}
                     />
                   </div>
                 </div>
                 <div
                   className={
-                    forSale
+                    web
                       ? "py-4 md:p-0 md:col-span-2"
                       : "disabled  md:col-span-2"
                   }
@@ -387,13 +387,13 @@ const Form = (props: formProps) => {
                   <label
                     htmlFor="price"
                     className={
-                      forSale
+                      web
                         ? "block text-lg font-medium leading-6 text-gray-900"
                         : "block text-lg font-medium leading-6 text-gray-500"
                     }
                   >
                     Price{" "}
-                    {forSale ? (
+                    {web ? (
                       ""
                     ) : (
                       <span className="text-sm text-gray-500">
@@ -407,12 +407,12 @@ const Form = (props: formProps) => {
                         $
                       </span>
                       <input
-                        disabled={!forSale}
+                        disabled={!web}
                         type="number"
                         name="price"
                         id="price"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                        value={forSale ? price : ""}
+                        value={web ? price : ""}
                         onChange={(e) => setPrice(parseInt(e.target.value))}
                       />
                     </div>
@@ -508,7 +508,7 @@ const Form = (props: formProps) => {
                 </div>
                 <div className="md:col-span-2">
                   <label
-                    htmlFor="sortPriority"
+                    htmlFor="web_sort"
                     className="block text-lg font-medium leading-6 text-gray-900"
                   >
                     Sorting Priority{" "}
@@ -519,17 +519,17 @@ const Form = (props: formProps) => {
                   <div className="mt-2">
                     <input
                       type="number"
-                      name="sortPriority"
-                      id="sortPriority"
+                      name="web_sort"
+                      id="web_sort"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      value={sortPriority}
-                      onChange={(e) => setSortPriority(parseInt(e.target.value))}
+                      value={web_sort}
+                      onChange={(e) => setweb_sort(parseInt(e.target.value))}
                     />
                   </div>
                 </div>
                 <div className="md:col-span-2">
                   <label
-                    htmlFor="linkUrl"
+                    htmlFor="link_url"
                     className="block text-lg font-medium leading-6 text-gray-900"
                   >
                     Link URL{" "}
@@ -538,17 +538,17 @@ const Form = (props: formProps) => {
                   <div className="mt-2">
                     <input
                       type="text"
-                      name="linkUrl"
-                      id="linkUrl"
+                      name="link_url"
+                      id="link_url"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      value={linkUrl}
-                      onChange={(e) => setLinkUrl((e.target.value))}
+                      value={link_url}
+                      onChange={(e) => setlink_url((e.target.value))}
                     />
                   </div>
                 </div>
                 <div className="md:col-span-2">
                   <label
-                    htmlFor="linkText"
+                    htmlFor="link_text"
                     className="block text-lg font-medium leading-6 text-gray-900"
                   >
                     Link Text{" "}
@@ -557,11 +557,11 @@ const Form = (props: formProps) => {
                   <div className="mt-2">
                     <input
                       type="text"
-                      name="linkText"
-                      id="linkText"
+                      name="link_text"
+                      id="link_text"
                       className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      value={linkText}
-                      onChange={(e) => setLinkText((e.target.value))}
+                      value={link_text}
+                      onChange={(e) => setlink_text((e.target.value))}
                     />
                   </div>
                 </div>

@@ -8,7 +8,7 @@ const ArtPiece = (props: artPieceNode) => {
       <div className="flex flex-col rounded-xl pb-2 mx-auto w-full">
         <div className="w-full grid place-items-center">
           <img
-            src={props.image}
+            src={`https://energysims.com/pics/${props.image}`}
             alt={props.title}
             className="rounded-xl w-full"
           />
@@ -28,25 +28,25 @@ const ArtPiece = (props: artPieceNode) => {
               )
             })
           ) : null}
-          {props.linkUrl ? (<a href={props.linkUrl} target="_blank" rel="noreferrer" className="underline text-md md:text-lg text-blue-500 text-base tracking-wider">
-              {props.linkText || props.linkUrl}
+          {props.link_url ? (<a href={props.link_url} target="_blank" rel="noreferrer" className="underline text-md md:text-lg text-blue-500 text-base tracking-wider">
+              {props.link_text || props.link_url}
             </a>) : null}
           <div className="flex justify-between item-center">
             <div className="flex items-center">
               <p className="text-gray-500 text-md md:text-lg tracking-wider">
-                {props.thickness
-                  ? `${props.height}" x ${props.width}" x ${props.thickness}"`
+                {props.depth
+                  ? `${props.height}" x ${props.width}" x ${props.depth}"`
                   : `${props.height}" x ${props.width}"`}
               </p>
             </div>
             <p
               className={
-                props.forSale
+                props.web
                   ? "text-md md:text-lg text-gray-500"
                   : "text-md md:text-lg italic text-red-400"
               }
             >
-              {props.forSale ? `$${props.price}` : "Sold"}
+              {props.web ? `$${props.price}` : "Sold"}
             </p>
           </div>
         </div>
@@ -69,10 +69,10 @@ export default ArtPiece;
     <div className="px-3">
     <p
     className={
-      props.forSale ? "text-md text-gray-400" : "text-md text-red-400"
+      props.web ? "text-md text-gray-400" : "text-md text-red-400"
     }
     >
-    {props.forSale ? `$${props.price}` : "Sold"}
+    {props.web ? `$${props.price}` : "Sold"}
     </p>
     </div>
     <div className="px-3">
@@ -82,8 +82,8 @@ export default ArtPiece;
     </div>
     <div className="px-3">
     <p className="text-sm text-gray-400">
-    {props.thickness
-      ? `${props.height}" x ${props.width}" x ${props.thickness}"`
+    {props.depth
+      ? `${props.height}" x ${props.width}" x ${props.depth}"`
       : `${props.height}" x ${props.width}"`}
       </p>
       </div>
