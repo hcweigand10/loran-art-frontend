@@ -26,6 +26,7 @@ const Table = (props: table) => {
             <th className="p-2 w-40">Link Text</th>
             <th className="p-2 w-40">Link Url</th>
             <th className="p-2 w-40">Image</th>
+            <th className="p-2 w-40">MDK</th>
             <th className="p-2 w-40">Actions</th>
           </tr>
         </thead>
@@ -121,6 +122,7 @@ const TableRow = (props: tableRow) => {
           className="h-12 object-contain shadow"
         />
       </td>
+      <td className="p-2 w-40 border-r-2">{props.mdk}</td>
 
       <td className="p-2 w-60 border-r-2 flex justify-center">
         <div className="flex items-center">
