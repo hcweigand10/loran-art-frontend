@@ -32,7 +32,7 @@ const columns = [
   "link_url",
   "link_text",
   "web",
-  "sort_priority",
+  "web_sort",
   "mdk",
   "image",
 ];

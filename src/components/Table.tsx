@@ -7,16 +7,26 @@ import categoryIdToName from "../utils/categoryIdToName";
 const Table = (props: table) => {
 
   return (
-    <div className="overflow-x shadow rounded mb-5">
+    <div className="overflow-x-auto shadow rounded mb-5">
       <table className="text-left w-full">
         <thead className="bg-slate-700 flex text-white w-full rounded-t">
           <tr className="flex w-full mb-4">
-            <th className="p-4 w-1/6">Title</th>
-            <th className="p-4 w-1/6">Catergory</th>
-            <th className="p-4 w-1/6">Tags</th>
-            <th className="p-4 w-1/6">Price</th>
-            <th className="p-4 w-1/6">Image</th>
-            <th className="p-4 w-1/6">Actions</th>
+            <th className="p-2 w-40">Title</th>
+            <th className="p-2 w-40">Catergory</th>
+            <th className="p-2 w-40">Location</th>
+            <th className="p-2 w-40">Description</th>
+            <th className="p-2 w-40">Tags</th>
+            <th className="p-2 w-40">Dimensions</th>
+            <th className="p-2 w-40">Price</th>
+            <th className="p-2 w-40">Old Price</th>
+            <th className="p-2 w-40">Sold</th>
+            <th className="p-2 w-40">Sold Date</th>
+            <th className="p-2 w-40">Sold Location</th>
+            <th className="p-2 w-40">History</th>
+            <th className="p-2 w-40">Link Text</th>
+            <th className="p-2 w-40">Link Url</th>
+            <th className="p-2 w-40">Image</th>
+            <th className="p-2 w-40">Actions</th>
           </tr>
         </thead>
         <tbody className="bg-grey-light flex flex-col items-center justify-between overflow-y-scroll w-full max-h-80">
@@ -35,15 +45,23 @@ const Table = (props: table) => {
                 mdk={art.mdk}
                 key={art.mdk}
                 title={art.title}
+                location={art.location}
                 description={art.description}
                 height={art.height}
                 width={art.width}
                 depth={art.depth}
+                hours={art.hours}
                 price={art.price}
+                old_price={art.old_price}
                 web={art.web}
                 image={art.image}
                 notes={art.notes}
                 sold={art.sold}
+                sold_date={art.sold_date}
+                sold_location={art.sold_location}
+                history={art.history}
+                link_url={art.link_url}
+                link_text={art.link_text}
                 tags={art.Tags}
                 category={CategoryIdToName(art.CategoryId)}
                 delete={() => props.deleteArt(art.mdk, art.title)}
@@ -79,14 +97,24 @@ const TableRow = (props: tableRow) => {
       className="flex w-full border-b-2 border-black bg-white"
 
     >
-      <td className="p-4 w-1/6 font-bold text-lg">{props.title}</td>
-      <td className="p-4 w-1/6">{props.category}</td>
+      <td className="p-2 w-40 font-bold text-lg">{props.title}</td>
+      <td className="p-2 w-40 border-r-2">{props.category}</td>
+      <td className="p-2 w-40 border-r-2">{props.location}</td>
+      <td className="p-2 w-40 border-r-2">{props.description}</td>
 
-      <td className="p-4 w-1/6">
+      <td className="p-2 w-40 border-r-2">
         {genTags()}
       </td>
-      <td className="p-4 w-1/6">{props.price ? `$${props.price}` : "null"}</td>
-      <td className="p-4 w-1/6">
+      <td className="p-2 w-40 border-r-2">{props.height} x {props.width} x {props.depth}</td>
+      <td className="p-2 w-40 border-r-2">{props.price ? `$${props.price}` : ""}</td>
+      <td className="p-2 w-40 border-r-2">{props.old_price ? `$${props.old_price}` : ""}</td>
+      <td className="p-2 w-40 border-r-2">{props.sold ? "True" : "False"}</td>
+      <td className="p-2 w-40 border-r-2">{props.sold_date}</td>
+      <td className="p-2 w-40 border-r-2">{props.sold_location}</td>
+      <td className="p-2 w-40 border-r-2">{props.history}</td>
+      <td className="p-2 w-40 border-r-2">{props.link_url}</td>
+      <td className="p-2 w-40 border-r-2">{props.link_text}</td>
+      <td className="p-2 w-40 border-r-2">
         <img
           src={"https://energysims.com/pics/" + props.image}
           alt={props.title}
@@ -94,7 +122,7 @@ const TableRow = (props: tableRow) => {
         />
       </td>
 
-      <td className="p-4 w-1/6">
+      <td className="p-2 w-60 border-r-2 flex justify-center">
         <div className="flex items-center">
           <Link
             to={`/admin/edit/?id=${props.mdk}`}

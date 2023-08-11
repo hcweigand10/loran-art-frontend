@@ -14,7 +14,7 @@ export interface artPiece {
   CategoryId: number;
   category?: string;
   hours: number;
-  oldPrice: number;
+  old_price: number;
   date: string;
   web_sort: number,
   link_url: string,
@@ -37,6 +37,7 @@ export interface artPieceNode {
   key?: number;
   mdk: number;
   title: string;
+  location: string;
   description: string;
   height: number;
   width: number;
@@ -70,16 +71,24 @@ export interface tableRow {
   key?: number;
   mdk: number;
   title: string;
+  location: string;
   description: string;
   height: number;
   width: number;
+  hours: number;
   depth: number;
   price: number;
+  old_price: number;
   web: boolean;
   image: string;
   category: string;
   notes: string;
   sold: boolean,
+  sold_date: string
+  sold_location: string,
+  history: string,
+  link_url: string,
+  link_text: string,
   tags: {id: number, name: string}[]
   delete: (id: number, title: string) => Promise<void>;
   setModalArt: () => void;
