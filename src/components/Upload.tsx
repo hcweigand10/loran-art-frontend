@@ -110,6 +110,7 @@ export default function Upload(props: any) {
         CategoryId: categoryNameToId(art.category),
       };
       newArt.web = newArt.web.toLowerCase() === "x" ? true : false;
+      newArt.sold = newArt.sold.toLowerCase() === "x" ? true : false;
       const intPrice = parseInt(newArt.price.substring(1));
       newArt.price = intPrice || null;
       const intOldPrice = parseInt(newArt["old_price"].substring(1));
