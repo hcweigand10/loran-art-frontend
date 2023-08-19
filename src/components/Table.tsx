@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { artPiece, table, tableRow } from "../interfaces/interfaces";
-import CategoryIdToName from "../utils/categoryIdToName";
 import categoryIdToName from "../utils/categoryIdToName";
 
 const Table = (props: table) => {
@@ -14,6 +13,7 @@ const Table = (props: table) => {
             <th className="p-2 w-40">Title</th>
             <th className="p-2 w-40">Catergory</th>
             <th className="p-2 w-40">Location</th>
+            <th className="p-2 w-40">Date Created</th>
             <th className="p-2 w-40">Description</th>
             <th className="p-2 w-40">Tags</th>
             <th className="p-2 w-40">Dimensions</th>
@@ -26,6 +26,7 @@ const Table = (props: table) => {
             <th className="p-2 w-40">Link Text</th>
             <th className="p-2 w-40">Link Url</th>
             <th className="p-2 w-40">Image</th>
+            <th className="p-2 w-40">Web Sort</th>
             <th className="p-2 w-40">MDK</th>
             <th className="p-2 w-40">Actions</th>
           </tr>
@@ -37,7 +38,7 @@ const Table = (props: table) => {
                 return true;
               } else {
                 return (
-                  CategoryIdToName(art.CategoryId) === props.selectedCategory
+                  categoryIdToName(art.categoryId) === props.selectedCategory
                 );
               }
             })
@@ -48,6 +49,7 @@ const Table = (props: table) => {
                 title={art.title}
                 location={art.location}
                 description={art.description}
+                date_created={art.date_created}
                 height={art.height}
                 width={art.width}
                 depth={art.depth}
@@ -63,8 +65,9 @@ const Table = (props: table) => {
                 history={art.history}
                 link_url={art.link_url}
                 link_text={art.link_text}
-                tags={art.Tags}
-                category={CategoryIdToName(art.CategoryId)}
+                web_sort={art.web_sort}
+                tags={art.tags}
+                category={categoryIdToName(art.categoryId)}
                 delete={() => props.deleteArt(art.mdk, art.title)}
                 setModalArt={() => props.setModalArt(art)}
                 setShowModal={() => props.setShowModal(true)}
@@ -101,6 +104,7 @@ const TableRow = (props: tableRow) => {
       <td className="p-2 w-40 font-bold text-lg">{props.title}</td>
       <td className="p-2 w-40 border-r-2">{props.category}</td>
       <td className="p-2 w-40 border-r-2">{props.location}</td>
+      <td className="p-2 w-40 border-r-2">{props.date_created}</td>
       <td className="p-2 w-40 border-r-2">{props.description}</td>
 
       <td className="p-2 w-40 border-r-2">
@@ -109,7 +113,7 @@ const TableRow = (props: tableRow) => {
       <td className="p-2 w-40 border-r-2">{props.height} x {props.width} x {props.depth}</td>
       <td className="p-2 w-40 border-r-2">{props.price ? `$${props.price}` : ""}</td>
       <td className="p-2 w-40 border-r-2">{props.old_price ? `$${props.old_price}` : ""}</td>
-      <td className="p-2 w-40 border-r-2">{props.sold ? "True" : "False"}</td>
+      <td className={`p-2 w-40 border-r-2 ${props.sold ? "text-red-400" : ""}`}>{props.sold ? "True" : "False"}</td>
       <td className="p-2 w-40 border-r-2">{props.sold_date}</td>
       <td className="p-2 w-40 border-r-2">{props.sold_location}</td>
       <td className="p-2 w-40 border-r-2">{props.history}</td>
@@ -122,6 +126,7 @@ const TableRow = (props: tableRow) => {
           className="h-12 object-contain shadow"
         />
       </td>
+      <td className="p-2 w-40 border-r-2">{props.web_sort}</td>
       <td className="p-2 w-40 border-r-2">{props.mdk}</td>
 
       <td className="p-2 w-60 border-r-2 flex justify-center">

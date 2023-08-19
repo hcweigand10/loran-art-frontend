@@ -4,6 +4,7 @@ export interface artPiece {
   mdk: number;
   title: string;
   description: string;
+  date_created: string;
   height: number;
   width: number;
   depth: number;
@@ -11,7 +12,7 @@ export interface artPiece {
   web: boolean;
   image: string;
   notes: string;
-  CategoryId: number;
+  categoryId: number;
   category?: string;
   hours: number;
   old_price: number;
@@ -26,7 +27,7 @@ export interface artPiece {
   history: string,
   mdk: number,
   
-  Tags: any[]
+  tags: any[]
 }
 
 export interface formProps {
@@ -39,6 +40,7 @@ export interface artPieceNode {
   title: string;
   location: string;
   description: string;
+  date_created: string;
   height: number;
   width: number;
   depth: number;
@@ -73,6 +75,7 @@ export interface tableRow {
   title: string;
   location: string;
   description: string;
+  date_created: string;
   height: number;
   width: number;
   hours: number;
@@ -89,6 +92,7 @@ export interface tableRow {
   history: string,
   link_url: string,
   link_text: string,
+  web_sort: number,
   tags: {id: number, name: string}[]
   delete: (id: number, title: string) => Promise<void>;
   setModalArt: () => void;

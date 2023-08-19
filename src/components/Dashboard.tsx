@@ -8,7 +8,7 @@ import userContext from "../contexts/userContext";
 import galleryAPI from "../utils/axios";
 import Loading from "./Loading";
 // import ArtModal from "./ArtModal";
-import CategoryIdToName from "../utils/categoryIdToName";
+import categoryIdToName from "../utils/categoryIdToName";
 import Table from "./Table";
 import Upload from "./Upload";
 

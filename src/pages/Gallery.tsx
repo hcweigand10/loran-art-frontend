@@ -10,7 +10,7 @@ import { artPiece } from "../interfaces/interfaces";
 import { useQuery } from "react-query";
 import { MultiSelect, Option } from "react-multi-select-component";
 import Hero from "../components/Hero";
-import CategoryIdToName from "../utils/categoryIdToName";
+import categoryIdToName from "../utils/categoryIdToName";
 // import ArtModal from "../components/ArtModal";
 import WallArt from "./WallArt";
 import Back from "../components/Back";
@@ -39,7 +39,7 @@ const Gallery = () => {
         `/api/categories/byname/${toSentenceCase(galleryCategory)}`
       ),
     onSuccess: (res): void => {
-      const artPieces = res.data.Arts.sort((a: artPiece,b: artPiece) => b.web_sort - a.web_sort);
+      const artPieces = res.data.arts.sort((a: artPiece,b: artPiece) => b.web_sort - a.web_sort);
       console.log(artPieces)
       setArt(artPieces);
     },
@@ -84,6 +84,7 @@ const Gallery = () => {
                 key={art.mdk}
                 title={art.title}
                 description={art.description}
+                date_created={art.date_created}
                 height={art.height}
                 width={art.width}
                 depth={art.depth}
@@ -98,8 +99,8 @@ const Gallery = () => {
                 sold_location={art.sold_location}
                 history={art.history}
                 location={art.location}
-                category={CategoryIdToName(art.CategoryId)}
-                tags={art.Tags.map((tagObj: any) => tagObj.name)}
+                category={categoryIdToName(art.categoryId)}
+                tags={art.tags.map((tagObj: any) => tagObj.name)}
               />
             );
           })
@@ -122,6 +123,7 @@ const Gallery = () => {
                 key={art.mdk}
                 title={art.title}
                 description={art.description}
+                date_created={art.date_created}
                 height={art.height}
                 width={art.width}
                 depth={art.depth}
@@ -136,8 +138,8 @@ const Gallery = () => {
                 sold_location={art.sold_location}
                 history={art.history}
                 location={art.location}
-                category={CategoryIdToName(art.CategoryId)}
-                tags={art.Tags.map((tagObj: any) => tagObj.name)}
+                category={categoryIdToName(art.categoryId)}
+                tags={art.tags.map((tagObj: any) => tagObj.name)}
               />
             );
           })
@@ -160,6 +162,7 @@ const Gallery = () => {
                 key={art.mdk}
                 title={art.title}
                 description={art.description}
+                date_created={art.date_created}
                 height={art.height}
                 width={art.width}
                 depth={art.depth}
@@ -174,8 +177,8 @@ const Gallery = () => {
                 sold_location={art.sold_location}
                 history={art.history}
                 location={art.location}
-                category={CategoryIdToName(art.CategoryId)}
-                tags={art.Tags.map((tagObj: any) => tagObj.name)}
+                category={categoryIdToName(art.categoryId)}
+                tags={art.tags.map((tagObj: any) => tagObj.name)}
               />
             );
           })
@@ -198,6 +201,7 @@ const Gallery = () => {
                 key={art.mdk}
                 title={art.title}
                 description={art.description}
+                date_created={art.date_created}
                 height={art.height}
                 width={art.width}
                 depth={art.depth}
@@ -212,8 +216,8 @@ const Gallery = () => {
                 sold_location={art.sold_location}
                 history={art.history}
                 location={art.location}
-                category={CategoryIdToName(art.CategoryId)}
-                tags={art.Tags.map((tagObj: any) => tagObj.name)}
+                category={categoryIdToName(art.categoryId)}
+                tags={art.tags.map((tagObj: any) => tagObj.name)}
               />
             );
           })
@@ -235,6 +239,7 @@ const Gallery = () => {
                 key={art.mdk}
                 title={art.title}
                 description={art.description}
+                date_created={art.date_created}
                 height={art.height}
                 width={art.width}
                 depth={art.depth}
@@ -249,8 +254,8 @@ const Gallery = () => {
                 sold_location={art.sold_location}
                 history={art.history}
                 location={art.location}
-                category={CategoryIdToName(art.CategoryId)}
-                tags={art.Tags.map((tagObj: any) => tagObj.name)}
+                category={categoryIdToName(art.categoryId)}
+                tags={art.tags.map((tagObj: any) => tagObj.name)}
               />
             );
           })
@@ -273,6 +278,7 @@ const Gallery = () => {
                 key={art.mdk}
                 title={art.title}
                 description={art.description}
+                date_created={art.date_created}
                 height={art.height}
                 width={art.width}
                 depth={art.depth}
@@ -287,8 +293,8 @@ const Gallery = () => {
                 sold_location={art.sold_location}
                 history={art.history}
                 location={art.location}
-                category={CategoryIdToName(art.CategoryId)}
-                tags={art.Tags.map((tagObj: any) => tagObj.name)}
+                category={categoryIdToName(art.categoryId)}
+                tags={art.tags.map((tagObj: any) => tagObj.name)}
               />
             );
           })

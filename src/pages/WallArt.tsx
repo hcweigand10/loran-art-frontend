@@ -10,7 +10,7 @@ import { artPiece } from "../interfaces/interfaces";
 import { useQuery } from "react-query";
 import { MultiSelect, Option } from "react-multi-select-component";
 import Hero from "../components/Hero";
-import CategoryIdToName from "../utils/categoryIdToName";
+import categoryIdToName from "../utils/categoryIdToName";
 // import ArtModal from "../components/ArtModal";
 import Back from "../components/Back";
 
@@ -104,7 +104,7 @@ const WallArt = () => {
         selectedTags.length !== tagsData?.data.length
       ) {
         filteredArt = filteredArt.filter((artPiece: artPiece) => {
-          return artPiece.Tags.some((tagObj: any) =>
+          return artPiece.tags.some((tagObj: any) =>
             selectedTags
               .map((option: Option) => option.value)
               .includes(tagObj.id)
@@ -119,6 +119,7 @@ const WallArt = () => {
               key={art.mdk}
               title={art.title}
               description={art.description}
+              date_created={art.date_created}
               height={art.height}
               width={art.width}
               depth={art.depth}
@@ -133,8 +134,8 @@ const WallArt = () => {
               sold_location={art.sold_location}
               history={art.history}
               location={art.location}
-              category={CategoryIdToName(art.CategoryId)}
-              tags={art.Tags.map((tagObj: any) => tagObj.name)}
+              category={categoryIdToName(art.categoryId)}
+              tags={art.tags.map((tagObj: any) => tagObj.name)}
             />
           </div>
         ))

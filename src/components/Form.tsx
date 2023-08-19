@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 import galleryAPI from "../utils/axios";
 import { artPiece, formProps } from "../interfaces/interfaces";
 import CloudinaryBtn from "./CloudinaryBtn";
-import CategoryIdToName from "../utils/categoryIdToName";
+import categoryIdToName from "../utils/categoryIdToName";
 import Loading from "./Loading";
 import categoryNameToId from "../utils/categoryNameToId";
 import { useNavigate } from "react-router-dom";
@@ -20,7 +20,7 @@ const Form = (props: formProps) => {
   const [price, setPrice] = useState<number>(0);
   const [web, setweb] = useState<boolean>(true);
   const [image, setImage] = useState<string>("");
-  const [CategoryId, setCategoryId] = useState<number>(1);
+  const [categoryId, setcategoryId] = useState<number>(1);
   const [category, setCategory] = useState<string>("Wall Art");
   const [notes, setNotes] = useState<string>("");
   const [date, setDate] = useState<string>("");
@@ -60,8 +60,8 @@ const Form = (props: formProps) => {
           return { label: tagObj.name, value: tagObj.id };
         })
       );
-      setCategory(CategoryIdToName(data.data.CategoryId));
-      setCategoryId(data.data.CategoryId);
+      setCategory(categoryIdToName(data.data.categoryId));
+      setcategoryId(data.data.categoryId);
     },
     // staleTime: 10000,
     enabled: false,
@@ -85,7 +85,7 @@ const Form = (props: formProps) => {
 
   const handleSelectChange = (e: ChangeEvent<HTMLSelectElement>) => {
     setCategory(e.target.value);
-    setCategoryId(categoryNameToId(e.target.value));
+    setcategoryId(categoryNameToId(e.target.value));
   };
 
   const handleCancel = () => {
@@ -118,7 +118,7 @@ const Form = (props: formProps) => {
       web_sort,
       link_url,
       link_text,
-      CategoryId: CategoryId,
+      categoryId: categoryId,
     };
     if (props.artId !== 0) {
       setLoading(true);

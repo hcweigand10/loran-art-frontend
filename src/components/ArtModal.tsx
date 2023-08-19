@@ -1,7 +1,7 @@
 // import React, { SetStateAction, useState, Dispatch } from "react";
 // import { artPiece } from "../interfaces/interfaces";
 // import ArtPiece from "./ArtPiece";
-// import CategoryIdToName from "../utils/categoryIdToName";
+// import categoryIdToName from "../utils/categoryIdToName";
 
 // interface props {
 //   artpiece: {
@@ -18,7 +18,7 @@
 //     web_sort: number;
 //     link_url: string;
 //     link_text: string;
-//     CategoryId: number;
+//     categoryId: number;
 //     category?: string;
 //     Tags: any[];
 //   };
@@ -49,7 +49,7 @@
 //             web_sort={props.artpiece.web_sort}
 //             link_url={props.artpiece.link_url}
 //             link_text={props.artpiece.link_text}
-//             category={CategoryIdToName(props.artpiece.CategoryId)}
+//             category={categoryIdToName(props.artpiece.categoryId)}
 //             tags={props.artpiece.Tags.map((tagObj: any) => tagObj.name)}
 //           />
 //           {/* footer  */}

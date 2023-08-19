@@ -67,6 +67,7 @@ export default function Upload(props: any) {
           trim: true,
           skip_empty_lines: true,
           from_line: 2,
+          // encoding: "ascii",
           // escape: false,
           relax_quotes: true,
         });
@@ -107,17 +108,23 @@ export default function Upload(props: any) {
     const clean = filtered.map((art: any) => {
       const newArt = {
         ...art,
-        CategoryId: categoryNameToId(art.category),
+        categoryId: categoryNameToId(art.category),
       };
+      newArt.mdk = parseInt(newArt.mdk) || 0;
+      newArt.title = newArt.title.replace("Ã©", "é")
+      newArt.description = newArt.description.replaceAll("Ã©", "é")
+      if (newArt.mdk === 701) {
+        newArt.description = newArt.description.replaceAll("\\n", "n")
+        console.log(newArt)
+      }
       newArt.web = newArt.web.toLowerCase() === "x" ? true : false;
       newArt.sold = newArt.sold.toLowerCase() === "x" ? true : false;
-      const intPrice = parseInt(newArt.price.substring(1));
+      const intPrice = parseInt(newArt.price.replace(",", "").substring(1));
       newArt.price = intPrice || null;
-      const intOldPrice = parseInt(newArt["old_price"].substring(1));
+      const intOldPrice = parseInt(newArt["old_price"].replace(",", "").substring(1));
       newArt.old_price = intOldPrice || null;
       newArt.hours = parseInt(newArt.hours) || null;
-      newArt.mdk = parseInt(newArt.mdk) || 0;
-      newArt.sort_priority = parseInt(newArt.sort_priority) || null;
+      newArt.web_sort = parseInt(newArt.web_sort) || null;
       return newArt;
     });
     return clean;
@@ -165,20 +172,20 @@ export default function Upload(props: any) {
     }
     const tagIdMdks = tagMdks.map((x: any) => {
       return {
-        ArtMdk: x.mdk,
-        TagId: ids[x.tagName],
+        artMdk: x.mdk,
+        tagId: ids[x.tagName],
       };
     });
     addArtTags(tagIdMdks);
   };
 
-  const addArtTags = async (tagIds: { ArtMdk: number; TagId: number }[]) => {
+  const addArtTags = async (tagIds: { artMdk: number; tagId: number }[]) => {
     try {
       const res = await galleryAPI.post("/api/art/tags/seed", {
         seeds: tagIds,
       });
       if (res.status === 200) {
-        window.location.reload()
+        // window.location.reload()
       }
     } catch (error) {
       console.log(error);
