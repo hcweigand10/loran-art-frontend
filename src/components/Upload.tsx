@@ -185,7 +185,7 @@ export default function Upload(props: any) {
         seeds: tagIds,
       });
       if (res.status === 200) {
-        // window.location.reload()
+        window.location.reload()
       }
     } catch (error) {
       console.log(error);
