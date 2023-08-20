@@ -46,7 +46,7 @@ const ArtPiece = (props: artPieceNode) => {
                   : "text-md md:text-lg italic text-red-400"
               }
             >
-              {props.web ? `$${props.price}` : "Sold"}
+              {!props.sold ? `$${props.price}` : "Sold"}
             </p>
           </div>
         </div>
