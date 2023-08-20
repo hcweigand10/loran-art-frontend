@@ -66,15 +66,15 @@ const WallArt = () => {
     applyFilters();
   }, [selectedSizes, selectedTags, artData, hideSold]);
 
-  useEffect(() => {
-    getSlice();
-  }, [currentPage]);
+  // useEffect(() => {
+  //   getSlice();
+  // }, [currentPage]);
 
   const getSlice = () => {
     const indexOfLastPost = currentPage * postsPerPage;
     const indexOfFirstPost = indexOfLastPost - postsPerPage;
     const artSlice = art.slice(indexOfFirstPost, indexOfLastPost);
-    setArtSlice(artSlice)
+    return artSlice
   };
 
   const paginateFront = () => setCurrentPage(currentPage + 1);
@@ -158,11 +158,7 @@ const WallArt = () => {
           </div>
         ))
       );
-      if (currentPage === 1) {
-        getSlice()
-      } else {
-        setCurrentPage(1)
-      }
+      setCurrentPage(1)
     }
   };
 
@@ -266,7 +262,7 @@ const WallArt = () => {
           ) : null}
           {artData && tagsData ? (
             <div className="grid grid-cols-1 md:grid-cols-1 gap-6 mt-3 max-w-lg mx-auto max-h-screen">
-              {artSlice}
+              {getSlice()}
             </div>
           ) : null}
         </div>
