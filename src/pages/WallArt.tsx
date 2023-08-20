@@ -66,7 +66,7 @@ const WallArt = () => {
     if (!artData) {
       setArt([]);
     } else {
-      let filteredArt: any[] = artData?.data.Arts.map((artPiece: artPiece) => {
+      let filteredArt: any[] = artData?.data.arts.map((artPiece: artPiece) => {
         if (Math.max(artPiece.height, artPiece.width) <= 8) {
           return {
             ...artPiece,
