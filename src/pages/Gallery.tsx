@@ -20,6 +20,7 @@ import WholesalePiece from "../components/WholesalePiece";
 const Gallery = () => {
   const [art, setArt] = useState<artPiece[]>([]);
   const [nodes, setNodes] = useState<React.ReactNode>([]);
+  const [currentPage, setCurrentPage] = useState(1)
   // const [selectedTags, setSelectedTags] = useState<Option[]>([]);
   // const [selectedSizes, setSelectedSizes] = useState<Option[]>([]);
   // const [hideSold, setHideSold] = useState<boolean>(false);

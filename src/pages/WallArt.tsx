@@ -5,6 +5,7 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import galleryAPI from "../utils/axios";
 import Loading from "../components/Loading";
 import ArtPiece from "../components/ArtPiece";
+import Pagination from "../components/Pagination";
 import toSentenceCase from "../utils/toSentenceCase";
 import { artPiece } from "../interfaces/interfaces";
 import { useQuery } from "react-query";
@@ -20,11 +21,15 @@ const sizeOptions = [
   { label: `Large (over 18")`, value: "L" },
 ];
 
+const postsPerPage = 10
+
 const WallArt = () => {
   const [art, setArt] = useState<JSX.Element[]>([]);
+  const [artSlice, setArtSlice] = useState<JSX.Element[]>([]);
   const [selectedTags, setSelectedTags] = useState<Option[]>([]);
   const [selectedSizes, setSelectedSizes] = useState<Option[]>([]);
   const [hideSold, setHideSold] = useState<boolean>(true);
+  const [currentPage, setCurrentPage] = useState<number>(0);
   // const [showModal, setShowModal] = useState<boolean>(false);
   // const [modalArt, setModalArt] = useState<artPiece>();
 
@@ -61,8 +66,21 @@ const WallArt = () => {
     applyFilters();
   }, [selectedSizes, selectedTags, artData, hideSold]);
 
+  useEffect(() => {
+    getSlice();
+  }, [currentPage]);
+
+  const getSlice = () => {
+    const indexOfLastPost = currentPage * postsPerPage;
+    const indexOfFirstPost = indexOfLastPost - postsPerPage;
+    const artSlice = art.slice(indexOfFirstPost, indexOfLastPost);
+    setArtSlice(artSlice)
+  };
+
+  const paginateFront = () => setCurrentPage(currentPage + 1);
+  const paginateBack = () => setCurrentPage(currentPage - 1);
+
   const applyFilters = () => {
-    
     if (!artData) {
       setArt([]);
     } else {
@@ -96,7 +114,7 @@ const WallArt = () => {
       }
       if (hideSold) {
         filteredArt = filteredArt.filter(
-          (artPiece: artPiece) => artPiece.web
+          (artPiece: artPiece) => !artPiece.sold
         );
       }
       if (
@@ -140,6 +158,11 @@ const WallArt = () => {
           </div>
         ))
       );
+      if (currentPage === 1) {
+        getSlice()
+      } else {
+        setCurrentPage(1)
+      }
     }
   };
 
@@ -157,7 +180,7 @@ const WallArt = () => {
   );
 
   return (
-    <div className="relative lg:max-w-4xl mx-auto">
+    <div className="relative lg:max-w-6xl mx-auto">
       {/* <Back/> */}
       {/* <Hero/> */}
       <div className="mt-12 mb-4">
@@ -235,19 +258,26 @@ const WallArt = () => {
           </div>
           <hr className="md:hidden" />
         </div>
-        <div className="col-span-1 md:col-span-4">
+        <div className="col-span-1 md:col-span-4 bg-white overflow-y-scroll">
           {artLoading ? (
             <div className="">
               <Loading />
             </div>
           ) : null}
           {artData && tagsData ? (
-            <div className="grid grid-cols-1 md:grid-cols-1 gap-6 mt-3 max-w-4xl">
-              {art}
+            <div className="grid grid-cols-1 md:grid-cols-1 gap-6 mt-3 max-w-lg mx-auto max-h-screen">
+              {artSlice}
             </div>
           ) : null}
         </div>
       </div>
+          <Pagination
+            postsPerPage={postsPerPage}
+            totalPosts={art.length}
+            paginateBack={paginateBack}
+            paginateFront={paginateFront}
+            currentPage={currentPage}
+          />
       {/* {showModal && modalArt ? (
         <ArtModal artpiece={modalArt} setShowModal={setShowModal} />
       ) : null} */}
