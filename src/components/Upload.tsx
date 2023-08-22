@@ -113,10 +113,7 @@ export default function Upload(props: any) {
       newArt.mdk = parseInt(newArt.mdk) || 0;
       newArt.title = newArt.title.replace("Ã©", "é")
       newArt.description = newArt.description.replaceAll("Ã©", "é")
-      if (newArt.mdk === 701) {
-        newArt.description = newArt.description.replaceAll("\\n", "n")
-        console.log(newArt)
-      }
+      // newArt.description = newArt.description.replaceAll("\\", "\\")
       newArt.web = newArt.web.toLowerCase() === "x" ? true : false;
       newArt.sold = newArt.sold.toLowerCase() === "x" ? true : false;
       const intPrice = parseInt(newArt.price.replace(",", "").substring(1));
