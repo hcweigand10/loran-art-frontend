@@ -40,7 +40,7 @@ const Gallery = () => {
         `/api/categories/byname/${toSentenceCase(galleryCategory)}`
       ),
     onSuccess: (res): void => {
-      const artPieces = res.data.arts.sort((a: artPiece,b: artPiece) => b.web_sort - a.web_sort);
+      const artPieces = res.data.arts.sort((a: artPiece,b: artPiece) => a.web_sort - b.web_sort);
       console.log(artPieces)
       setArt(artPieces);
     },

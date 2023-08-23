@@ -129,7 +129,7 @@ const WallArt = () => {
           );
         });
       }
-      filteredArt = filteredArt.sort((a: artPiece,b: artPiece) => b.web_sort - a.web_sort)
+      filteredArt = filteredArt.sort((a: artPiece,b: artPiece) => a.web_sort - b.web_sort)
       setArt(
         filteredArt.map((art: artPiece) => (
           <div key={art.mdk}>
