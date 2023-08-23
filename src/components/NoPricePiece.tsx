@@ -38,7 +38,7 @@ const NoPricePiece = (props: artPieceNode) => {
                     {block.trim() + " "}
                   </p>
                 ) : (
-                  <p key={index} className="text-md md:text-lg hidden">hidden</p>
+                  <p key={index} className="text-md md:text-lg invisible">hidden</p>
                 );
               })
             : null}
