@@ -22,16 +22,24 @@ const NoPricePiece = (props: artPieceNode) => {
           </p>
           {blocks.length > 1
             ? blocks.slice(1).map((block, index) => {
-                return block.length > 0 ? (
+                return (
                   <p
                     className="text-md md:text-lg text-gray-500 text-base tracking-wider"
                     key={index}
                   >
-                    {block.trim()}
+                    {block.trim() + " "}
                   </p>
-                ) : (
-                  <br key={index} />
-                );
+                ) 
+                // return block.length > 0 ? (
+                //   <p
+                //     className="text-md md:text-lg text-gray-500 text-base tracking-wider"
+                //     key={index}
+                //   >
+                //     {block.trim() + " "}
+                //   </p>
+                // ) : (
+                //   <br key={index} />
+                // );
               })
             : null}
           {props.link_url ? (
