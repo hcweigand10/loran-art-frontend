@@ -48,7 +48,7 @@ const Gallery = () => {
 
   const email = (
     <p className="block align-items-bottom text-neutral-600 text-sm md:text-md">
-      For availaility, contact the artist
+      For availaility, <Link to={"/contact"} className="text-blue-500">contact</Link> the artist
       {/* <a className="ml-1 underline" href="mailto:loranscruggs8@gmail.com">
         loranscruggs8@gmail.com
       </a> */}
