@@ -34,7 +34,7 @@ const WallArt = () => {
   // const [modalArt, setModalArt] = useState<artPiece>();
 
   const queryParameters = new URLSearchParams(window.location.search);
-  const galleryCategory = queryParameters.get("category") || "wall-art";
+  const galleryCategory = queryParameters.get("page") || "0";
 
   const { data: tagsData, isLoading: tagsLoading } = useQuery({
     queryKey: ["tags"],
@@ -55,7 +55,7 @@ const WallArt = () => {
     queryKey: [galleryCategory],
     queryFn: () =>
       galleryAPI.get(
-        `/api/categories/byname/${toSentenceCase(galleryCategory)}`
+        '/api/categories/byname/Wall%20Art'
       ),
     onSuccess: (res): void => {
       // console.log(res)
@@ -77,8 +77,14 @@ const WallArt = () => {
     return artSlice
   };
 
-  const paginateFront = () => setCurrentPage(currentPage + 1);
-  const paginateBack = () => setCurrentPage(currentPage - 1);
+  const paginateFront = () => {
+    window.scroll({top:0, left:0, behavior: "smooth"})
+    setCurrentPage(currentPage + 1);
+  }
+  const paginateBack = () => {
+    window.scroll({top:0, left:0, behavior: "smooth"})
+    setCurrentPage(currentPage - 1);
+  }
 
   const applyFilters = () => {
     if (!artData) {
@@ -129,7 +135,7 @@ const WallArt = () => {
           );
         });
       }
-      filteredArt = filteredArt.sort((a: artPiece,b: artPiece) => a.web_sort - b.web_sort)
+      filteredArt = filteredArt.sort((a: artPiece,b: artPiece) => b.web_sort - a.web_sort)
       setArt(
         filteredArt.map((art: artPiece) => (
           <div key={art.mdk}>
@@ -182,7 +188,7 @@ const WallArt = () => {
       {/* <Hero/> */}
       <div className="mt-12 mb-4">
         <h1 className="text-3xl tracking-wider block">
-          {toSentenceCase(galleryCategory)}
+          Wall Art
         </h1>
         {purchaseString}
       </div>
@@ -255,14 +261,14 @@ const WallArt = () => {
           </div>
           <hr className="md:hidden" />
         </div>
-        <div className="col-span-1 md:col-span-4 bg-white overflow-y-scroll">
+        <div className="col-span-1 md:col-span-4">
           {artLoading ? (
             <div className="">
               <Loading />
             </div>
           ) : null}
           {artData && tagsData ? (
-            <div className="grid grid-cols-1 md:grid-cols-1 gap-6 mt-3 max-w-lg mx-auto max-h-screen">
+            <div className="grid grid-cols-1 md:grid-cols-1 gap-6 mt-3 max-w-lg mx-auto">
               {getSlice()}
             </div>
           ) : null}
@@ -274,6 +280,7 @@ const WallArt = () => {
             paginateBack={paginateBack}
             paginateFront={paginateFront}
             currentPage={currentPage}
+            
           />
       {/* {showModal && modalArt ? (
         <ArtModal artpiece={modalArt} setShowModal={setShowModal} />

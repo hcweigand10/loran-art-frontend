@@ -40,7 +40,7 @@ const Gallery = () => {
         `/api/categories/byname/${toSentenceCase(galleryCategory)}`
       ),
     onSuccess: (res): void => {
-      const artPieces = res.data.arts.sort((a: artPiece,b: artPiece) => a.web_sort - b.web_sort);
+      const artPieces = res.data.arts.sort((a: artPiece,b: artPiece) => b.web_sort - a.web_sort);
       console.log(artPieces)
       setArt(artPieces);
     },
@@ -48,10 +48,10 @@ const Gallery = () => {
 
   const email = (
     <p className="block align-items-bottom text-neutral-600 text-sm md:text-md">
-      To purchase, email me at
-      <a className="ml-1 underline" href="mailto:loranscruggs8@gmail.com">
+      For availaility, contact the artist
+      {/* <a className="ml-1 underline" href="mailto:loranscruggs8@gmail.com">
         loranscruggs8@gmail.com
-      </a>
+      </a> */}
     </p>
   );
   const etsy = (
@@ -113,7 +113,7 @@ const Gallery = () => {
             <h4 className="text-neutral-600 text-sm md:text-lg">
               Wooden toys covered in tin cans with bottle cap wheels
             </h4>
-            {etsy}
+            {email}
           </div>
         );
         setNodes(
@@ -153,6 +153,7 @@ const Gallery = () => {
               Airplanes made from tin cans, look great hung in a tree or rear view
               mirror
             </h4>
+            {email}
           </div>
         );
         setNodes(
@@ -230,6 +231,7 @@ const Gallery = () => {
             <h4 className="text-neutral-600 text-sm md:text-lg">
               Wholesale Whistles
             </h4>
+            {email}
           </div>
         );
         setNodes(
