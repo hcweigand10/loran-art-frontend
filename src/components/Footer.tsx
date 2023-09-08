@@ -34,7 +34,7 @@ const Footer = () => {
                 className="bg-white text-insta shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 hover:-translate-y-1"
                 type="button"
               >
-                <a href="https://www.facebook.com/671809086" target="_blank" rel="noreferrer">
+                <a href="https://www.instagram.com/loranscruggs1/" target="_blank" rel="noreferrer">
                 <FontAwesomeIcon icon={faInstagram}/>
                 </a>
               </button>
