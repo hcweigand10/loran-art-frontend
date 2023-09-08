@@ -22,38 +22,18 @@ const Footer = () => {
               Find me on any of these platforms
             </h5>
             <div className="mt-6 lg:mb-0 mb-6">
-              <button
-                className="bg-white text-lightBlue-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 hover:-translate-y-1"
-                type="button"
-              >
-                <a href="https://www.facebook.com/671809086" target="_blank" rel="noreferrer">
+                <a href="https://www.facebook.com/671809086" target="_blank" rel="noreferrer" className="bg-white text-lightBlue-600 shadow-lg font-normal px-3 py-2 text-xl items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 opacity-80 hover:opacity-100 hover:shadow-xl">
                 <FontAwesomeIcon icon={faFacebook}/>
                 </a>
-              </button>
-              <button
-                className="bg-white text-insta shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 hover:-translate-y-1"
-                type="button"
-              >
-                <a href="https://www.instagram.com/loranscruggs1/" target="_blank" rel="noreferrer">
+                <a href="https://www.instagram.com/loranscruggs1/" target="_blank" rel="noreferrer" className="bg-white text-insta shadow-lg font-normal px-3 py-2 text-xl items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 opacity-80 hover:opacity-100 hover:shadow-xl">
                 <FontAwesomeIcon icon={faInstagram}/>
                 </a>
-              </button>
-              <button
-                className="bg-white text-pink-600 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 hover:-translate-y-1"
-                type="button"
-              >
-                <a href="https://flickr.com/people/loranscruggs" target="_blank" rel="noreferrer">
+                <a href="https://flickr.com/people/loranscruggs" target="_blank" rel="noreferrer" className="bg-white text-pink-600 shadow-lg font-normal px-3 py-2 text-xl items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 opacity-80 hover:opacity-100 hover:shadow-xl">
                 <FontAwesomeIcon icon={faFlickr}/>
                 </a>
-              </button>
-              <button
-                className="bg-white text-red-500 shadow-lg font-normal h-10 w-10 items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 hover:-translate-y-1"
-                type="button"
-              >
-                <a href="https://pinterest.com/loranscruggs" target="_blank" rel="noreferrer">
+                <a href="https://pinterest.com/loranscruggs" target="_blank" rel="noreferrer" className="bg-white text-red-500 shadow-lg font-normal px-3 py-2 text-xl items-center justify-center align-center rounded-full outline-none focus:outline-none mr-2 opacity-80 hover:opacity-100 hover:shadow-xl">
                 <FontAwesomeIcon icon={faPinterest}/>
                 </a>
-              </button>
             </div>
           </div>
           <div className="w-full md:w-6/12 px-4">
