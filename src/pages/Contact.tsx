@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useState } from "react";
 import { emailProps } from "../interfaces/interfaces";
 import emailjs from "@emailjs/browser";
+import paperAirplane from "../assets/images/paper_plane.png"
 
 const Contact = () => {
   const [formInfo, setFormInfo] = useState<emailProps>({
@@ -66,8 +67,8 @@ const Contact = () => {
                   </p>
                 </div>
               </div>
-
-              <div className="mb-8 flex w-full max-w-[370px] grid grid-cols-8 gap-3">
+              {/* removed 12/16 per Loran */}
+              {/* <div className="mb-8 flex w-full max-w-[370px] grid grid-cols-8 gap-3">
                 <div className="bg-primary text-primary mr-4 flex h-[60px] w-full items-center justify-center overflow-hidden rounded bg-opacity-5 col-span-2">
                   <svg
                     width="28"
@@ -84,8 +85,9 @@ const Contact = () => {
                     loranscruggs8@gmail.com
                   </p>
                 </div>
-              </div>
+              </div> */}
             </div>
+            <img src={paperAirplane} alt="paper airplane" className="hidden md:block pb-5 my-2"/>
           </div>
           <div className="w-full px-4 lg:w-1/2 xl:w-5/12">
             <div className="relative rounded-lg bg-white p-8 shadow-lg sm:p-12">

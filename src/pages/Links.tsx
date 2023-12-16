@@ -50,11 +50,6 @@ const Links = () => {
       link: "http://sanangelfolkart.com/jerimoe"
     },
     {
-      name: "Burnt Offerings",
-      description: "Brunt Offerings is the website for Opie & Linda O'Brien who create all sorts of fun and lively artwork with tin and other found objects. They also teach and have published books on the subjects of their talents. Their site has a wealth of information about who they are.",
-      link: "http://www.burntofferings.com/TinMetalCollage"
-    },
-    {
       name: "Nia Michaels",
       description: "Nia works primarily with vintage tin and tin types. Each artwork is like a treasured jewel.",
       link: "http://niamichaels.com/"

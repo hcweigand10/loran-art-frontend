@@ -1,15 +1,25 @@
 import React, { useState } from "react";
 import { artPieceNode } from "../interfaces/interfaces";
+import noImage from '../assets/images/no_image.jpeg'
 
 const ArtPiece = (props: artPieceNode) => {
+  const [image, setImage] = useState(`https://energysims.com/pics/${props.image}`)
+  // const [image, setImage] = useState(`https://loranscruggs.com/pics/${props.image}`)
+
   const blocks =  props.description.split("\n")
+
+  const handleImageError = () => {
+    setImage(noImage)
+  }
   return (
     <div className="flex flex-col justify-center">
       <div className="flex flex-col rounded-xl pb-2 mx-auto w-full">
         <div className="w-full grid place-items-center">
           <img
-            src={`https://energysims.com/pics/${props.image}`}
+            src={image}
             alt={props.title}
+            // onError={function(e) { e.target.setAttribute = noImage}}
+            onError={handleImageError}
             className="rounded-xl w-full"
           />
         </div>

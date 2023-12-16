@@ -22,6 +22,9 @@ const sizeOptions = [
 ];
 
 const postsPerPage = 10
+const queryParameters = new URLSearchParams(window.location.search);
+const pageParam = queryParameters.get("page") || "1";
+console.log(pageParam)
 
 const WallArt = () => {
   const [art, setArt] = useState<JSX.Element[]>([]);
@@ -29,42 +32,33 @@ const WallArt = () => {
   const [selectedTags, setSelectedTags] = useState<Option[]>([]);
   const [selectedSizes, setSelectedSizes] = useState<Option[]>([]);
   const [hideSold, setHideSold] = useState<boolean>(true);
-  const [currentPage, setCurrentPage] = useState<number>(0);
+  const [currentPage, setCurrentPage] = useState<number>(parseInt(pageParam));
   // const [showModal, setShowModal] = useState<boolean>(false);
   // const [modalArt, setModalArt] = useState<artPiece>();
 
-  const queryParameters = new URLSearchParams(window.location.search);
-  const galleryCategory = queryParameters.get("page") || "0";
 
   const { data: tagsData, isLoading: tagsLoading } = useQuery({
     queryKey: ["tags"],
     queryFn: () => galleryAPI.get("/api/tags"),
-    onSuccess: (data) => {
-      // setSelectedTags(data.data.map(
-      //   (tag: { id: number; name: string }) => {
-      //     return {
-      //       label: toSentenceCase(tag.name),
-      //       value: tag.id,
-      //     };
-      //   }
-      // ))
-    },
   });
 
   const { data: artData, isLoading: artLoading } = useQuery({
-    queryKey: [galleryCategory],
+    queryKey: ["wall-art"],
     queryFn: () =>
       galleryAPI.get(
         '/api/categories/byname/Wall%20Art'
       ),
-    onSuccess: (res): void => {
-      // console.log(res)
-    },
   });
 
   useEffect(() => {
     applyFilters();
   }, [selectedSizes, selectedTags, artData, hideSold]);
+
+  useEffect(() => {
+    queryParameters.set("page", currentPage.toString())
+    window.history.replaceState({}, '', `${window.location.pathname}?${queryParameters}`);
+  }, [currentPage])
+  
 
   // useEffect(() => {
   //   getSlice();
@@ -77,12 +71,25 @@ const WallArt = () => {
     return artSlice
   };
 
+  const scrollToTop = () => {
+    if ('scrollBehavior' in document.documentElement.style) {
+      console.log("scroll!")
+      window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }
+
   const paginateFront = () => {
-    window.scroll({top:0, left:0, behavior: "smooth"})
+    setTimeout(() => {
+      scrollToTop()
+    }, 200);
     setCurrentPage(currentPage + 1);
   }
   const paginateBack = () => {
-    window.scroll({top:0, left:0, behavior: "smooth"})
+    setTimeout(() => {
+      scrollToTop()
+    }, 200);
     setCurrentPage(currentPage - 1);
   }
 
@@ -165,7 +172,6 @@ const WallArt = () => {
           </div>
         ))
       );
-      setCurrentPage(1)
     }
   };
 
