@@ -83,13 +83,13 @@ const WallArt = () => {
   const paginateFront = () => {
     setTimeout(() => {
       scrollToTop()
-    }, 200);
+    }, 125);
     setCurrentPage(currentPage + 1);
   }
   const paginateBack = () => {
     setTimeout(() => {
       scrollToTop()
-    }, 200);
+    }, 125);
     setCurrentPage(currentPage - 1);
   }
 
