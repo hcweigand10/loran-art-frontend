@@ -41,7 +41,6 @@ const Gallery = () => {
       ),
     onSuccess: (res): void => {
       const artPieces = res.data.arts.sort((a: artPiece,b: artPiece) => b.web_sort - a.web_sort);
-      console.log(artPieces)
       setArt(artPieces);
     },
   });

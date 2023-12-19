@@ -24,7 +24,6 @@ const sizeOptions = [
 const postsPerPage = 10
 const queryParameters = new URLSearchParams(window.location.search);
 const pageParam = queryParameters.get("page") || "1";
-console.log(pageParam)
 
 const WallArt = () => {
   const [art, setArt] = useState<JSX.Element[]>([]);
@@ -73,7 +72,6 @@ const WallArt = () => {
 
   const scrollToTop = () => {
     if ('scrollBehavior' in document.documentElement.style) {
-      console.log("scroll!")
       window.scroll({ top: 0, left: 0, behavior: 'smooth' });
     } else {
       window.scrollTo(0, 0);

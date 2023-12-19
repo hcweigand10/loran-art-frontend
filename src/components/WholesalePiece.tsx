@@ -1,14 +1,22 @@
 import React, { useState } from "react";
 import { artPieceNode } from "../interfaces/interfaces";
+import noImage from '../assets/images/no_image.png'
 
 const WholesalePiece = (props: artPieceNode) => {
-  const blocks = props.description.split("\n");
+  const [image, setImage] = useState(`${process.env.REACT_APP_IMAGE_HOST}${props.image}`)
+
+  const blocks =  props.description.split("\n")
+
+  const handleImageError = () => {
+    setImage(noImage)
+  }
   return (
     <div className="flex flex-col justify-center">
       <div className="flex flex-col rounded-xl pb-2 mx-auto w-full">
         <div className="w-full grid place-items-center">
           <img
-            src={`https://energysims.com/pics/${props.image}`}
+            src={image}
+            onError={handleImageError}
             alt={props.title}
             className="rounded-xl w-full"
           />
