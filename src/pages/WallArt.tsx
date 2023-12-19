@@ -51,6 +51,8 @@ const WallArt = () => {
 
   useEffect(() => {
     applyFilters();
+    setCurrentPage(1)
+    queryParameters.set("page", "1")
   }, [selectedSizes, selectedTags, artData, hideSold]);
 
   useEffect(() => {
